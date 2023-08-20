@@ -33,7 +33,7 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/rounded_back"
+                android:id="@+id/rounded_backHome"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@drawable/rounded_background"
@@ -53,7 +53,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="-35dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    tools:layout_editor_absoluteX="15dp" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginHorizontal="15dp"
@@ -128,11 +139,11 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/service_tab"
                 android:elevation="21dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rounded_back"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/rounded_backHome"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rounded_back"
-                android:orientation="horizontal">
+                app:layout_constraintTop_toBottomOf="@+id/rounded_backHome">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,9 +152,9 @@
                     android:layout_height="100dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/lytFindaDoc"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/lytFindaDoc"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -180,8 +191,8 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/lytDiagnoseMe"
                     app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/lytDiagnoseMe"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -212,7 +223,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -223,8 +233,9 @@
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="35sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/service_tab"
-                tools:layout_editor_absoluteX="50dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_tab" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardDoctor"
@@ -250,10 +261,10 @@
                     android:id="@+id/imgDoc"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:shapeAppearanceOverlay="@style/RoundedFrameShape"
                     app:srcCompat="@drawable/ic_baseline_profile_36" />
@@ -263,48 +274,47 @@
                     android:id="@+id/tvDocName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
-                    android:text="Dr. X"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorOnPrimary"
+                    android:layout_gravity="center"
                     android:layout_marginTop="25dp"
-                    android:layout_gravity="center"/>
+                    android:text="Dr. X"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDocSpeciality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:text="Surgeon"
-                    android:textColor="?attr/colorOnPrimary"
+                    android:layout_gravity="center"
                     android:layout_marginTop="50dp"
-                    android:layout_gravity="center"/>
+                    android:text="Surgeon"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvDocLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="85dp"
                     android:drawableLeft="@drawable/ic_baseline_location_on_24"
                     android:text="Dhaka,Bangladesh"
                     android:textColor="?attr/colorOnPrimary"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="85dp"
-                    />
+                    android:textSize="20sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/et_design"
                     android:text="@string/contacts"
-                    android:layout_margin="15dp"
                     android:textColor="?attr/colorPrimary"
-                    android:textStyle="bold"
                     android:textSize="25sp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="15dp"/>
+                    android:textStyle="bold" />
 
 
             </androidx.cardview.widget.CardView>
@@ -318,15 +328,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardDoctor" />
 
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_tab" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
     </ScrollView>
-
 
 
     <!-- TODO: Update blank fragment layout -->
