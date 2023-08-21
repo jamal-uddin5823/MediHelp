@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
+
         handleBottomNavBar();
 
 
@@ -28,19 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout,fragment)
+                .commit();
     }
 
     private void handleBottomNavBar() {
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+
         binding.bottomNavigationView.setBackground(null);
-
-
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
