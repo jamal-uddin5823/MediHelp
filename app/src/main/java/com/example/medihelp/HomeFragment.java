@@ -5,18 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
 public class HomeFragment extends Fragment {
 
-
+    boolean isBookmarked = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,7 +28,23 @@ public class HomeFragment extends Fragment {
         Button btnDoctorContact = view.findViewById(R.id.btnDoctorContact);
         ConstraintLayout lytDiagnoseMe = view.findViewById(R.id.lytDiagnoseMe);
         ConstraintLayout lytFindaDoc = view.findViewById(R.id.lytFindaDoc);
+        ImageButton btnBookmark = view.findViewById(R.id.btnBookmark);
+        ConstraintLayout btnBookmarkBack = view.findViewById(R.id.btnBookmarkBack);
 
+
+        btnBookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isBookmarked) {
+                    btnBookmark.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white));
+                    btnBookmarkBack.setBackgroundResource(R.drawable.round_border_solid);
+                } else {
+                    btnBookmark.setColorFilter(ContextCompat.getColor(requireContext(), R.color.lavender));
+                    btnBookmarkBack.setBackgroundResource(R.drawable.round_border_trans);
+                }
+                isBookmarked=!isBookmarked;
+            }
+        });
 
         btnDoctorContact.setOnClickListener(new View.OnClickListener() {
             @Override
