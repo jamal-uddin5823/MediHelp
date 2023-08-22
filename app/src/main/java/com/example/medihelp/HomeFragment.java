@@ -1,5 +1,7 @@
 package com.example.medihelp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,10 +27,12 @@ public class HomeFragment extends Fragment {
         ConstraintLayout lytDiagnoseMe = view.findViewById(R.id.lytDiagnoseMe);
         ConstraintLayout lytFindaDoc = view.findViewById(R.id.lytFindaDoc);
 
+
         btnDoctorContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
+                dialPhoneNumber("+8801714268748");
+//                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,5 +59,13 @@ public class HomeFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.frame_layout,destinationFragment)
                 .commit();
+    }
+
+    private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }

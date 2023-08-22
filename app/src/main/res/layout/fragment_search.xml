@@ -76,7 +76,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lytRoundedBackSearch">
 
-                <include layout="@layout/search_bar"/>
+                <include layout="@layout/search_dashboard"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
