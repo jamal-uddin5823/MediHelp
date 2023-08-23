@@ -7,6 +7,7 @@
     android:gravity="center"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:background="@color/pink"
     tools:context=".Login">
 
     <TextView
@@ -26,6 +27,8 @@
             android:id="@+id/email"
             android:textSize="20dp"
             android:hint="@string/email"
+            android:background="@color/white"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -39,6 +42,7 @@
             android:id="@+id/password"
             android:textSize="20dp"
             android:hint="@string/password"
+            android:background="@color/white"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -56,6 +60,18 @@
         android:text="@string/login_C"
         android:textStyle="bold"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textStyle="bold|italic"
+        android:textSize="20dp"
+        android:background="@color/black"
+        android:textColor="@color/pink"
+        android:gravity="center"
+        android:layout_marginTop="280dp"
+        android:id="@+id/SignUp"
+        android:text="@string/sign_up"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
