@@ -4,7 +4,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="greenBlue">#023735</color>
-
     <color name="purple_200">#ffbb86fc</color>
     <color name="purple_500">#ff6200ee</color>
     <color name="purple_700">#ff3700b3</color>
@@ -13,5 +12,12 @@
     <color name="pink">#FFFFC1CC</color>
     <color name="lavender">#8692f7</color>
     <color name="dark_lavender">#5667f4</color>
+
+
+    <color name="darkest_green">#213730</color>
+    <color name="dark_green">#2D4840</color>
+    <color name="lime">#c8d869</color>
+    <color name="mint">#69bf83</color>
+
 
 </resources>
