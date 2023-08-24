@@ -1,10 +1,13 @@
 package com.example.medihelp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +26,11 @@ public class Login extends AppCompatActivity {
 
     private static final String TAG = "Login";
     EditText editTextEmail, editTextPassword;
-    Button buttonLogin;
+    Button buttonLogin,buttonforgor;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
+    static final int Req_Call=1;
 
     @Override
     public void onStart() {
@@ -48,6 +52,7 @@ public class Login extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
+        buttonforgor = findViewById(R.id.iforgorpass);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.SignUp);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +61,20 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Register.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        buttonforgor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_CALL_BUTTON);
+                try {
+                    startActivityForResult(intent,Req_Call);
+                }
+                catch (ActivityNotFoundException e){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(Login.this);
+                    builder.setTitle("Error").setMessage("Error occurred while making Call: "+e.getMessage()).setPositiveButton("ok",null).show();
+                }
             }
         });
 

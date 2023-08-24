@@ -1,7 +1,10 @@
 package com.example.medihelp;
 
+import android.content.ActivityNotFoundException;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +26,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
-    Button buttonReg;
+    Button buttonReg,buttonCam;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
+    static final int Req_Image_capture=1;
 
     @Override
     public void onStart() {
@@ -48,6 +52,7 @@ public class Register extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonReg = findViewById(R.id.btn_register);
+        buttonCam = findViewById(R.id.btn_camera);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +61,20 @@ public class Register extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        buttonCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                try {
+                    startActivityForResult(intent,Req_Image_capture);
+                }
+                catch (ActivityNotFoundException e){
+                    AlertDialog.Builder builder= new AlertDialog.Builder(Register.this);
+                    builder.setTitle("Error").setMessage("Error occurred while opening Camera: "+e.getMessage()).setPositiveButton("ok",null).show();
+                }
             }
         });
 

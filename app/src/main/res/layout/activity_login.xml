@@ -59,7 +59,16 @@
         android:id="@+id/btn_login"
         android:text="@string/login_C"
         android:textStyle="bold"
+        android:layout_marginBottom="10dp"
         android:background="?attr/colorSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/iforgorpass"
+        android:text="@string/forgot_password"
+        android:textStyle="bold"
+        android:background="?attr/colorPrimaryVariant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
