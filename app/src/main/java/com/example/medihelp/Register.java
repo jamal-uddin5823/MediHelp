@@ -1,8 +1,11 @@
 package com.example.medihelp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +31,8 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
+    ShapeableImageView imgCamera;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public void onStart() {
@@ -50,12 +56,28 @@ public class Register extends AppCompatActivity {
         buttonReg = findViewById(R.id.btn_register);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
+        imgCamera = findViewById(R.id.imgCamera);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        imgCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                try {
+//                    registerForActivityResult(     @NonNull ActivityResultContract<I, O> contract,
+//                            @NonNull ActivityResultCallback<O> callback )
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                } catch (ActivityNotFoundException e) {
+                    // display error state to the user
+                    Log.d("Camera","Camera not opening");
+                }
             }
         });
 
