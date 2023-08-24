@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="beige">#E7DAD9</color>
+
 
     <color name="greenBlue">#023735</color>
     <color name="purple_200">#ffbb86fc</color>
@@ -18,6 +20,7 @@
     <color name="dark_green">#2D4840</color>
     <color name="lime">#c8d869</color>
     <color name="mint">#69bf83</color>
+    <color name="olive">#a1ba89</color>
 
 
 </resources>
