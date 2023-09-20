@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.ActivityNotFoundException;
+
+import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -29,8 +33,11 @@ public class Login extends AppCompatActivity {
     Button buttonLogin,buttonforgor;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    TextView textView;
+
     static final int Req_Call=1;
+
+    TextView textView,textViewforgotPass;
+
 
     @Override
     public void onStart() {
@@ -44,6 +51,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,34 +62,45 @@ public class Login extends AppCompatActivity {
         buttonLogin = findViewById(R.id.btn_login);
         buttonforgor = findViewById(R.id.iforgorpass);
         progressBar = findViewById(R.id.progressBar);
-        textView = findViewById(R.id.SignUp);
+        textView = findViewById(R.id.signup);
+        textViewforgotPass = findViewById(R.id.forgotpass);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
+                Intent intent = new Intent(getApplicationContext(), Signup.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        buttonforgor.setOnClickListener(new View.OnClickListener() {
+        textViewforgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_CALL_BUTTON);
-                try {
-                    startActivityForResult(intent,Req_Call);
-                }
-                catch (ActivityNotFoundException e){
-                    AlertDialog.Builder builder= new AlertDialog.Builder(Login.this);
-                    builder.setTitle("Error").setMessage("Error occurred while making Call: "+e.getMessage()).setPositiveButton("ok",null).show();
-                }
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
+                startActivity(intent);
+                finish();
             }
         });
+
+//        buttonforgor.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(Intent.ACTION_CALL_BUTTON);
+//                try {
+//                    startActivityForResult(intent,Req_Call);
+//                }
+//                catch (ActivityNotFoundException e){
+//                    AlertDialog.Builder builder= new AlertDialog.Builder(Login.this);
+//                    builder.setTitle("Error").setMessage("Error occurred while making Call: "+e.getMessage()).setPositiveButton("ok",null).show();
+//                }
+//            }
+//        });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
+
                 String email,password;
                 email=editTextEmail.getText().toString();
                 password=editTextPassword.getText().toString();
@@ -95,30 +114,33 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Enter password",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(Login.this, "Login Successful.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    //FIX THIS
-                                    Toast.makeText(Login.this, "Logged In.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        });
+//                mAuth.signInWithEmailAndPassword(email, password)
+//                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                progressBar.setVisibility(View.GONE);
+//                                if (task.isSuccessful()) {
+//                                    // Sign in success, update UI with the signed-in user's information
+//                                    Toast.makeText(Login.this, "Login Successful.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } else {
+//                                    // If sign in fails, display a message to the user.
+//                                    //FIX THIS
+//                                    Toast.makeText(Login.this, "Authentication failed",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                            }
+//                        });
             }
         });
     }

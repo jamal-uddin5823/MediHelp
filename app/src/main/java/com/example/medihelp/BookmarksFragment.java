@@ -14,9 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 public class BookmarksFragment extends Fragment {
 
     boolean isBookmarked = true;
+
+    ArrayList<Doctor> doctors = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,5 +74,10 @@ public class BookmarksFragment extends Fragment {
         if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    private void setUpDoctors() {
+        doctors.add(new Doctor(1,"Dr. Abul","Medicine","Dhanmondi","01714268748"));
+        doctors.add(new Doctor(2,"Dr. Babu","Cardiologist","Banani","01918231233"));
     }
 }
