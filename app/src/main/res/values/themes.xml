@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MediHelp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Light.Theme.MediHelp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
@@ -35,5 +35,5 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
-    <style name="Theme.MediHelp" parent="Base.Theme.MediHelp" />
+    <style name="Theme.MediHelp" parent="Light.Theme.MediHelp" />
 </resources>

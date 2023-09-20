@@ -3,6 +3,7 @@ package com.example.medihelp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +27,7 @@ public class Login extends AppCompatActivity {
     Button buttonLogin;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    TextView textView;
+    TextView textView,textViewforgotPass;
 
     @Override
     public void onStart() {
@@ -40,6 +41,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +51,21 @@ public class Login extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
         progressBar = findViewById(R.id.progressBar);
-        textView = findViewById(R.id.SignUp);
+        textView = findViewById(R.id.signup);
+        textViewforgotPass = findViewById(R.id.forgotpass);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
+                Intent intent = new Intent(getApplicationContext(), Signup.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        textViewforgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
                 startActivity(intent);
                 finish();
             }
@@ -62,7 +74,8 @@ public class Login extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
+
                 String email,password;
                 email=editTextEmail.getText().toString();
                 password=editTextPassword.getText().toString();
@@ -76,30 +89,33 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Enter password",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(Login.this, "Login Successful.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    //FIX THIS
-                                    Toast.makeText(Login.this, "Logged In.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        });
+//                mAuth.signInWithEmailAndPassword(email, password)
+//                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                progressBar.setVisibility(View.GONE);
+//                                if (task.isSuccessful()) {
+//                                    // Sign in success, update UI with the signed-in user's information
+//                                    Toast.makeText(Login.this, "Login Successful.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } else {
+//                                    // If sign in fails, display a message to the user.
+//                                    //FIX THIS
+//                                    Toast.makeText(Login.this, "Authentication failed",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                            }
+//                        });
             }
         });
     }

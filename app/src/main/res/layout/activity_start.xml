@@ -3,66 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?attr/colorPrimary"
     android:layout_height="match_parent"
-    android:paddingHorizontal="15dp"
-    android:paddingVertical="30dp"
-    tools:context=".StartActivity">
+    tools:context=".StartActivity"
+    android:background="?attr/colorPrimary">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="320dp"
+        android:layout_height="328dp"
+        android:src="@drawable/assistance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/mon"
         android:gravity="center"
-        android:text="MediHelp"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="50sp"
+        android:text="Need doctors near your place?"
+        android:textColor="@color/white"
+        android:textSize="35dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.089" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="584dp"
-        android:gravity="center"
-        android:text="Team Scooby DU"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="380dp"
-        android:gravity="center"
-        android:text="Jamal Uddin Mallick(07)\nTasnia Iffat(27)
-\nAfia Lubaina(14)"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGetStarted"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="212dp"
-        android:background="?attr/colorAccent"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/thin"
         android:gravity="center"
-        android:text="Get Started"
-        android:textColor="?attr/colorOnSecondary"
-        android:textSize="35dp"
-        android:textStyle="bold|italic"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Lets get started!"
+        android:textColor="@color/black"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.196" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

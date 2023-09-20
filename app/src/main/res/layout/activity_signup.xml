@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".SignUp">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -67,17 +67,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
-                android:text="Login"
+                android:text="Sign Up"
                 android:textColor="@color/black"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_textbg"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="10dp"
+                android:hint="Username"
+                android:paddingStart="10dp" />
+
+            <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_textbg"
                 android:drawableStart="@drawable/baseline_email_24"
@@ -85,13 +98,12 @@
                 android:hint="Email"
                 android:paddingStart="10dp" />
 
-
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_textbg"
                 android:drawableStart="@drawable/key"
@@ -99,28 +111,30 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingStart="10dp" />
-
-
-
-            <TextView
-                android:id="@+id/forgotpass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/confirmpassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="Forgot Password?"
-                android:textColor="@color/lavender" />
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit_textbg"
+                android:drawableStart="@drawable/key"
+                android:drawablePadding="5dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingStart="10dp" />
+
+
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
+                android:id="@+id/signup"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button_bg"
-                android:text="LOGIN"
+                android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="20dp">
 
@@ -131,7 +145,6 @@
 
 
     </androidx.cardview.widget.CardView>
-
 
 
 
@@ -181,12 +194,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signup"
+        android:id="@+id/signin"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/white_button"
-        android:text="Register"
+        android:text="Sign in"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -194,16 +207,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.688">
+        app:layout_constraintVertical_bias="0.689">
 
     </androidx.appcompat.widget.AppCompatButton>
 
     <ProgressBar
-        android:id="@+id/progress_login"
+        android:id="@+id/progress_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/signup"
+        app:layout_constraintBottom_toBottomOf="@+id/signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
