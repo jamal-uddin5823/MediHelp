@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardDoctor"
     android:layout_width="match_parent"
     android:layout_height="400dp"
@@ -18,6 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/rounded_background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="15dp">
+            <include layout="@layout/bookmark_button"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,6 +92,7 @@
         android:textColor="?attr/colorPrimary"
         android:textSize="25sp"
         android:textStyle="bold" />
+
 
 
 </androidx.cardview.widget.CardView>
