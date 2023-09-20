@@ -16,6 +16,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="?attr/colorAccent"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -28,7 +29,7 @@
             android:id="@+id/email"
             android:textSize="20dp"
             android:hint="@string/email"
-            android:background="?attr/colorOnPrimary"
+            android:background="?attr/colorPrimaryVariant"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -43,7 +44,7 @@
             android:id="@+id/password"
             android:textSize="20dp"
             android:hint="@string/password"
-            android:background="?attr/colorOnPrimary"
+            android:background="?attr/colorPrimaryVariant"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -56,30 +57,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:text="@string/login_C"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
-        android:background="?attr/colorSecondary"
+        android:background="@drawable/et_design"
+        android:textColor="?attr/colorPrimaryVariant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-<!--<<<<<<< HEAD-->
-<!--    <Button-->
-<!--        android:id="@+id/iforgorpass"-->
-<!--        android:text="@string/forgot_password"-->
-<!--        android:textStyle="bold"-->
-<!--        android:background="?attr/colorPrimaryVariant"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/iforgorpass"
+        android:text="@string/forgot_password"
+        android:textStyle="bold"
+        android:background="@drawable/et_design"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <TextView
         android:textStyle="bold|italic"
         android:textSize="35dp"
-        android:background="?attr/colorAccent"
-        android:textColor="?attr/colorOnSecondary"
+        android:background="@drawable/et_design"
+        android:textColor="?attr/colorPrimaryVariant"
         android:gravity="center"
         android:layout_marginTop="280dp"
         android:id="@+id/SignUp"
