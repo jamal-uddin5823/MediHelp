@@ -6,11 +6,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class ProfileFragment extends Fragment {
@@ -46,7 +49,11 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Logging out",Toast.LENGTH_SHORT).show();
                 Context context = getActivity();
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(context, Login.class);
+
+
+                Log.d("Hllo","Redreictb=ing to lgin");
 
                 context.startActivity(intent);
 
