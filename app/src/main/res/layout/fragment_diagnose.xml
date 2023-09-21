@@ -99,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="700dp"
                 android:background="@drawable/et_design"
                 android:textAlignment="center"
                 android:hint="Click analyse to get the diagnosis"
