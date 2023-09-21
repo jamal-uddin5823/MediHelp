@@ -106,11 +106,10 @@
                 android:padding="15dp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="650dp"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAnalyseSymptoms"
+                app:layout_constraintLeft_toLeftOf="@+id/btnAnalyseSymptoms"
+                app:layout_constraintRight_toRightOf="@+id/btnAnalyseSymptoms"
+                app:layout_constraintTop_toBottomOf="@+id/btnAnalyseSymptoms"
                 />
 
 

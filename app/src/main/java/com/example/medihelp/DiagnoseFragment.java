@@ -50,7 +50,13 @@ public class DiagnoseFragment extends Fragment {
                 symptoms=etSymptoms.getText().toString();
 
                 Toast.makeText(view.getContext(),"Analysing the symptoms",Toast.LENGTH_SHORT).show();
-                diagnosis.setText(diagnosetext);
+
+//                System.out.printf(symptoms);
+
+                if(symptoms.equals("chest pain"))diagnosis.setText("Consult Cardiologist");
+                else if(symptoms.equals("blurry sight"))diagnosis.setText("Consult Eye Doctor");
+                else if(symptoms.equals("stomach pain"))diagnosis.setText("Consult Gastroenterologist");
+                else diagnosis.setText(diagnosetext);
             }
         });
 

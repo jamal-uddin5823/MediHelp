@@ -30,6 +30,11 @@ public class Signup extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog progress_signup;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
+
+//myRef.setValue("Hello, World!");
+
 
 
     @Override
