@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -40,9 +41,16 @@ public class DiagnoseFragment extends Fragment {
         });
 
         btnAnalyseSymptoms.setOnClickListener(new View.OnClickListener() {
+            EditText etSymptoms = view.findViewById(R.id.etSymptoms);
+            TextView diagnosis=view.findViewById(R.id.diagnosis);
             @Override
             public void onClick(View view) {
+                String symptoms;
+                String diagnosetext="Consult Family Medicine Doctor";
+                symptoms=etSymptoms.getText().toString();
+
                 Toast.makeText(view.getContext(),"Analysing the symptoms",Toast.LENGTH_SHORT).show();
+                diagnosis.setText(diagnosetext);
             }
         });
 
