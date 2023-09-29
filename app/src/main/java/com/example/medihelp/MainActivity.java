@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
             } else if (itemId == R.id.bookmark) {
                 replaceFragment(new BookmarksFragment());
             } else if (itemId == R.id.profile) {
-                replaceFragment(new ProfileFragment());
+                replaceFragment(new lebsProfile());
             }
             return true;
         });

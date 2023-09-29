@@ -10,6 +10,14 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="LightTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your light theme here -->
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat">
+        <!-- Customize your dark theme here -->
+    </style>
+
 
 
 </resources>
