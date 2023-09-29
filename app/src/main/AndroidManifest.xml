@@ -29,6 +29,15 @@
         android:theme="@style/Theme.MediHelp"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
+            android:name=".UserDetails"
+            android:exported="false" />
+        <activity
+            android:name=".lebsProfile"
+            android:exported="false" />
+        <activity
             android:name=".Signup"
             android:exported="false" />
         <activity
