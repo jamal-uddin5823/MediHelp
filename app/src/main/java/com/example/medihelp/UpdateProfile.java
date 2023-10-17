@@ -29,7 +29,7 @@ public class UpdateProfile extends AppCompatActivity {
     private DatabaseReference userDatabase;
 
     // UI components
-    private EditText editName, editEmail, editPassword, Age, Weight, Blood;
+    private EditText editName, editEmail, editPassword, Age, Weight, Blood,Gender;
     private Button saveButton, backButton;
     private ProgressBar progressBar;
 
@@ -47,10 +47,11 @@ public class UpdateProfile extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         Age = findViewById(R.id.Age);
+        Gender = findViewById(R.id.Gender);
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
         saveButton = findViewById(R.id.SaveButton);
-//        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.backButton);
 //        progressBar = findViewById(R.id.progressBar);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -60,15 +61,15 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Handle back button click or navigation to previous screen
-//                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
-//                startActivity(intent);
-////                finish();
-//            }
-//        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle back button click or navigation to previous screen
+                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
+                startActivity(intent);
+//                finish();
+            }
+        });
     }
 
     private void saveProfileData() {
@@ -77,11 +78,12 @@ public class UpdateProfile extends AppCompatActivity {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String age = Age.getText().toString().trim();
+        String gender = Gender.getText().toString().trim();
         String weight = Weight.getText().toString().trim();
         String bloodGroup = Blood.getText().toString().trim();
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || !bloodGroup.isEmpty()) {
+        if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || !bloodGroup.isEmpty() || !gender.isEmpty()) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -107,9 +109,17 @@ public class UpdateProfile extends AppCompatActivity {
                                 existingUser.setEmail(email);
                                 editEmail.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
+                            if (!password.isEmpty()) {
+                                existingUser.setPassword(password);
+                                editPassword.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                            }
                             if (!age.isEmpty()) {
                                 existingUser.setAge(age);
                                 Age.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                            }
+                            if (!gender.isEmpty()) {
+                                existingUser.setGender(gender);
+                                Gender.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
                             if (!weight.isEmpty()) {
                                 existingUser.setWeight(weight);

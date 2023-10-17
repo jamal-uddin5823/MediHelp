@@ -2,20 +2,25 @@ package com.example.medihelp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,10 +33,10 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDetails extends AppCompatActivity {
     TextView profileName, profileEmail, profilePassword;
 
-    TextView   Age, Weight, Blood;
+    TextView   Age, Weight, Blood,Gender;
     Button back,update;
     private FirebaseAuth mAuth;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
 
 
     @Override
@@ -45,6 +50,7 @@ public class UserDetails extends AppCompatActivity {
 //        progressBar = findViewById(R.id.progressBar);
 
         Age = findViewById(R.id.Age);
+        Gender = findViewById(R.id.Gender);
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
 //        back=findViewById(R.id.backButton);
@@ -59,30 +65,86 @@ public class UserDetails extends AppCompatActivity {
             Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
         } else {
             showAllUserData(firebaseUser);
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
-        back.setOnClickListener(new View.OnClickListener() {
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), lebsProfile.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//
+//        update.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), UpdateProfile.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+        Log.d("YourActivity", "Attempting to find LinearLayout ll3...");
+        LinearLayout ll3 = findViewById(R.id.ll3);
+
+        if (ll3 != null) {
+            Log.d("YourActivity", "LinearLayout ll3 found!");
+        } else {
+            Log.e("YourActivity", "LinearLayout ll3 not found!");
+        }
+
+
+
+        ImageView toggleEyeIcon = ll3.findViewById(R.id.toggleEyeIcon);
+        Drawable visibleIcon = ContextCompat.getDrawable(this, R.drawable.ic_eye);
+        Drawable hiddenIcon = ContextCompat.getDrawable(this, R.drawable.ic_not_eye);
+
+        PasswordToggleHelper passwordToggleHelper = new PasswordToggleHelper(profilePassword, toggleEyeIcon, visibleIcon, hiddenIcon);
+
+//        toggleEyeIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("YourActivity", "toggleEyeIcon clicked");
+//                // Add other actions if needed
+//            }
+//        });
+
+        toggleEyeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), lebsProfile.class);
-                startActivity(intent);
-                finish();
+                Log.d("Hello","KUKURRRRRRRRRRR");
+                passwordToggleHelper.togglePasswordVisibilityForImageView();
             }
         });
 
-        update.setOnClickListener(new View.OnClickListener() {
+        ShapeableImageView btnEdit = findViewById(R.id.btnEditDetails);
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), UpdateProfile.class);
+//                binding.bottomNavigationView.setSelectedItemId(R.id.profile);
+                Log.d("Hello","hiiiiiiiiiiiiiiiiii");
+                Intent intent = new Intent(getApplicationContext(),UpdateProfile.class);
                 startActivity(intent);
-                finish();
+
+
+            }
+        });
+
+        TextView profile = findViewById(R.id.textView4);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("EIIIIIIIIIIIIIIIII", "onClick: ALUEEEEEEEEEEEEEEE");
             }
         });
     }
 
+
+
     private void showAllUserData(FirebaseUser firebaseUser) {
-        progressBar.setVisibility(View.VISIBLE); // Show the ProgressBar
+//        progressBar.setVisibility(View.VISIBLE); // Show the ProgressBar
 
         String uid = firebaseUser.getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
@@ -97,12 +159,14 @@ public class UserDetails extends AppCompatActivity {
                         String emailUser = user.getEmail();
                         String passwordUser = user.getPassword();
                         String age= user.getAge();
+                        String gender = user.getGender();
                         String weight=user.getWeight();
                         String bloodGroup=user.getBloodGroup();
                         profileName.setText(nameUser);
                         profileEmail.setText(emailUser);
                         profilePassword.setText(passwordUser);
                         Age.setText(age);
+                        Gender.setText(gender);
                         Weight.setText(weight);
                         Blood.setText(bloodGroup);
                     }
@@ -117,21 +181,11 @@ public class UserDetails extends AppCompatActivity {
                 Toast.makeText(UserDetails.this, "Data not retrieved from Firebase", Toast.LENGTH_SHORT).show();
 
                 // Hide the ProgressBar if an error occurs during data retrieval
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
             }
         });
 
-//        ImageView toggleEyeIcon = findViewById(R.id.toggleEyeIcon);
-//        Drawable visibleIcon = ContextCompat.getDrawable(this, R.drawable.ic_eye);
-//        Drawable hiddenIcon = ContextCompat.getDrawable(this, R.drawable.ic_not_eye);
 
-//        PasswordToggleHelper passwordToggleHelper = new PasswordToggleHelper(profilePassword, toggleEyeIcon, visibleIcon, hiddenIcon);
-//        toggleEyeIcon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                passwordToggleHelper.togglePasswordVisibilityForImageView();
-//            }
-//        });
 
     }
 

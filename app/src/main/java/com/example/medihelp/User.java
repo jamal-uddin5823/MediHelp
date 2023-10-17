@@ -2,7 +2,7 @@ package com.example.medihelp;
 
 public class User {
 
-    private String name, email, password, age, weight, BloodGroup;
+    private String name, email, password, age, weight, BloodGroup,gender;
 
 
     public User() {
@@ -14,10 +14,11 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String email, String age, String weight, String BloodGroup) {
+    public User(String name, String email, String age,String gender, String weight, String BloodGroup) {
         this.name = name;
         this.email = email;
         this.age = age;
+        this.gender = gender;
         this.weight = weight;
         this.BloodGroup = BloodGroup;
     }
@@ -68,5 +69,13 @@ public class User {
 
     public void setBloodGroup(String bloodGroup) {
         this.BloodGroup = bloodGroup;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

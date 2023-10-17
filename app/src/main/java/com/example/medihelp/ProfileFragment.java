@@ -99,7 +99,7 @@ public class ProfileFragment extends Fragment {
         btnUserDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),UserDetailsActivity.class);
+                Intent intent = new Intent(getContext(),UserDetails.class);
                 startActivity(intent);
                 Toast.makeText(view.getContext(),"Showing user details",Toast.LENGTH_SHORT).show();
             }

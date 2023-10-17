@@ -32,7 +32,7 @@
             android:name=".UpdateProfile"
             android:exported="false" />
         <activity
-            android:name=".UserDetailsActivity"
+            android:name=".UserDetails"
             android:exported="false" />
         <activity
             android:name=".SearchActivity"

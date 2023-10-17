@@ -6,6 +6,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class PasswordToggleHelper {
     private final TextView Textview;
     private final ImageView toggleImageView;
@@ -23,22 +25,22 @@ public class PasswordToggleHelper {
         // Set initial transformation method
         textView.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
-        toggleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                togglePasswordVisibility();
-            }
-        });
+//        toggleImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                togglePasswordVisibility();
+//            }
+//        });
     }
 
     private void togglePasswordVisibility() {
         if (passwordVisible) {
             // Hide the password
-            Textview.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            this.Textview.setTransformationMethod(PasswordTransformationMethod.getInstance());
             toggleImageView.setImageDrawable(hiddenIcon);
         } else {
             // Show the password
-            Textview.setTransformationMethod(null);
+            this.Textview.setTransformationMethod(null);
             toggleImageView.setImageDrawable(visibleIcon);
         }
         passwordVisible = !passwordVisible;
