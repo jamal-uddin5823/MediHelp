@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class Signup extends AppCompatActivity {
-    private EditText editTextEmail, editTextPassword, confirmPassword,name;
+    private EditText name,editTextEmail, editTextPassword, confirmPassword,editName;
     private  Button buttonSignup;
     private Button buttonSign_in;
     private FirebaseAuth mAuth;
@@ -37,19 +37,21 @@ public class Signup extends AppCompatActivity {
 
         //init firebase
         mAuth=FirebaseAuth.getInstance();
-
+        setContentView(R.layout.activity_signup);
         progress_signup=new ProgressDialog(this);
         progress_signup.setTitle("Please wait");
         progress_signup.setCanceledOnTouchOutside(false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        name=findViewById(R.id.username);
-        editTextEmail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
+        name=findViewById(R.id.editName);
+        editTextEmail = findViewById(R.id.editEmail);
+        editTextPassword = findViewById(R.id.editPassword);
         confirmPassword = findViewById(R.id.confirmpassword);
         buttonSignup = findViewById(R.id.signup);
         buttonSign_in = findViewById(R.id.signin);
+
+
         buttonSign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,6 +131,10 @@ public class Signup extends AppCompatActivity {
         long timestamp = System.currentTimeMillis();
 
         String uid = mAuth.getUid();
+        String age="Age Not Added";
+        String bloodGroup= "Blood Group not Added";
+        String weight= "Weight not Added";
+
 
         // Setup data to add in db
 
@@ -136,7 +142,11 @@ public class Signup extends AppCompatActivity {
         hashMap.put("uid", uid);
         hashMap.put("email", email);
         hashMap.put("name", username);
+        hashMap.put("password",password);
         hashMap.put("profileImage", "");
+        hashMap.put("age",age);
+        hashMap.put("bloodGroup",bloodGroup);
+        hashMap.put("weight",weight);
         hashMap.put("userType", "user");
         hashMap.put("timestamp", timestamp);
 

@@ -1,14 +1,25 @@
 package com.example.medihelp;
 
 public class User {
-    private String name,email,password,age,weight,bloodGroup;
 
-    public User() {}
+    private String name, email, password, age, weight, BloodGroup;
+
+
+    public User() {
+    }
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String name, String email, String age, String weight, String BloodGroup) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.weight = weight;
+        this.BloodGroup = BloodGroup;
     }
 
     public String getName() {
@@ -52,10 +63,10 @@ public class User {
     }
 
     public String getBloodGroup() {
-        return bloodGroup;
+        return BloodGroup;
     }
 
     public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
+        this.BloodGroup = bloodGroup;
     }
 }

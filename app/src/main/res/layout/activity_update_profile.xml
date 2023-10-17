@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".UpdateProfile">
+    android:background="@color/background">
+
 
 
     <LinearLayout
@@ -81,9 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:src="@drawable/ic_baseline_profile_36"
-
-                    />
+                    android:src="@drawable/ic_baseline_profile_36" />
             </androidx.cardview.widget.CardView>
 
             <EditText
@@ -222,6 +220,7 @@
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

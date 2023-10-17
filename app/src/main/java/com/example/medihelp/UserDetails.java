@@ -27,12 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserDetails extends AppCompatActivity {
     TextView profileName, profileEmail, profilePassword;
-    TextView  Age, Weight, Blood;
+
+    TextView   Age, Weight, Blood;
     Button back,update;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-
-
 
 
     @Override
@@ -42,13 +41,16 @@ public class UserDetails extends AppCompatActivity {
         profileName = findViewById(R.id.editName);
         profileEmail = findViewById(R.id.editEmail);
         profilePassword = findViewById(R.id.editPassword);
+
 //        progressBar = findViewById(R.id.progressBar);
 
         Age = findViewById(R.id.Age);
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
         back=findViewById(R.id.backButton);
-        update=findViewById(R.id.SaveButton);
+
+        update=findViewById(R.id.updateButton);
+
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
