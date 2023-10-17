@@ -2,10 +2,15 @@ package com.example.medihelp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +21,49 @@ import android.widget.Toast;
 public class ProfileFragment extends Fragment {
     View view;
     private int currentTheme=R.style.Light_Theme_MediHelp;
+    SwitchCompat switchmode;
+    boolean isNightmode;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    Button btnUserDetails;
+    Button btnLogout;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getActivity() != null) {
+            sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        }
+        isNightmode = sharedPreferences.getBoolean("nightmode", false);
+
+    }
+
+    private void updateTheme(boolean isNightMode) {
+
+        //theme and fragment both change
+        if (isNightmode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Button btnUserDetails = view.findViewById(R.id.btnUserDetails);
-        Button btnTheme = view.findViewById(R.id.btnTheme);
-        Button btnLogout = view.findViewById(R.id.btn_logout);
+        btnUserDetails = view.findViewById(R.id.btnUserDetails);
+
+        switchmode = view.findViewById(R.id.switchMode);
+
+
+        btnLogout = view.findViewById(R.id.btn_logout);
 
         btnUserDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,10 +72,35 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        btnTheme.setOnClickListener(new View.OnClickListener() {
+
+        if (getActivity() != null) {
+            sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
+            isNightmode = sharedPreferences.getBoolean("nightmode",false);
+        }
+
+        switchmode.setChecked(isNightmode);
+
+        switchmode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Changing theme",Toast.LENGTH_SHORT).show();
+
+                isNightmode = switchmode.isChecked();
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("nightmode", isNightmode);
+                editor.apply();
+
+
+                updateTheme(isNightmode);
+
+
+
+                // Check if the fragment is already in ProfileFragment
+                if (!(getActivity() instanceof MainActivity) || !((MainActivity) getActivity()).isProfileFragmentVisible()) {
+//                     Navigate to ProfileFragment only if it's not the current fragment
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.replaceFragment(new ProfileFragment());
+                }
             }
         });
 
@@ -55,4 +119,6 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+
+
 }

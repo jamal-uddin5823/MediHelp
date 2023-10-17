@@ -2,7 +2,7 @@
 <resources>
     <style name="AppbarLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:gravity">center</item>
-        <item name="color">?attr/colorPrimary</item>
+        <item name="color">@color/primary</item>
         <item name="android:textSize">20sp</item>
     </style>
 

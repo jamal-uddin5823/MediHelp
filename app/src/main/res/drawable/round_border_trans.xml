@@ -4,7 +4,7 @@
     <corners android:radius="500dp" />
     <stroke
         android:width="2dp"
-        android:color="?attr/colorPrimary" />
+        android:color="@color/primary" />
     <solid android:color="@android:color/transparent"/> <!-- Lavender-colored stroke -->
 </shape>
 

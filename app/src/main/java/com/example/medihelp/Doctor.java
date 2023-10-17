@@ -7,12 +7,15 @@ public class Doctor {
     private String location;
     private String contact;
 
-    public Doctor(int ID, String name, String speciality, String location, String contact) {
+    private boolean isBookmarked;
+
+    public Doctor(int ID, String name, String speciality, String location, String contact, boolean isBookmarked) {
         this.ID = ID;
         this.name = name;
         this.speciality = speciality;
         this.location = location;
         this.contact = contact;
+        this.isBookmarked = isBookmarked;
     }
 
     public int getID() {
@@ -53,5 +56,13 @@ public class Doctor {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
     }
 }

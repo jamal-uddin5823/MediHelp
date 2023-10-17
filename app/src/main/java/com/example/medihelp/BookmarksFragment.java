@@ -77,7 +77,7 @@ public class BookmarksFragment extends Fragment {
     }
 
     private void setUpDoctors() {
-        doctors.add(new Doctor(1,"Dr. Abul","Medicine","Dhanmondi","01714268748"));
-        doctors.add(new Doctor(2,"Dr. Babu","Cardiologist","Banani","01918231233"));
+        doctors.add(new Doctor(1,"Dr. Abul","Medicine","Dhanmondi","01714268748",false));
+        doctors.add(new Doctor(2,"Dr. Babu","Cardiologist","Banani","01918231233",false));
     }
 }

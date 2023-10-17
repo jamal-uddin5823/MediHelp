@@ -11,9 +11,9 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:tint="?attr/colorPrimary"
+        android:tint="@color/primary"
         android:background="@android:color/transparent"
-        android:layout_margin="5dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
