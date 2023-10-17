@@ -50,7 +50,7 @@ public class UpdateProfile extends AppCompatActivity {
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
         saveButton = findViewById(R.id.SaveButton);
-        backButton = findViewById(R.id.backButton);
+//        backButton = findViewById(R.id.backButton);
 //        progressBar = findViewById(R.id.progressBar);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -60,15 +60,15 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle back button click or navigation to previous screen
-                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Handle back button click or navigation to previous screen
+//                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
+//                startActivity(intent);
+////                finish();
+//            }
+//        });
     }
 
     private void saveProfileData() {

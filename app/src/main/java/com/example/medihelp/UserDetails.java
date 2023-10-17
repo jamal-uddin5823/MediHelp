@@ -47,9 +47,9 @@ public class UserDetails extends AppCompatActivity {
         Age = findViewById(R.id.Age);
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
-        back=findViewById(R.id.backButton);
+//        back=findViewById(R.id.backButton);
 
-        update=findViewById(R.id.updateButton);
+//        update=findViewById(R.id.updateButton);
 
 
         mAuth = FirebaseAuth.getInstance();
