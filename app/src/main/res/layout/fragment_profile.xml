@@ -157,7 +157,7 @@
                     android:textColor="@color/white"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/layout_button"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_buttonTheme"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +165,7 @@
                     app:layout_constraintVertical_bias="0.588" />
 
                 <LinearLayout
-                    android:id="@+id/layout_button"
+                    android:id="@+id/layout_buttonTheme"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_marginVertical="25dp"
@@ -196,8 +196,8 @@
                         android:thumb="@drawable/thumb"
                         app:track="@drawable/track"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/layout_button"
-                        app:layout_constraintBottom_toBottomOf="@id/layout_button" />
+                        app:layout_constraintTop_toTopOf="@id/layout_buttonTheme"
+                        app:layout_constraintBottom_toBottomOf="@id/layout_buttonTheme" />
 
                 </LinearLayout>
 

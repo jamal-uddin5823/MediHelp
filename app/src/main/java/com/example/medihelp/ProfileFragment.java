@@ -20,6 +20,7 @@ import android.content.res.Configuration;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class ProfileFragment extends Fragment {
@@ -85,6 +86,8 @@ public class ProfileFragment extends Fragment {
         btnUserDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getContext(),UserDetailsActivity.class);
+                startActivity(intent);
                 Toast.makeText(view.getContext(),"Showing user details",Toast.LENGTH_SHORT).show();
             }
         });
@@ -126,6 +129,8 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Logging out",Toast.LENGTH_SHORT).show();
                 Context context = getActivity();
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
                 Intent intent = new Intent(context, Login.class);
 
                 context.startActivity(intent);

@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
-        progressBar = findViewById(R.id.progressBar);
+//        progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.signup);
         textViewforgotPass = findViewById(R.id.forgotpass);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -89,33 +89,33 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Enter password",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+//                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//                finish();
 
-//                mAuth.signInWithEmailAndPassword(email, password)
-//                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 //                                progressBar.setVisibility(View.GONE);
-//                                if (task.isSuccessful()) {
-//                                    // Sign in success, update UI with the signed-in user's information
-//                                    Toast.makeText(Login.this, "Login Successful.",
-//                                            Toast.LENGTH_SHORT).show();
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Toast.makeText(Login.this, "Login Successful.",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    //FIX THIS
+                                    Toast.makeText(Login.this, "Authentication failed",
+                                            Toast.LENGTH_SHORT).show();
 //                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
 //                                    startActivity(intent);
 //                                    finish();
-//                                } else {
-//                                    // If sign in fails, display a message to the user.
-//                                    //FIX THIS
-//                                    Toast.makeText(Login.this, "Authentication failed",
-//                                            Toast.LENGTH_SHORT).show();
-//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
-//                            }
-//                        });
+                                }
+                            }
+                        });
             }
         });
     }

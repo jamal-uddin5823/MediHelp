@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.medihelp.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    ActivityMainBinding binding;
     boolean isBookmarked = false;
 
     ShapeableImageView imgProfile;
@@ -34,11 +37,15 @@ public class HomeFragment extends Fragment {
 
     CardView cvDiagnose;
     CardView cvSearch;
+    BottomNavigationView bottomNavigationView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+//        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
 
         cvDiagnose = view.findViewById(R.id.cvDiagnose);
         cvSearch = view.findViewById(R.id.cvSearch);
@@ -56,6 +63,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),SearchActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -65,6 +73,7 @@ public class HomeFragment extends Fragment {
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                binding.bottomNavigationView.setSelectedItemId(R.id.profile);
                 replaceFragment(new ProfileFragment());
             }
         });
