@@ -29,6 +29,9 @@
         android:theme="@style/Theme.MediHelp"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
             android:name=".UserDetailsActivity"
             android:exported="false" />
         <activity
@@ -54,9 +57,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".Register"
-            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true">

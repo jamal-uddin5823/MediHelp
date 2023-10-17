@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.content.res.Configuration;
 import androidx.core.content.ContextCompat;
@@ -72,6 +73,7 @@ public class ProfileFragment extends Fragment {
 
         switchmode = view.findViewById(R.id.switchMode);
 
+
         // Check the system theme and set the appropriate drawables
         int thumbDrawable = isSystemInDarkMode() ? R.drawable.thumb_dark : R.drawable.thumb_light;
 
@@ -82,6 +84,17 @@ public class ProfileFragment extends Fragment {
 
 
         btnLogout = view.findViewById(R.id.btn_logout);
+
+
+
+
+//        btnEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getContext(),UpdateProfile.class);
+//                startActivity(intent);
+//            }
+//        });
 
         btnUserDetails.setOnClickListener(new View.OnClickListener() {
             @Override
