@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.material.imageview.ShapeableImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,19 +28,51 @@ public class HomeFragment extends Fragment {
 
     boolean isBookmarked = false;
 
+    ShapeableImageView imgProfile;
+
     RecyclerView recyclerView;
+
+    CardView cvDiagnose;
+    CardView cvSearch;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        cvDiagnose = view.findViewById(R.id.cvDiagnose);
+        cvSearch = view.findViewById(R.id.cvSearch);
+
+        cvDiagnose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),DiagnoseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        imgProfile = view.findViewById(R.id.imgProfile);
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new ProfileFragment());
+            }
+        });
+
         recyclerView = view.findViewById(R.id.rvNearDoc);
+        ArrayList<Doctor> arrayList = Doctors.arrayList;
 
-        ArrayList<Doctor> arrayList = new ArrayList<Doctor>();
 
-        arrayList.add(new Doctor(1, "Dr. X", "Cardiologist", "Dhanmondi, Dhaka", "+8801714368748",false));
-        arrayList.add(new Doctor(2, "Dr. Y", "Oncologist", "Banani, Dhaka", "+8801714268748",false));
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

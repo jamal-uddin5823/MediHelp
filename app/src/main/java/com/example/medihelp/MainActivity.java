@@ -65,14 +65,14 @@ public class MainActivity extends AppCompatActivity{
 
         binding.bottomNavigationView.setBackground(null);
 
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currFragment = "Diagnose";
-                replaceFragment(new DiagnoseFragment());
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currFragment = "Diagnose";
+//                replaceFragment(new DiagnoseFragment());
+//            }
+//        });
 
 
 
@@ -81,13 +81,16 @@ public class MainActivity extends AppCompatActivity{
             if (itemId == R.id.home) {
                 currFragment = "Home";
                 replaceFragment(new HomeFragment());
-            } else if (itemId == R.id.search) {
-                currFragment = "Search";
-                replaceFragment(new SearchFragment());
-            } else if (itemId == R.id.blank) {
-                currFragment = "Diagnose";
-                replaceFragment(new DiagnoseFragment());
-            } else if (itemId == R.id.bookmark) {
+            }
+//            else if (itemId == R.id.search) {
+//                currFragment = "Search";
+//                replaceFragment(new SearchFragment());
+//            }
+//            else if (itemId == R.id.blank) {
+//                currFragment = "Diagnose";
+//                replaceFragment(new DiagnoseFragment());
+//            }
+            else if (itemId == R.id.bookmark) {
                 currFragment = "Bookmark";
                 replaceFragment(new BookmarksFragment());
             } else if (itemId == R.id.profile) {

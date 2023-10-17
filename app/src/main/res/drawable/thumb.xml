@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="true"
-        android:drawable="@drawable/thumbtrue"/>
+        android:drawable="@drawable/thumb_dark"/>
     <item
         android:state_checked="false"
-        android:drawable="@drawable/thumbfalse"/>
+        android:drawable="@drawable/thumb_light"/>
 
 </selector>

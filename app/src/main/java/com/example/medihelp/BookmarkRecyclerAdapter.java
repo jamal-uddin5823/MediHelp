@@ -1,19 +1,13 @@
 package com.example.medihelp;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,34 +18,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DocRecyclerAdapter extends RecyclerView.Adapter<DocRecyclerAdapter.ViewHolder> {
+public class BookmarkRecyclerAdapter extends RecyclerView.Adapter<BookmarkRecyclerAdapter.ViewHolder> {
     Context context;
 
     ArrayList<Doctor> doctorArrayList;
 
-    DocRecyclerAdapter(Context context,ArrayList<Doctor> docArrayList) {
+    BookmarkRecyclerAdapter(Context context,ArrayList<Doctor> docArrayList) {
         this.context = context;
         this.doctorArrayList=docArrayList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookmarkRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.doctor_card,parent,false);
         return new ViewHolder(context,view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull BookmarkRecyclerAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.docName.setText(doctorArrayList.get(position).getName());
         holder.docSpeciality.setText(doctorArrayList.get(position).getSpeciality());
-        if (doctorArrayList.get(position).isBookmarked()) {
-            holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
-            holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
-        } else {
-            holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.primary));
-            holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_trans);
-        }
+        holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
+        holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
 
         holder.icon_bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,19 +48,11 @@ public class DocRecyclerAdapter extends RecyclerView.Adapter<DocRecyclerAdapter.
                 if (!doctorArrayList.get(position).isBookmarked()) {
                     holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
                     holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
-
-                    boolean flag = false;
-                    Doctor doctor = doctorArrayList.get(position);
-                    for (Doctor d: BookmarksFragment.arrayList) {
-                        if(d.getID()==doctor.getID()) {
-                            flag=true;
-                        }
-                    }
-                    if(!flag)
-                        BookmarksFragment.arrayList.add(doctorArrayList.get(position));
                 } else {
                     holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.primary));
                     holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_trans);
+                    doctorArrayList.remove(position);
+                    notifyItemRemoved(position);
                 }
                 boolean isTrue = doctorArrayList.get(position).isBookmarked();
                 doctorArrayList.get(position).setBookmarked(!isTrue);

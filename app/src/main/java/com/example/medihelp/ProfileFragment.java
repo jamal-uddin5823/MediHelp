@@ -16,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+import android.content.res.Configuration;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.imageview.ShapeableImageView;
 
 
 public class ProfileFragment extends Fragment {
     View view;
-    private int currentTheme=R.style.Light_Theme_MediHelp;
     SwitchCompat switchmode;
     boolean isNightmode;
 
@@ -30,20 +33,26 @@ public class ProfileFragment extends Fragment {
     Button btnUserDetails;
     Button btnLogout;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        isNightmode = isSystemInDarkMode();
+        if(isNightmode)
+            Log.d("Theme","Dark");
+        else
+            Log.d("Theme","Light");
+
         if (getActivity() != null) {
             sharedPreferences = getActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE);
         }
-        isNightmode = sharedPreferences.getBoolean("nightmode", false);
 
     }
 
     private void updateTheme(boolean isNightMode) {
 
-        //theme and fragment both change
         if (isNightmode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -62,6 +71,14 @@ public class ProfileFragment extends Fragment {
 
         switchmode = view.findViewById(R.id.switchMode);
 
+        // Check the system theme and set the appropriate drawables
+        int thumbDrawable = isSystemInDarkMode() ? R.drawable.thumb_dark : R.drawable.thumb_light;
+
+        // Set the thumb and track drawables
+        switchmode.setThumbResource(thumbDrawable);
+        switchmode.setChecked(isNightmode);
+
+
 
         btnLogout = view.findViewById(R.id.btn_logout);
 
@@ -78,7 +95,6 @@ public class ProfileFragment extends Fragment {
             isNightmode = sharedPreferences.getBoolean("nightmode",false);
         }
 
-        switchmode.setChecked(isNightmode);
 
         switchmode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +134,12 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private boolean isSystemInDarkMode() {
+        int theme =  getContext().getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+        return theme == Configuration.UI_MODE_NIGHT_YES;
     }
 
 
