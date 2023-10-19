@@ -30,6 +30,8 @@ public class Signup extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog progress_signup;
 
+    public static User myuser;
+
 
 
     @Override
@@ -135,6 +137,8 @@ public class Signup extends AppCompatActivity {
         String bloodGroup= "Blood Group not Added";
         String weight= "Weight not Added";
 
+        myuser=new User(username,email,password);
+
 
         // Setup data to add in db
 
@@ -174,5 +178,6 @@ public class Signup extends AppCompatActivity {
                     }
                 });
     }
+
 
 }

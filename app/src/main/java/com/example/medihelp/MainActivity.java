@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity{
             case "diagnose":
                 replaceFragment(new DiagnoseFragment());
                 break;
-            case "bookmark":
-                replaceFragment(new BookmarksFragment());
-                break;
+//            case "bookmark":
+//                replaceFragment(new BookmarksFragment());
+//                break;
             case "profile":
                 replaceFragment(new ProfileFragment());
                 break;
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity{
 //            }
             else if (itemId == R.id.bookmark) {
                 currFragment = "Bookmark";
-                replaceFragment(new BookmarksFragment());
+                //replaceFragment(new BookmarksFragment());
             } else if (itemId == R.id.profile) {
                 currFragment = "Profile";
                 replaceFragment(new ProfileFragment());

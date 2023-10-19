@@ -128,7 +128,6 @@ public class UserDetails extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),UpdateProfile.class);
                 startActivity(intent);
 
-
             }
         });
 
