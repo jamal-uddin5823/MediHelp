@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
         });
 
         welcomeTextView = view.findViewById(R.id.welcome);
-        ShowName();
+        showName(welcomeTextView);
 
 //        Log.d(TAG, "Welcome user: "+username);
 
@@ -104,10 +104,10 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         Log.d(TAG, "RecyclerView initialized");
 
-
-        recyclerView.setAdapter(new MyAdapter(getActivity().getApplicationContext(),doctorsList));
-
         adapter = new MyAdapter(requireContext(), doctorsList);
+
+        recyclerView.setAdapter(adapter);
+
         Log.d(TAG, "Adapter set");
         // Make sure you have a list of doctors
         Log.d("AdapterSetup", "Number of doctors: " + doctorsList.size());
@@ -199,25 +199,33 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    void ShowName(){
-        UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+    void showName(TextView textView){
+        if(MainActivity.currentUserData==null) {
+            UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
 
-        userDataRetrieval.retrieveUserData(new UserDataRetrieval.OnUserDataReceivedListener() {
-            @Override
-            public void onUserReceived(User user) {
-                if (user != null) {
-                    // The user object contains the current user's data
-                    String userName = user.getName();
-                   // String userEmail = user.getEmail();
-                    welcomeTextView.setText("Welcome \n" +userName );
-                    Log.d(TAG, "onUserReceived: " +userName);
-                    // ... and so on
-                } else {
-                    // Handle the case where the user is not found or not authenticated
-                    Log.d(TAG,"No welcome");
+
+            userDataRetrieval.retrieveUserData(new UserDataRetrieval.OnUserDataReceivedListener() {
+                @Override
+                public void onUserReceived(User user) {
+                    if (user != null) {
+                        // The user object contains the current user's data
+                        String userName = user.getName();
+                        // String userEmail = user.getEmail();
+                        textView.setText("Welcome \n" +userName );
+                        Log.d(TAG, "onUserReceived: " +userName);
+                        // ... and so on
+                    } else {
+                        // Handle the case where the user is not found or not authenticated
+                        Log.d(TAG,"No welcome");
+                    }
                 }
-            }
-        });
+            });
+
+        }  else {
+            textView.setText("Welcome \n" +MainActivity.currentUserData.getName() );
+        }
+
+
 
     }
 }

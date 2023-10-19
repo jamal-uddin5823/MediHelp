@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Configuration;
 import androidx.core.content.ContextCompat;
@@ -35,11 +36,14 @@ public class ProfileFragment extends Fragment {
     Button btnUserDetails;
     Button btnLogout;
 
+    TextView tvUserName;
+
+    private static final String TAG = "ProfileFragment";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         isNightmode = isSystemInDarkMode();
         if(isNightmode)
@@ -73,6 +77,10 @@ public class ProfileFragment extends Fragment {
 
         switchmode = view.findViewById(R.id.switchMode);
 
+        tvUserName = view.findViewById(R.id.tvUserName);
+
+
+        showName(tvUserName);
 
         // Check the system theme and set the appropriate drawables
         int thumbDrawable = isSystemInDarkMode() ? R.drawable.thumb_dark : R.drawable.thumb_light;
@@ -158,6 +166,36 @@ public class ProfileFragment extends Fragment {
         int theme =  getContext().getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK;
         return theme == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    void showName(TextView textView){
+        if(MainActivity.currentUserData==null) {
+            UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+
+
+            userDataRetrieval.retrieveUserData(new UserDataRetrieval.OnUserDataReceivedListener() {
+                @Override
+                public void onUserReceived(User user) {
+                    if (user != null) {
+                        // The user object contains the current user's data
+                        String userName = user.getName();
+                        // String userEmail = user.getEmail();
+                        textView.setText(userName);
+                        Log.d(TAG, "onUserReceived: " +userName);
+                        // ... and so on
+                    } else {
+                        // Handle the case where the user is not found or not authenticated
+                        Log.d(TAG,"No welcome");
+                    }
+                }
+            });
+
+        }  else {
+            textView.setText(MainActivity.currentUserData.getName());
+        }
+
+
+
     }
 
 

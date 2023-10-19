@@ -145,44 +145,56 @@ public class UserDetails extends AppCompatActivity {
     private void showAllUserData(FirebaseUser firebaseUser) {
 //        progressBar.setVisibility(View.VISIBLE); // Show the ProgressBar
 
-        String uid = firebaseUser.getUid();
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
+        if(MainActivity.currentUserData==null) {
+            String uid = firebaseUser.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        User user = dataSnapshot.getValue(User.class);
 
-                    if (user != null) {
-                        String nameUser = user.getName();
-                        String emailUser = user.getEmail();
-                        String passwordUser = user.getPassword();
-                        String age= user.getAge();
-                        String gender = user.getGender();
-                        String weight=user.getWeight();
-                        String bloodGroup=user.getBloodGroup();
-                        profileName.setText(nameUser);
-                        profileEmail.setText(emailUser);
-                        profilePassword.setText(passwordUser);
-                        Age.setText(age);
-                        Gender.setText(gender);
-                        Weight.setText(weight);
-                        Blood.setText(bloodGroup);
+                        if (user != null) {
+                            String nameUser = user.getName();
+                            String emailUser = user.getEmail();
+                            String passwordUser = user.getPassword();
+                            String age= user.getAge();
+                            String gender = user.getGender();
+                            String weight=user.getWeight();
+                            String bloodGroup=user.getBloodGroup();
+                            profileName.setText(nameUser);
+                            profileEmail.setText(emailUser);
+                            profilePassword.setText(passwordUser);
+                            Age.setText(age);
+                            Gender.setText(gender);
+                            Weight.setText(weight);
+                            Blood.setText(bloodGroup);
+                        }
                     }
+
+                    // Hide the ProgressBar when data retrieval is complete
+//                progressBar.setVisibility(View.GONE);
                 }
 
-                // Hide the ProgressBar when data retrieval is complete
-//                progressBar.setVisibility(View.GONE);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(UserDetails.this, "Data not retrieved from Firebase", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserDetails.this, "Data not retrieved from Firebase", Toast.LENGTH_SHORT).show();
-
-                // Hide the ProgressBar if an error occurs during data retrieval
+                    // Hide the ProgressBar if an error occurs during data retrieval
 //                progressBar.setVisibility(View.GONE);
-            }
-        });
+                }
+            });
+
+        } else {
+            profileName.setText(MainActivity.currentUserData.getName());
+            profileEmail.setText(MainActivity.currentUserData.getEmail());
+            profilePassword.setText(MainActivity.currentUserData.getPassword());
+            Age.setText(MainActivity.currentUserData.getAge());
+            Gender.setText(MainActivity.currentUserData.getGender());
+            Weight.setText(MainActivity.currentUserData.getWeight());
+            Blood.setText(MainActivity.currentUserData.getBloodGroup());
+        }
+
 
 
 

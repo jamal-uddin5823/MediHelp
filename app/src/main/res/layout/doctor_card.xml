@@ -43,20 +43,30 @@
 
                 <TextView
                     android:id="@+id/tvDocName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Dr. X"
                     android:textAlignment="textStart"
                     android:textColor="@color/secondary"
-                    android:textSize="35sp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDocSpeciality"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Surgeon"
                     android:textAlignment="textStart"
+                    android:textColor="@color/accent2"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tvDocLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="200dp"
+                    android:drawableRight="@drawable/ic_baseline_location_on_24"
+                    android:text="Dhaka,Bangladesh"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/accent2"
                     android:textSize="15sp" />
 
@@ -79,15 +89,7 @@
                     android:layout_gravity="end"
                     android:layout_marginBottom="5dp" />
 
-                <TextView
-                    android:id="@+id/tvDocLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                    android:text="Dhaka,Bangladesh"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="15sp" />
+
 
             </LinearLayout>
 
@@ -110,7 +112,7 @@
         android:layout_margin="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/et_design"
-        android:text="@string/contacts"
+        android:text="@string/contact"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:gravity="center_horizontal"

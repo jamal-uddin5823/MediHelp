@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity{
     ActivityMainBinding binding;
 
     public static String currFragment="Home";
+    public static User currentUserData;
     //this is tasnia
 
     @Override
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
 //            }
             else if (itemId == R.id.bookmark) {
                 currFragment = "Bookmark";
-                //replaceFragment(new BookmarksFragment());
+                replaceFragment(new BookmarksFragment());
             } else if (itemId == R.id.profile) {
                 currFragment = "Profile";
                 replaceFragment(new ProfileFragment());
