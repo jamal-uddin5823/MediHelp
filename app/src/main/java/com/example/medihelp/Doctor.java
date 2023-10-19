@@ -1,28 +1,29 @@
 package com.example.medihelp;
 
 public class Doctor {
-    private int ID;
+
+
+    private Long ID;
     private String name;
     private String speciality;
     private String location;
     private String contact;
 
-    private boolean isBookmarked;
-
-    public Doctor(int ID, String name, String speciality, String location, String contact, boolean isBookmarked) {
+    public Doctor(Long ID, String name, String speciality, String location, String contact) {
         this.ID = ID;
         this.name = name;
         this.speciality = speciality;
         this.location = location;
         this.contact = contact;
-        this.isBookmarked = isBookmarked;
+    }
+    public Doctor() {
     }
 
-    public int getID() {
+    public Long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
 
@@ -56,13 +57,5 @@ public class Doctor {
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public boolean isBookmarked() {
-        return isBookmarked;
-    }
-
-    public void setBookmarked(boolean bookmarked) {
-        isBookmarked = bookmarked;
     }
 }

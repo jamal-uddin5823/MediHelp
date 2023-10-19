@@ -59,7 +59,10 @@
             </LinearLayout>
 
             <TextView
+
                 android:id="@+id/textView4"
+
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="45dp"
@@ -169,14 +172,17 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:id="@+id/ll3"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll2">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -191,8 +197,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/toggleEyeIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="47dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_eye" />
 
@@ -364,6 +370,10 @@
             android:src="@drawable/baseline_edit_24"
             app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
