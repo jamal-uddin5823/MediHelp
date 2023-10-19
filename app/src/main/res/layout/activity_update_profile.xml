@@ -195,12 +195,12 @@
                         android:orientation="horizontal"
                         android:layout_marginTop="20dp">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/backButton"
                             android:layout_width="20dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
-                            android:backgroundTint="@color/primary"
+                            android:background="@drawable/white_button"
                             android:text="Back"
                             android:textColor="@color/white"
                             android:textSize="18sp"
@@ -208,12 +208,12 @@
                             android:layout_marginLeft="2dp"
                             android:layout_marginRight="2dp"
                             />
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/SaveButton"
                             android:layout_width="25dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
-                            android:backgroundTint="@color/primary"
+                            android:background="@drawable/white_button"
                             android:text="Save"
                             android:textColor="@color/white"
                             android:textSize="18sp"

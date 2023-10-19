@@ -2,6 +2,7 @@ package com.example.medihelp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
@@ -86,7 +87,7 @@ public class UserDetails extends AppCompatActivity {
 //            }
 //        });
         Log.d("YourActivity", "Attempting to find LinearLayout ll3...");
-        LinearLayout ll3 = findViewById(R.id.ll3);
+        LinearLayoutCompat ll3 = findViewById(R.id.ll3);
 
         if (ll3 != null) {
             Log.d("YourActivity", "LinearLayout ll3 found!");
@@ -113,7 +114,7 @@ public class UserDetails extends AppCompatActivity {
         toggleEyeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Hello","KUKURRRRRRRRRRR");
+//                Log.d("Hello","KUKURRRRRRRRRRR");
                 passwordToggleHelper.togglePasswordVisibilityForImageView();
             }
         });

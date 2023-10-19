@@ -251,7 +251,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
             android:text="Doctors Available"
             android:textAlignment="center"
             android:textColor="@color/secondary"

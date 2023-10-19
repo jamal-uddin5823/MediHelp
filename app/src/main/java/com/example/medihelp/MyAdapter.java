@@ -1,6 +1,8 @@
 package com.example.medihelp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context context;
     List<Doctor> doctors;
     ArrayList<Boolean> bookmarked = new ArrayList<>();
+    ArrayList<Doctor> booked;
+
+    RoomDatabaseHelper roomDatabaseHelper;
 
     public MyAdapter(Context context, List<Doctor> doctors) {
         this.context = context;
@@ -38,6 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder called");
+        roomDatabaseHelper = RoomDatabaseHelper.getInstance(context);
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.doctor_card, parent, false));
     }
 
@@ -48,34 +54,40 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         if (doctor != null) {
             holder.Doc_name.setText(doctor.getName());
             holder.Speciality.setText(doctor.getSpeciality());
-            holder.location.setText(doctor.getLocation());
-//            holder.Contact_no.setText(doctor.getContact());
+            holder.Location.setText(doctor.getLocation());
+
         } else {
             Log.e(TAG, "Doctor is null at position: " + position);
         }
 
-        holder.icon_bookmark.setOnClickListener(new View.OnClickListener() {
+
+        booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new Long[] {doctors.get(position).getID()});
+//                if (!bookmarked.get(position)) {
+        if(!booked.isEmpty()) {
+            holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
+            holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
+        }
+
+        holder.icon_bookmark.setOnClickListener(view -> {
+            booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new Long[] {doctors.get(position).getID()});
+            if(booked.isEmpty()) {
+                holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
+                holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
+                roomDatabaseHelper.DoctorDao().insert(doctor);
+            } else {
+                holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.primary));
+                holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_trans);
+                roomDatabaseHelper.DoctorDao().delete(doctor);
+            }
+        });
+
+        holder.Contact_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (!bookmarked.get(position)) {
-                    holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
-                    holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
 
-//                    boolean flag = false;
-//                    Doctor doctor = doctors.get(position);
-//                    for (Doctor d: BookmarksFragment.arrayList) {
-//                        if(d.getID()==doctor.getID()) {
-//                            flag=true;
-//                        }
-//                    }
-//                    if(!flag)
-//                        BookmarksFragment.arrayList.add(doctors.get(position));
-//                } else {
-//                    holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.primary));
-//                    holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_trans);
-//                }
-//                boolean isTrue = bookmarked.get(position);
-//                bookmarked.set(position,!isTrue);
+                String phno = doctors.get(position).getContact();
+                dialPhoneNumber(phno);
+//                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,5 +96,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         Log.d(TAG, "getItemCount called. Number of items: " + doctors.size());
         return doctors.size();
+    }
+
+        private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
     }
 }

@@ -98,20 +98,17 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_weight="1"/>
+
 
 
        <TextView
-        android:id="@+id/DoctorContact"
+        android:id="@+id/tvContact"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:layout_margin="15dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/et_design"
+        android:background="@drawable/white_button"
         android:text="@string/contact"
         android:textColor="@color/white"
         android:textSize="30dp"

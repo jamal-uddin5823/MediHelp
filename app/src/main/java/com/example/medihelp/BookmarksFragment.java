@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -29,15 +30,19 @@ public class BookmarksFragment extends Fragment {
 //    ConstraintLayout btnBookmarkBack;
 
     RecyclerView recyclerView;
+    TextView tvEmpty;
 
     public static ArrayList<Doctor> arrayList= new ArrayList<>();
 
     ArrayList<Doctor> doctors = new ArrayList<>();
+
+    RoomDatabaseHelper roomDatabaseHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
+        roomDatabaseHelper = RoomDatabaseHelper.getInstance(requireContext());
 
 //        btnDoctorContact = view.findViewById(R.id.btnDoctorContact);
 //        btnBookmark = view.findViewById(R.id.btnBookmark);
@@ -45,8 +50,10 @@ public class BookmarksFragment extends Fragment {
 //        btnBookmark.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white));
 //        btnBookmarkBack.setBackgroundResource(R.drawable.round_border_solid);
 
+        tvEmpty = view.findViewById(R.id.tvEmpty);
 
         recyclerView = view.findViewById(R.id.rvBookmarks);
+        arrayList = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadAll();
 //        ArrayList<Doctor> array = Doctors.arrayList;
 //
 //        for(Doctor doctor: array) {
@@ -57,8 +64,16 @@ public class BookmarksFragment extends Fragment {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MyAdapter adapter = new MyAdapter(getContext(),arrayList);
+        BookmarkRecyclerAdapter adapter = new BookmarkRecyclerAdapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
+
+        if(arrayList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            tvEmpty.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            tvEmpty.setVisibility(View.GONE);
+        }
 
 //        btnBookmark.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lytRoundedBackSearch"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:background="@drawable/rounded_background"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,8 +81,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:tint="@color/accent2"
             app:layout_constraintBottom_toBottomOf="@+id/lytRoundedBackSearch"
@@ -93,285 +93,144 @@
             app:srcCompat="@drawable/ic_baseline_profile_36" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lytRoundedBackSearch">
+            app:layout_constraintTop_toBottomOf="@id/imgProfile">
 
-            <LinearLayout
-                android:id="@+id/ll1"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnEditDetails"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/baseline_edit_24"
+                app:layout_constraintBottom_toTopOf="@id/infoCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.886"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/infoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_margin="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Name: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/editName"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/custom_edittext"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
+                    <TextView
+                        android:id="@+id/editName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="8dp"
+                        android:padding="8dp"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/black"
+                        app:drawableLeftCompat="@drawable/baseline_person_24" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="8dp"
+                        android:textAlignment="textEnd"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        app:drawableLeftCompat="@drawable/baseline_email_24" />
 
-            <LinearLayout
-                android:id="@+id/ll2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll1">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/editPassword"
+                            android:layout_width="250dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:drawableLeft="@drawable/key"
+                            android:drawablePadding="5dp"
+                            android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:padding="8dp"
+                            android:textColor="@color/black" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/toggleEyeIcon"
+                            android:layout_width="35dp"
+                            android:layout_height="47dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_eye" />
 
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Email: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/editEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll3"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll2">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="80dp"
-                    android:text="Password: "
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/toggleEyeIcon"
-                    android:layout_width="35dp"
-                    android:layout_height="47dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_eye" />
-
-                <TextView
-                    android:id="@+id/editPassword"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll3">
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Gender: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
-            <LinearLayout
-                android:id="@+id/ll5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll4">
+                    <TextView
+                        android:id="@+id/Age"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/baseline_calendar_month_24"
+                        android:drawablePadding="8dp"
+                        android:textAlignment="textEnd"
+                        android:padding="8dp"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Age: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/Gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:drawablePadding="8dp"
+                        android:textAlignment="textEnd"
+                        android:padding="8dp"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/Age"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/Weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/baseline_scale_24"
+                        android:drawablePadding="8dp"
+                        android:textAlignment="textEnd"
+                        android:padding="8dp"
+                        android:textColor="@color/black" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/Blood"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/baseline_bloodtype_24"
+                        android:drawablePadding="8dp"
+                        android:textAlignment="textEnd"
+                        android:padding="8dp"
+                        android:textColor="@color/black" />
 
-            <LinearLayout
-                android:id="@+id/ll6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll5">
 
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Weight: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Weight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll6">
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Blood Group: "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Blood"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/accent2"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/btnEditDetails"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/baseline_edit_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 
 
