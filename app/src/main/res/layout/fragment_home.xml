@@ -79,6 +79,7 @@
                 android:paddingHorizontal="30dp"
                 android:text="Welcome\n"
                 android:textColor="@color/white"
+
                 android:textSize="45sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
