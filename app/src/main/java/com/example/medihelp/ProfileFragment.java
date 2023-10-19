@@ -33,6 +33,7 @@ public class ProfileFragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+
     Button btnUserDetails;
     Button btnLogout;
 
@@ -153,8 +154,8 @@ public class ProfileFragment extends Fragment {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
                 Intent intent = new Intent(context, Login.class);
-
-                context.startActivity(intent);
+                MainActivity.currFragment="Home";
+                startActivity(intent);
 
             }
         });

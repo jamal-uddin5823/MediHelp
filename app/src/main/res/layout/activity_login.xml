@@ -111,6 +111,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
+                        android:maxLines="1"
                         android:drawableStart="@drawable/key"
                         android:drawablePadding="10dp"
                         android:hint="Password"
@@ -137,6 +138,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"
                         android:background="@drawable/button_bg"
+                        android:maxLines="1"
                         android:text="LOGIN"
                         android:textColor="@color/white"
                         android:textSize="20dp">
