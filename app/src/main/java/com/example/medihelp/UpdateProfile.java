@@ -3,9 +3,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,7 @@ public class UpdateProfile extends AppCompatActivity {
     // UI components
     private EditText editName, editEmail, editPassword, Age, Weight, Blood, Gender;
     private Button saveButton, backButton;
+    private Spinner bloodGroupSpinner, genderSpinner;
     private ProgressBar progressBar;
     private static final String TAG = "YourClassName";
 
@@ -55,12 +58,22 @@ public class UpdateProfile extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         Age = findViewById(R.id.Age);
-        Gender = findViewById(R.id.Gender);
         Weight = findViewById(R.id.Weight);
-        Blood = findViewById(R.id.Blood);
         saveButton = findViewById(R.id.SaveButton);
         backButton = findViewById(R.id.backButton);
 //        progressBar = findViewById(R.id.progressBar);
+
+
+        bloodGroupSpinner = findViewById(R.id.Blood);
+        ArrayAdapter<CharSequence> bloodGroupAdapter = ArrayAdapter.createFromResource(this, R.array.blood_group_options, android.R.layout.simple_spinner_item);
+        bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bloodGroupSpinner.setAdapter(bloodGroupAdapter);
+
+        genderSpinner = findViewById(R.id.Gender);
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_options, android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderAdapter);
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,12 +99,16 @@ public class UpdateProfile extends AppCompatActivity {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String age = Age.getText().toString().trim();
-        String gender = Gender.getText().toString().trim();
+        // String gender = Gender.getText().toString().trim();
         String weight = Weight.getText().toString().trim();
-        String bloodGroup = Blood.getText().toString().trim();
+        //  String bloodGroup = Blood.getText().toString().trim();
+
+        String selectedGender = genderSpinner.getSelectedItem().toString();
+        String selectedBloodGroup = bloodGroupSpinner.getSelectedItem().toString();
+
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || !bloodGroup.isEmpty() || !gender.isEmpty()) {
+        if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -132,18 +149,22 @@ public class UpdateProfile extends AppCompatActivity {
                                 existingUser.setAge(age);
                                 Age.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
-                            if (!gender.isEmpty()) {
-                                existingUser.setGender(gender);
-                                Gender.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                            if (genderSpinner.getSelectedItemPosition() != 0) {
+                                existingUser.setGender(selectedGender); // Update gender value with the selected option
+
+                            }
+                            if (bloodGroupSpinner.getSelectedItemPosition() != 0) {
+                                existingUser.setBloodGroup(selectedBloodGroup); // Update blood group value with the selected option
+
                             }
                             if (!weight.isEmpty()) {
                                 existingUser.setWeight(weight);
                                 Weight.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
-                            if (!bloodGroup.isEmpty()) {
-                                existingUser.setBloodGroup(bloodGroup);
-                                Blood.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-                            }
+//                            if (!bloodGroup.isEmpty()) {
+//                                existingUser.setBloodGroup(bloodGroup);
+//                                Blood.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+//                            }
 
                             // Save the updated user data to Firebase
                             userDatabase.child(uid).setValue(existingUser)

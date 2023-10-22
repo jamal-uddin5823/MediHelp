@@ -149,18 +149,7 @@
                         android:hint="Age"
                         android:padding="8dp"
                         android:textColor="@color/black" />
-                    <EditText
-                        android:id="@+id/Gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/arrow"
-                        android:gravity="center_vertical"
-                        android:drawablePadding="8dp"
-                        android:hint="Gender"
-                        android:padding="8dp"
-                        android:textColor="@color/black" />
+
 
                     <EditText
                         android:id="@+id/Weight"
@@ -175,18 +164,30 @@
                         android:padding="8dp"
                         android:textColor="@color/black" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/Blood"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="5dp"
-                        android:gravity="center_vertical"
                         android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/arrow"
-                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
                         android:hint="Blood Group"
+                        android:layout="@layout/custom_spinner"
+                        android:padding="8dp" />
+
+
+                    <Spinner
+                        android:id="@+id/Gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/custom_edittext"
+                        android:gravity="center_vertical"
+                        android:hint="Gender"
+                        android:layout="@layout/custom_spinner"
                         android:padding="8dp"
-                        android:textColor="@color/black" />
+                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
 
 
 
