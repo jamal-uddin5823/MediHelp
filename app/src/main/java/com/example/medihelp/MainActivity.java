@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;
+
+    public static String currFragment="Home";
+    public static User currentUserData;
     //this is tasnia
 
     @Override
@@ -24,7 +28,26 @@ public class MainActivity extends AppCompatActivity{
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+
+        switch (currFragment.toLowerCase()) {
+            case "home":
+                replaceFragment(new HomeFragment());
+                break;
+            case "search":
+                replaceFragment(new SearchFragment());
+                break;
+            case "diagnose":
+                replaceFragment(new DiagnoseFragment());
+                break;
+//            case "bookmark":
+//                replaceFragment(new BookmarksFragment());
+//                break;
+            case "profile":
+                replaceFragment(new ProfileFragment());
+                break;
+
+        }
+//            replaceFragment(new HomeFragment());
 
         handleBottomNavBar();
 
@@ -33,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    private void replaceFragment(Fragment fragment) {
+    void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_layout,fragment)
                 .commit();
@@ -43,32 +66,55 @@ public class MainActivity extends AppCompatActivity{
 
         binding.bottomNavigationView.setBackground(null);
 
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                replaceFragment(new DiagnoseFragment());
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currFragment = "Diagnose";
+//                replaceFragment(new DiagnoseFragment());
+//            }
+//        });
 
 
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
+                currFragment = "Home";
                 replaceFragment(new HomeFragment());
-            } else if (itemId == R.id.search) {
-                replaceFragment(new SearchFragment());
-            } else if (itemId == R.id.blank) {
-                replaceFragment(new DiagnoseFragment());
-            } else if (itemId == R.id.bookmark) {
+            }
+//            else if (itemId == R.id.search) {
+//                currFragment = "Search";
+//                replaceFragment(new SearchFragment());
+//            }
+//            else if (itemId == R.id.blank) {
+//                currFragment = "Diagnose";
+//                replaceFragment(new DiagnoseFragment());
+//            }
+            else if (itemId == R.id.bookmark) {
+                currFragment = "Bookmark";
                 replaceFragment(new BookmarksFragment());
             } else if (itemId == R.id.profile) {
+                currFragment = "Profile";
                 replaceFragment(new ProfileFragment());
             }
             return true;
         });
     }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+
+        // Handle configuration change if needed
+        // You can update your UI accordingly for landscape or portrait mode
+    }
+
+    public boolean isProfileFragmentVisible() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+        return currentFragment instanceof ProfileFragment;
+    }
+
 
 //    private void handleActionBar() {
 //        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

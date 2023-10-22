@@ -1,0 +1,39 @@
+{
+    "Doctors" :[
+    {
+        "ID": 1,
+        "name": "Dr. John Smith",
+        "speciality": "Cardiologist",
+        "location": "New York, USA",
+        "contact": "+1 (123) 456-7890"
+    },
+    {
+        "ID": 2,
+        "name": "Dr. Emily Johnson",
+        "speciality": "Dermatologist",
+        "location": "Los Angeles, USA",
+        "contact": "+1 (987) 654-3210"
+    },
+    {
+        "ID": 3,
+        "name": "Dr. Michael Brown",
+        "speciality": "Orthopedic Surgeon",
+        "location": "Chicago, USA",
+        "contact": "+1 (111) 222-3333"
+    },
+    {
+        "ID": 4,
+        "name": "Dr. Maria Garcia",
+        "speciality": "Pediatrician",
+        "location": "Miami, USA",
+        "contact": "+1 (555) 123-4567"
+    },
+    {
+        "ID": 5,
+        "name": "Dr. David Wilson",
+        "speciality": "Neurologist",
+        "location": "San Francisco, USA",
+        "contact": "+1 (999) 888-7777"
+    }
+]
+}

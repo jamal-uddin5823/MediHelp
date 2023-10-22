@@ -4,6 +4,6 @@
     <corners android:radius="500dp" />
     <solid
         android:width="2dp"
-        android:color="?attr/colorPrimary" /><!-- Lavender-colored stroke -->
+        android:color="@color/primary" /><!-- Lavender-colored stroke -->
 </shape>
 

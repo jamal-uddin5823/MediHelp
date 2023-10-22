@@ -15,7 +15,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
         android:text="I'm feeling"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="@color/primary"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,10 @@
         android:layout_height="150dp"
         android:layout_marginHorizontal="15dp"
         android:background="@drawable/et_design"
+        android:backgroundTint="@color/white"
         android:hint="Enter the symptoms here"
+        android:textColorHint="@color/accent2"
+        android:textColor="@color/black"
         android:inputType="textMultiLine"
         android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
@@ -38,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_weight="1" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,40 +54,38 @@
         app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnAnalyseSymptoms"
-            android:layout_width="163dp"
-            android:layout_height="44dp"
-            android:background="@drawable/et_design"
-            android:text="@string/analyse"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnVoiceInput"
-            android:layout_width="163dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:background="@drawable/et_design"
             android:gravity="center"
+            android:layout_weight="1"
             android:src="@drawable/ic_baseline_keyboard_voice_24"
-            android:tint="?attr/colorPrimary"
+            android:tint="@color/white" />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnAnalyseSymptoms"
-            app:layout_constraintHorizontal_bias="0.173"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAnalyseSymptoms"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@drawable/et_design"
+            android:text="@string/analyse"
+            android:textColor="@color/white"
+            android:layout_weight="0.5"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </LinearLayout>
 
 
     />

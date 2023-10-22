@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorPrimary"
+    android:background="@color/white"
     tools:context=".SearchFragment">
 
     <ScrollView
@@ -20,7 +20,7 @@
                 android:id="@+id/lytRoundedBackSearch"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:background="?attr/colorOnPrimary"
+                android:background="@color/primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,8 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:text="@string/app_name"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/mon"
                     android:textSize="35sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,8 @@
                     android:layout_marginHorizontal="45dp"
                     android:layout_marginBottom="120dp"
                     android:text="@string/search"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="@color/white"
+
                     android:textSize="50sp"
                     android:textStyle="bold"
                     android:textAlignment="center"

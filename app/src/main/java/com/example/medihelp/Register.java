@@ -32,9 +32,7 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
-//<<<<<<< HEAD
-//    static final int Req_Image_capture=1;
-//=======
+
     ShapeableImageView imgCamera;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -71,18 +69,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-//<<<<<<< HEAD
-//        buttonCam.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                try {
-//                    startActivityForResult(intent,Req_Image_capture);
-//                }
-//                catch (ActivityNotFoundException e){
-//                    AlertDialog.Builder builder= new AlertDialog.Builder(Register.this);
-//                    builder.setTitle("Error").setMessage("Error occurred while opening Camera: "+e.getMessage()).setPositiveButton("ok",null).show();
-//=======
+
         imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

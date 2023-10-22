@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorPrimary"
+    android:background="@color/background"
     tools:context=".ProfileFragment">
 
     <ScrollView
@@ -15,13 +15,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lytRoundedBackSearch"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="?attr/colorOnPrimary"
+                android:background="@drawable/rounded_background"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -30,46 +30,50 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
 
-                <TextView
-                    android:id="@+id/tvTitle"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
+                    android:layout_height="120dp"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/top_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-                    tools:layout_editor_absoluteX="15dp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:text="MediHelp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mon"
+                        android:textSize="35sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="45dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="100dp"
                     android:text="@string/profile"
-                    android:textColor="?attr/colorPrimary"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="50sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                    app:layout_constraintVertical_bias="0.503" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,6 +83,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
+                android:tint="@color/accent2"
                 app:layout_constraintBottom_toBottomOf="@+id/lytRoundedBackSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +110,7 @@
                     android:gravity="center"
                     android:text="Name"
                     android:textAlignment="center"
-                    android:textColor="?attr/colorOnPrimary"
+                    android:textColor="@color/secondary"
                     android:textSize="45sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -114,18 +119,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tvUserLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                android:text="Dhaka,Bangladesh"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvUserLocation"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/ic_baseline_location_on_24"-->
+<!--                android:text="Dhaka,Bangladesh"-->
+<!--                android:textColor="@color/accent2"-->
+<!--                android:textSize="20sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.497"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />-->
 
 
 
@@ -139,63 +144,82 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserLocation">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnUserDetails"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginVertical="25dp"
-                    android:background="@drawable/et_design"
+                    android:background="@drawable/white_button"
                     android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
                     android:drawablePadding="15dp"
-                    android:drawableTint="?attr/colorPrimary"
+                    android:drawableTint="@color/white"
                     android:padding="15dp"
                     android:text="User Details"
                     android:textAlignment="textStart"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="25dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/btnTheme"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_buttonTheme"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.588" />
+                    app:layout_constraintVertical_bias="0.49" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnTheme"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layout_buttonTheme"
+                    android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_marginVertical="25dp"
-                    android:background="@drawable/et_design"
-                    android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
-                    android:drawablePadding="15dp"
-                    android:drawableTint="?attr/colorPrimary"
+                    android:background="@drawable/white_button"
+                    android:orientation="horizontal"
                     android:padding="15dp"
-                    android:text="Theme"
-                    android:textAlignment="textStart"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/btn_logout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="THEME"
+                        android:textColor="@color/white"
+                        android:textSize="27sp"
+                        android:textStyle="bold"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:theme="@style/Theme.AppCompat"
+                        android:thumb="@drawable/thumb"
+                        app:track="@drawable/track"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/layout_buttonTheme"
+                        app:layout_constraintBottom_toBottomOf="@id/layout_buttonTheme" />
+
+                </LinearLayout>
+
+
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_logout"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginVertical="25dp"
-                    android:background="@drawable/et_design"
+                    android:background="@drawable/white_button"
                     android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
                     android:drawablePadding="15dp"
-                    android:drawableTint="?attr/colorPrimary"
+                    android:drawableTint="@color/white"
                     android:padding="15dp"
                     android:text="Log out"
                     android:textAlignment="textStart"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/marginButton"

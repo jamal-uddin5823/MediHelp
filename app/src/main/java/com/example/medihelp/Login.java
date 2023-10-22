@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
@@ -35,18 +42,20 @@ public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
 
+
     static final int Req_Call=1;
 
     TextView textView,textViewforgotPass;
 
 
+
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+//        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -62,7 +71,7 @@ public class Login extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
-        progressBar = findViewById(R.id.progressBar);
+//        progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.signup);
         textViewforgotPass = findViewById(R.id.forgotpass);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -83,36 +92,22 @@ public class Login extends AppCompatActivity {
             }
         });
 
-//        buttonforgor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(Intent.ACTION_CALL_BUTTON);
-//                try {
-//                    startActivityForResult(intent,Req_Call);
-//                }
-//                catch (ActivityNotFoundException e){
-//                    AlertDialog.Builder builder= new AlertDialog.Builder(Login.this);
-//                    builder.setTitle("Error").setMessage("Error occurred while making Call: "+e.getMessage()).setPositiveButton("ok",null).show();
-//                }
-//            }
-//        });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                progressBar.setVisibility(View.VISIBLE);
 
-                String email,password;
-                email=editTextEmail.getText().toString();
-                password=editTextPassword.getText().toString();
+                String email, password;
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
 
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(Login.this,"Enter email",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(Login.this,"Enter password",Toast.LENGTH_SHORT).show();
+                else if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 //                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
@@ -145,4 +140,5 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 }

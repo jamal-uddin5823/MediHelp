@@ -46,8 +46,13 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database:20.2.2")
+<<<<<<< HEAD
     implementation("com.google.firebase:firebase-firestore:24.8.1")
+=======
+    implementation("androidx.room:room-runtime:2.5.2")
+>>>>>>> ffe5fe3cd7b24734f3bda58b199aae2cc5e56824
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
 }

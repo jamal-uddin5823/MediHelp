@@ -1,13 +1,26 @@
 package com.example.medihelp;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "bookmarkeddoc")
 public class Doctor {
-    private int ID;
+
+
+    @PrimaryKey()
+    private Long ID;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "speciality")
     private String speciality;
+    @ColumnInfo(name = "location")
     private String location;
+    @ColumnInfo(name = "contact")
     private String contact;
 
-    public Doctor(int ID, String name, String speciality, String location, String contact) {
+    public Doctor(Long ID, String name, String speciality, String location, String contact) {
         this.ID = ID;
         this.name = name;
         this.speciality = speciality;
@@ -15,11 +28,21 @@ public class Doctor {
         this.contact = contact;
     }
 
-    public int getID() {
+    @Ignore
+    public Doctor(String name, String speciality, String location, String contact) {
+        this.name = name;
+        this.speciality = speciality;
+        this.location = location;
+        this.contact = contact;
+    }
+    public Doctor() {
+    }
+
+    public Long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
 

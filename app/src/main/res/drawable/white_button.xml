@@ -7,8 +7,8 @@
     </corners>
 
     <gradient
-        android:startColor="@color/light_lavender"
-        android:endColor="@color/white"
+        android:startColor="@color/tertiary"
+        android:endColor="@color/primary"
         ></gradient>
     <stroke
         android:color="@color/light_gray"
