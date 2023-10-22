@@ -73,6 +73,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/analysebox"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_margin="25dp"
@@ -98,19 +99,15 @@
                 android:id="@+id/diagnosis"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="700dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="70dp"
                 android:background="@drawable/et_design"
                 android:textAlignment="center"
                 android:hint="Click analyse to get the diagnosis"
                 android:inputType="textMultiLine"
                 android:padding="15dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="650dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAnalyseSymptoms"
-                app:layout_constraintLeft_toLeftOf="@+id/btnAnalyseSymptoms"
-                app:layout_constraintRight_toRightOf="@+id/btnAnalyseSymptoms"
-                app:layout_constraintTop_toBottomOf="@+id/btnAnalyseSymptoms"
+                app:layout_constraintTop_toBottomOf="@+id/analysebox"
+                app:layout_constraintRight_toRightOf="parent"
                 />
 
 
