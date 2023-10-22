@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+tatu<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginBottom="92dp"
+                android:layout_marginBottom="56dp"
                 android:text="User Details"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -75,15 +75,15 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.696"
+                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
             android:tint="@color/accent2"
             app:layout_constraintBottom_toBottomOf="@+id/lytRoundedBackSearch"
@@ -102,8 +102,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/btnEditDetails"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="12dp"
                 android:src="@drawable/baseline_edit_24"
