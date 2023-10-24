@@ -59,9 +59,9 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.5.2")
 
     //for API
-    implementation("io.javalin:javalin:3.13.6")
-    implementation("org.slf4j:slf4j-simple:1.7.30")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+//    implementation("io.javalin:javalin:3.13.6")
+//    implementation("org.slf4j:slf4j-simple:1.7.30")
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 //    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.github.cdimascio:java-dotenv:5.2.0")
 }

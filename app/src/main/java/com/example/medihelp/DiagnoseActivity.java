@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Console;
@@ -18,7 +19,7 @@ import java.util.List;
 public class DiagnoseActivity extends AppCompatActivity {
 
     private static final int SPEECH_REQUEST_CODE = 0;
-
+    private MedicalAssistant medicalAssistant;
     ImageButton btnVoiceInput;
     Button btnAnalyseSymptoms;
 
@@ -35,6 +36,8 @@ public class DiagnoseActivity extends AppCompatActivity {
         btnAnalyseSymptoms = findViewById(R.id.btnAnalyseSymptoms);
         clDiagnosis = findViewById(R.id.clDiagnosis);
         btnDiagtoSearch = findViewById(R.id.btnDiagtoSearch);
+
+        medicalAssistant = new MedicalAssistant();
 
         btnDiagtoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +56,16 @@ public class DiagnoseActivity extends AppCompatActivity {
         });
 
         btnAnalyseSymptoms.setOnClickListener(new View.OnClickListener() {
+            EditText etSymptoms = findViewById(R.id.etSymptoms);
+            TextView diagnosis=findViewById(R.id.diagnosis);
             @Override
             public void onClick(View view) {
+                String symptoms;
+                symptoms=etSymptoms.getText().toString();
+                System.out.println(symptoms);
+                String diagnosetext = medicalAssistant.recommendSpecialist(symptoms);
+                diagnosis.setText(diagnosetext);
+                System.out.println(diagnosetext);
 //                Toast.makeText(view.getContext(),"Analysing the symptoms",Toast.LENGTH_SHORT).show();
                 clDiagnosis.setVisibility(View.VISIBLE);
 
