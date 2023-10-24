@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
-
 }
 
 android {
@@ -30,6 +29,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
 
     buildFeatures {
@@ -46,13 +46,22 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database:20.2.2")
-<<<<<<< HEAD
     implementation("com.google.firebase:firebase-firestore:24.8.1")
-=======
     implementation("androidx.room:room-runtime:2.5.2")
->>>>>>> ffe5fe3cd7b24734f3bda58b199aae2cc5e56824
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     annotationProcessor("androidx.room:room-compiler:2.5.2")
+
+    //for API
+    implementation("io.javalin:javalin:3.13.6")
+    implementation("org.slf4j:slf4j-simple:1.7.30")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+//    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.github.cdimascio:java-dotenv:5.2.0")
 }
