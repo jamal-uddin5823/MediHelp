@@ -58,6 +58,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     annotationProcessor("androidx.room:room-compiler:2.5.2")
 
+    //animation
+    implementation ("com.airbnb.android:lottie:6.1.0")
+
     //for API
 //    implementation("io.javalin:javalin:3.13.6")
 //    implementation("org.slf4j:slf4j-simple:1.7.30")
