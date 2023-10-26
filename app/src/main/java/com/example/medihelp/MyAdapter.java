@@ -22,7 +22,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     List<Doctor> doctors;
     ArrayList<Boolean> bookmarked = new ArrayList<>();
     ArrayList<Doctor> booked;
-
     RoomDatabaseHelper roomDatabaseHelper;
 
     public MyAdapter(Context context, List<Doctor> doctors) {
@@ -98,7 +97,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return doctors.size();
     }
 
-        private void dialPhoneNumber(String phoneNumber) {
+    private void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
