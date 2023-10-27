@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment {
     SharedPreferences.Editor editor;
 
 
-    Button btnUserDetails;
+    Button btnUserDetails,btnAboutUs;
     Button btnLogout;
 
     TextView tvUserName;
@@ -75,10 +75,13 @@ public class ProfileFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         btnUserDetails = view.findViewById(R.id.btnUserDetails);
+        btnAboutUs = view.findViewById(R.id.btn_aboutUs);
 
         switchmode = view.findViewById(R.id.switchMode);
 
         tvUserName = view.findViewById(R.id.tvUserName);
+        btnLogout = view.findViewById(R.id.btn_logout);
+
 
 
         showName(tvUserName);
@@ -91,8 +94,10 @@ public class ProfileFragment extends Fragment {
         switchmode.setChecked(isNightmode);
 
 
-
-        btnLogout = view.findViewById(R.id.btn_logout);
+        btnAboutUs.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), AboutUs.class);
+            startActivity(intent);
+        });
 
 
 
