@@ -14,6 +14,8 @@ import android.view.View;
 import com.example.medihelp.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import io.grpc.android.BuildConfig;
+
 public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;

@@ -1,13 +1,7 @@
-import java.util.Properties
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
 }
-
-val properties = Properties()
-properties.load(project.rootProject.file("app/.env").inputStream())
-val apiKey = properties.getProperty("API_KEY") ?: ""
-
 
 android {
     namespace = "com.example.medihelp"
@@ -21,16 +15,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
@@ -42,10 +34,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
-
-
 }
 
 dependencies {
@@ -64,11 +53,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    //okhttp
-    implementation("com.squareup.okhttp3:okhttp:4.9.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
-
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -82,7 +66,5 @@ dependencies {
 //    implementation("org.slf4j:slf4j-simple:1.7.30")
 //    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 //    implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    //for api key
     implementation("io.github.cdimascio:java-dotenv:5.2.0")
 }
