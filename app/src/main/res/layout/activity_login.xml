@@ -162,52 +162,6 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:cardCornerRadius="100dp"
-                app:cardElevation="21dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.426"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.059">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:src="@drawable/google_logo"
-
-                    />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:cardCornerRadius="100dp"
-                app:cardElevation="21dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.603"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.059">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:src="@drawable/fb_logo"
-
-                    />
-            </androidx.cardview.widget.CardView>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signup"
                 android:layout_width="160dp"
@@ -217,12 +171,12 @@
                 android:text="Sign up"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
                 app:layout_constraintVertical_bias="0.49">
 
             </androidx.appcompat.widget.AppCompatButton>

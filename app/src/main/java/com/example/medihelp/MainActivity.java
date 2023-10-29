@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity{
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
         switch (currFragment.toLowerCase()) {
             case "home":
                 replaceFragment(new HomeFragment());

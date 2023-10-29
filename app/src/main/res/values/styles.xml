@@ -4,6 +4,7 @@
         <item name="android:gravity">center</item>
         <item name="color">@color/primary</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:statusBarColor">@color/primary</item>
     </style>
 
     <style name="RoundedFrameShape">
