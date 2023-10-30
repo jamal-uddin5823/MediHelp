@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class HomeFragment extends Fragment {
     CardView cvDiagnose;
     CardView cvSearch;
     BottomNavigationView bottomNavigationView;
+
+    ImageView imgProfileHome;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class HomeFragment extends Fragment {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
 //        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        imgProfileHome = view.findViewById(R.id.imgProfileHome);
 
         cvDiagnose = view.findViewById(R.id.cvDiagnose);
         cvSearch = view.findViewById(R.id.cvSearch);
@@ -81,7 +86,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        imgProfile = view.findViewById(R.id.imgProfile);
+        imgProfile = view.findViewById(R.id.imgProfileHome);
 
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,9 +215,11 @@ public class HomeFragment extends Fragment {
                     if (user != null) {
                         // The user object contains the current user's data
                         String userName = user.getName();
-                        // String userEmail = user.getEmail();
+                        String imageUrl = user.getPicture();
+                         String userEmail = user.getEmail();
                         textView.setText("Welcome \n" +userName );
-                        Log.d(TAG, "onUserReceived: " +userName);
+                        Picasso.get().load(imageUrl).into(imgProfileHome);
+//                        Log.d(TAG, "onUserReceived: " +userName);
                         // ... and so on
                     } else {
                         // Handle the case where the user is not found or not authenticated
@@ -223,6 +230,7 @@ public class HomeFragment extends Fragment {
 
         }  else {
             textView.setText("Welcome \n" +MainActivity.currentUserData.getName() );
+            Picasso.get().load(MainActivity.currentUserData.getPicture()).into(imgProfileHome);
         }
 
 

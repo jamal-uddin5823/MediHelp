@@ -77,11 +77,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgDoc"
+                android:id="@+id/imgProfileFrag"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
-                android:tint="@color/accent2"
                 app:layout_constraintBottom_toBottomOf="@+id/lytRoundedBackSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

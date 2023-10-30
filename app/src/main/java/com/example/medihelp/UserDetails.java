@@ -31,12 +31,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class UserDetails extends AppCompatActivity {
     TextView profileName, profileEmail, profilePassword;
 
     TextView   Age, Weight, Blood,Gender;
     Button back,update;
+    ImageView imgProfile;
     private FirebaseAuth mAuth;
 //    private ProgressBar progressBar;
 
@@ -55,13 +57,15 @@ public class UserDetails extends AppCompatActivity {
         Gender = findViewById(R.id.Gender);
         Weight = findViewById(R.id.Weight);
         Blood = findViewById(R.id.Blood);
+        imgProfile = findViewById(R.id.imgProfile);
 //        back=findViewById(R.id.backButton);
 
 //        update=findViewById(R.id.updateButton);
 
-
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+
 
         if (firebaseUser == null) {
             Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -69,6 +73,8 @@ public class UserDetails extends AppCompatActivity {
             showAllUserData(firebaseUser);
 //            progressBar.setVisibility(View.VISIBLE);
         }
+
+
 
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -129,6 +135,7 @@ public class UserDetails extends AppCompatActivity {
                 Log.d("Hello","hiiiiiiiiiiiiiiiiii");
                 Intent intent = new Intent(getApplicationContext(),UpdateProfile.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -164,6 +171,7 @@ public class UserDetails extends AppCompatActivity {
                             String gender = user.getGender();
                             String weight=user.getWeight();
                             String bloodGroup=user.getBloodGroup();
+                            String imageUrl = user.getPicture();
                             profileName.setText(nameUser);
                             profileEmail.setText(emailUser);
                             profilePassword.setText(passwordUser);
@@ -171,6 +179,7 @@ public class UserDetails extends AppCompatActivity {
                             Gender.setText(gender);
                             Weight.setText(weight);
                             Blood.setText(bloodGroup);
+                            Picasso.get().load(imageUrl).into(imgProfile);
                         }
                     }
 
@@ -195,6 +204,13 @@ public class UserDetails extends AppCompatActivity {
             Gender.setText(MainActivity.currentUserData.getGender());
             Weight.setText(MainActivity.currentUserData.getWeight());
             Blood.setText(MainActivity.currentUserData.getBloodGroup());
+            if(MainActivity.currentUserData!=null) {
+                String imageUrl = MainActivity.currentUserData.getPicture(); // Replace with the actual method or key to access the image URL
+                if(imageUrl!=null) {
+                    Picasso.get().load(imageUrl).into(imgProfile);
+                }
+            }
+
         }
 
 
