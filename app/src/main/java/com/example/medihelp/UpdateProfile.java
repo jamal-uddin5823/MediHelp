@@ -171,7 +171,7 @@ public class UpdateProfile extends AppCompatActivity {
     private void uploadImageToFirebase(Uri imageUri) {
         // Create a reference to the Firebase Storage location where you want to store the image.
         // Replace "your-app-name" with your actual Firebase Storage bucket name.
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference("MediHelp/profile_images");
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("profile_images");
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
