@@ -36,7 +36,8 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
+                android:gravity="center_horizontal"
                 android:background="@drawable/top_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,19 +45,18 @@
 
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginRight="100dp"
-                    android:text="MEDIHELP"
+                    android:layout_marginRight="10dp"
+                    android:text="MediHelp"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="30dp"
                     android:fontFamily="@font/mon"
-                    android:textStyle="bold"
-                    />
-
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="560dp"
+                android:layout_height="520dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
@@ -115,11 +115,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
                         android:maxLines="1"
                         android:text="Sign Up"
                         android:textColor="@color/black"
-                        android:textSize="40dp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -246,11 +247,11 @@
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/button_bg"
                         android:text="Sign Up"
                         android:textColor="@color/white"
-                        android:textSize="20dp">
+                        android:textSize="20sp">
 
                     </androidx.appcompat.widget.AppCompatButton>
 
@@ -266,7 +267,7 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="50dp"
+                android:layout_marginVertical="20dp"
                 android:background="@drawable/white_button"
                 android:text="Log in"
                 android:textColor="@color/white"
@@ -276,7 +277,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.242">
+                app:layout_constraintVertical_bias="0.216">
 
             </androidx.appcompat.widget.AppCompatButton>
 

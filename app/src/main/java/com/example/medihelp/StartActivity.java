@@ -26,23 +26,31 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
 
+        UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+
+        userDataRetrieval.retrieveUserData(user -> {
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
 
         startProgressBar = findViewById(R.id.startProgressBar);
-        btnGetStarted = findViewById(R.id.btnGetStarted);
+//        btnGetStarted = findViewById(R.id.btnGetStarted);
         lottieanim=findViewById(R.id.animation);
         lottieanim.playAnimation();
 
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Show the ProgressBar when the button is clicked
-//                startProgressBar.setVisibility(View.VISIBLE);
-
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Show the ProgressBar when the button is clicked
+////                startProgressBar.setVisibility(View.VISIBLE);
+//
+//                Intent intent = new Intent(getApplicationContext(), Login.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
 
 

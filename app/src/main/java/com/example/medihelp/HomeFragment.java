@@ -86,16 +86,6 @@ public class HomeFragment extends Fragment {
         });
 
 
-        imgProfile = view.findViewById(R.id.imgProfileHome);
-
-        imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                binding.bottomNavigationView.setSelectedItemId(R.id.profile);
-                replaceFragment(new ProfileFragment());
-            }
-        });
-
         welcomeTextView = view.findViewById(R.id.welcome);
         showName(welcomeTextView);
 
@@ -118,29 +108,6 @@ public class HomeFragment extends Fragment {
         Log.d("AdapterSetup", "Number of doctors: " + doctorsList.size());
 
         recyclerView.setAdapter(adapter);
-
-//        btnBookmark.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(!isBookmarked) {
-//                    btnBookmark.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white));
-//                    btnBookmarkBack.setBackgroundResource(R.drawable.round_border_solid);
-//                } else {
-//                    btnBookmark.setColorFilter(ContextCompat.getColor(requireContext(), R.color.lavender));
-//                    btnBookmarkBack.setBackgroundResource(R.drawable.round_border_trans);
-//                }
-//                isBookmarked=!isBookmarked;
-//            }
-//        });
-
-//        btnDoctorContact.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialPhoneNumber("+8801714268748");
-////                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
 
         return view;
     }
@@ -216,7 +183,7 @@ public class HomeFragment extends Fragment {
                         // The user object contains the current user's data
                         String userName = user.getName();
                         String imageUrl = user.getPicture();
-                         String userEmail = user.getEmail();
+                        String userEmail = user.getEmail();
                         textView.setText("Welcome \n" +userName );
                         Picasso.get().load(imageUrl).into(imgProfileHome);
 //                        Log.d(TAG, "onUserReceived: " +userName);
