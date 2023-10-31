@@ -119,10 +119,10 @@
                     android:id="@+id/tvSuggTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="You should"
+                    android:text="You should consult"
                     android:textAlignment="center"
                     android:textColor="@color/secondary"
-                    android:textSize="35sp"
+                    android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,16 +133,31 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Specialist"
                     android:textAlignment="center"
                     android:textColor="@color/accent2"
-                    android:textSize="40sp"
+                    android:textSize="40dp"
                     android:textStyle="bold"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvSuggTitle" />
+
+                <TextView
+                    android:id="@+id/disclaimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="This service is not a substitute for professional medical advice."
+                    android:textAlignment="center"
+                    android:textColor="@color/secondary"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                                 <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btnDiagtoSearch"
@@ -160,7 +175,7 @@
                                     android:drawableTint="@color/white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                                    app:layout_constraintTop_toBottomOf="@+id/disclaimer" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

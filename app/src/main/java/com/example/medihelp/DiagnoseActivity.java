@@ -128,7 +128,7 @@ public class DiagnoseActivity extends AppCompatActivity {
                                     Gson gson = new Gson();
                                     APIResponse jsonResponse = gson.fromJson(responseBody, APIResponse.class);
                                     String content = jsonResponse.getChoices().get(0).getAPIMessage().getContent();
-                                    content = content.replaceFirst("\\*", "").trim();
+                                    content = content.replaceFirst("\\* Consult ", "").trim();
 
                                     // Set the extracted content to the TextView
                                     suggested.setText(content);
