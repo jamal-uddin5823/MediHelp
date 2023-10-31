@@ -125,6 +125,17 @@ public class DiagnoseActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(okhttp3.Call call, IOException e){
                         Log.d(TAG, "API Call failed: " + e.getMessage());
+                        suggested.setText("Network Error!");
+                        if (clBuffer == null) {
+                            Log.e(TAG, "clBuffer is null inside onResponse!");
+                        }
+
+                        if (clDiagnosis == null) {
+                            Log.e(TAG, "clDiagnosis is null!");
+                        }
+
+                        clBuffer.setVisibility(View.GONE);
+                        clDiagnosis.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -161,6 +172,16 @@ public class DiagnoseActivity extends AppCompatActivity {
                                 Log.d(TAG, responseBody);
                                 runOnUiThread(() -> {
                                     suggested.setText("API Response unsuccessful: " + responseBody);
+                                    if (clBuffer == null) {
+                                        Log.e(TAG, "clBuffer is null inside onResponse!");
+                                    }
+
+                                    if (clDiagnosis == null) {
+                                        Log.e(TAG, "clDiagnosis is null!");
+                                    }
+
+                                    clBuffer.setVisibility(View.GONE);
+                                    clDiagnosis.setVisibility(View.VISIBLE);
                                 });
                             }
                         } catch (IOException e) {
