@@ -83,6 +83,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
+            android:scaleType="centerCrop"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
