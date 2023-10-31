@@ -85,12 +85,13 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="50dp"
                         android:text="Login"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/textFillColor"
                         android:textSize="40sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/email"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="20dp"
@@ -105,6 +106,7 @@
 
                     <EditText
                         android:id="@+id/password"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="20dp"
@@ -129,7 +131,7 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:text="Forgot Password?"
-                        android:textColor="@color/lavender" />
+                        android:textColor="?attr/colorOnPrimary" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_login"

@@ -39,6 +39,7 @@
 
         <EditText
             android:id="@+id/email"
+            android:textCursorDrawable="@null"
             android:textSize="20dp"
             android:hint="@string/email"
             android:background="?attr/colorPrimaryVariant"
@@ -54,6 +55,7 @@
 
         <EditText
             android:id="@+id/password"
+            android:textCursorDrawable="@null"
             android:background="?attr/colorPrimaryVariant"
             android:textSize="20dp"
             android:hint="@string/password"
