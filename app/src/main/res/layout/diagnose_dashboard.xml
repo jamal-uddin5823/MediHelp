@@ -32,7 +32,7 @@
         android:backgroundTint="?attr/cardBackgroundColor"
         android:hint="Enter the symptoms here"
         android:textColorHint="@color/accent2"
-        android:textColor="@color/black"
+        android:textColor="?attr/textFillColor"
         android:inputType="textMultiLine"
         android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
