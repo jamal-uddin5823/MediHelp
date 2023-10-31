@@ -56,7 +56,7 @@ public class Signup extends AppCompatActivity {
 
     public static User myuser;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri selectedImageUri;
+    private Uri selectedImageUri = null;
 
 
     @Override
@@ -225,6 +225,9 @@ public class Signup extends AppCompatActivity {
         else if(!password.equals(ConfirmPassword)){
             Toast.makeText(this,"Passwords Doesn't Match",Toast.LENGTH_SHORT).show();
         }
+        else if(selectedImageUri==null) {
+            Toast.makeText(this, "Profile pic not added", Toast.LENGTH_SHORT).show();
+        }
 
         else{
             createUserAccount(age,weight,gender,bloodGroup);
@@ -262,6 +265,9 @@ public class Signup extends AppCompatActivity {
 
         String uid = mAuth.getUid();
 
+        if(selectedImageUri!=null) {
+
+        }
         uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
             myuser=new User(username,email,password);
 

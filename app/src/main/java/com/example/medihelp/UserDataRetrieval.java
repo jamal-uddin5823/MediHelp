@@ -48,6 +48,7 @@ public class UserDataRetrieval {
             });
         } else {
             listener.onUserReceived(null); // No authenticated user
+            MainActivity.currentUserData = null;
         }
     }
 

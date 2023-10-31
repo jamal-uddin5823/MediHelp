@@ -72,6 +72,7 @@
                     android:layout_height="100dp"
                     app:cardCornerRadius="50dp"
                     app:cardElevation="30dp"
+                    android:backgroundTint="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +82,7 @@
                         android:id="@+id/ivSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:tint="@color/white"
                         android:scaleType="centerCrop"
                         android:src="@drawable/baseline_person_add_24" />
                 </androidx.cardview.widget.CardView>
