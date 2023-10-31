@@ -52,12 +52,20 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
+
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+
+    //firebase
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database:20.2.2")
     implementation("com.google.firebase:firebase-firestore:24.8.1")
+
+    //room
     implementation("androidx.room:room-runtime:2.5.2")
 
     //retrofit
