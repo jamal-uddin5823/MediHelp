@@ -105,6 +105,34 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/clBuffer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:visibility="visible"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">-->
+
+<!--                <com.airbnb.lottie.LottieAnimationView-->
+<!--                    android:id="@+id/animation"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:elevation="5dp"-->
+<!--                    android:transitionName="logoimg"-->
+<!--                    app:lottie_autoPlay="true"-->
+<!--                    app:lottie_loop="true"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:lottie_rawRes="@raw/diagnoseanim" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDiagnosis"
                 android:layout_width="match_parent"

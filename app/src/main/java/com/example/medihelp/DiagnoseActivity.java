@@ -47,6 +47,7 @@ public class DiagnoseActivity extends AppCompatActivity {
     Button btnDiagtoSearch;
 
     ConstraintLayout clDiagnosis;
+    ConstraintLayout clBuffer;
     String apiKey = BuildConfig.API_KEY;
     private static final String TAG = "DiagnoseActivity";
 
@@ -60,6 +61,7 @@ public class DiagnoseActivity extends AppCompatActivity {
         btnVoiceInput = findViewById(R.id.btnVoiceInput);
         btnAnalyseSymptoms = findViewById(R.id.btnAnalyseSymptoms);
         clDiagnosis = findViewById(R.id.clDiagnosis);
+//        clBuffer = findViewById(R.id.clBuffer);
         btnDiagtoSearch = findViewById(R.id.btnDiagtoSearch);
         suggested=findViewById(R.id.textView7);
 
@@ -87,6 +89,8 @@ public class DiagnoseActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
+//                clBuffer.setVisibility(View.VISIBLE);
 //                progress_diagnose.setMessage("Please wait");
 //                progress_diagnose.show();
                 Toast.makeText(view.getContext(),"Please wait. Analysis may take 8-10 seconds.",Toast.LENGTH_LONG).show();
@@ -146,6 +150,7 @@ public class DiagnoseActivity extends AppCompatActivity {
 
 //                                    suggested.setText(responseBody);
 //                                    progress_diagnose.dismiss();
+//                                    clBuffer.setVisibility(View.GONE);
                                     clDiagnosis.setVisibility(View.VISIBLE);
                                 });
                             } else {
