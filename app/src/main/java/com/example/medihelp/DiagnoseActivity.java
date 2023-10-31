@@ -3,6 +3,7 @@ import com.example.medihelp.BuildConfig;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -41,6 +42,7 @@ public class DiagnoseActivity extends AppCompatActivity {
     ImageButton btnVoiceInput;
     Button btnAnalyseSymptoms;
     TextView suggested;
+    private ProgressDialog progress_diagnose;
 
     Button btnDiagtoSearch;
 
@@ -60,6 +62,10 @@ public class DiagnoseActivity extends AppCompatActivity {
         clDiagnosis = findViewById(R.id.clDiagnosis);
         btnDiagtoSearch = findViewById(R.id.btnDiagtoSearch);
         suggested=findViewById(R.id.textView7);
+
+        progress_diagnose = new ProgressDialog(this);
+        progress_diagnose.setTitle("Analysing...");
+        progress_diagnose.setCanceledOnTouchOutside(false);
 
         btnDiagtoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +87,9 @@ public class DiagnoseActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+//                progress_diagnose.setMessage("Please wait");
+//                progress_diagnose.show();
+                Toast.makeText(view.getContext(),"Please wait. Analysis may take 8-10 seconds.",Toast.LENGTH_LONG).show();
                 EditText etSymptoms = findViewById(R.id.etSymptoms);
                 String symptoms=etSymptoms.getText().toString();
                 Message mes = new Message();
@@ -113,6 +122,8 @@ public class DiagnoseActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(okhttp3.Call call, IOException e){
                         Log.d(TAG, "API Call failed: " + e.getMessage());
+                        suggested.setText("Network Error. Please check your internet connectivity");
+                        clDiagnosis.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -134,12 +145,14 @@ public class DiagnoseActivity extends AppCompatActivity {
                                     suggested.setText(content);
 
 //                                    suggested.setText(responseBody);
+//                                    progress_diagnose.dismiss();
                                     clDiagnosis.setVisibility(View.VISIBLE);
                                 });
                             } else {
                                 Log.d(TAG, responseBody);
                                 runOnUiThread(() -> {
                                     suggested.setText("API Response unsuccessful: " + responseBody);
+                                    clDiagnosis.setVisibility(View.VISIBLE);
                                 });
                             }
                         } catch (IOException e) {

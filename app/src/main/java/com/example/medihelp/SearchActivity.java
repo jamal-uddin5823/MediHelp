@@ -62,10 +62,14 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Searching",Toast.LENGTH_SHORT).show();
-                String name=etNameSearch.getText().toString();
-                String speciality=etSpecialitySearch.getText().toString();
-                String location=etLocationSearch.getText().toString();
-//                Log.d(TAG,name);
+                String name=etNameSearch.getText().toString().trim();
+                name = name.replaceFirst("\\Dr. ", "").trim();
+                name = name.replaceFirst("\\Dr.", "").trim();
+                name = name.replaceFirst("\\Dr ", "").trim();
+                name = name.replaceFirst("\\Dr", "").trim();
+                String speciality=etSpecialitySearch.getText().toString().trim();
+                String location=etLocationSearch.getText().toString().trim();
+                Log.d(TAG,name+" "+speciality+" "+location);
 //                if(name.isEmpty())Log.d(TAG,"AAAAAAAAAAA");
 
                 searchReference = FirebaseDatabase.getInstance().getReference("Doctors");
