@@ -54,6 +54,8 @@ public class DiagnoseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnose);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
 
         btnVoiceInput = findViewById(R.id.btnVoiceInput);
         btnAnalyseSymptoms = findViewById(R.id.btnAnalyseSymptoms);

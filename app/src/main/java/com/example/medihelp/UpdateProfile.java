@@ -57,6 +57,8 @@ public class UpdateProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
 
         // Initialize Firebase components
         mAuth = FirebaseAuth.getInstance();

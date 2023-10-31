@@ -45,6 +45,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
 
         btnSearch = findViewById(R.id.btnAnalyseSymptoms);
         clSearch = findViewById(R.id.clSearch);
@@ -62,9 +64,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Searching",Toast.LENGTH_SHORT).show();
-                String name=etNameSearch.getText().toString();
-                String speciality=etSpecialitySearch.getText().toString();
-                String location=etLocationSearch.getText().toString();
+                String name=etNameSearch.getText().toString().trim();
+                String speciality=etSpecialitySearch.getText().toString().trim();
+                String location=etLocationSearch.getText().toString().trim();
 //                Log.d(TAG,name);
 //                if(name.isEmpty())Log.d(TAG,"AAAAAAAAAAA");
 

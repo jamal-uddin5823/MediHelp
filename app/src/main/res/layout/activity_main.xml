@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?attr/colorOnPrimary"
-        app:hideOnScroll="true"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp">
 
@@ -26,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bottomNavigationView"
-            android:layout_marginEnd="10dp"
             app:hideOnScroll="false"
+            android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
@@ -35,17 +34,6 @@
             app:itemIconSize="36dp"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/floatingActionButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:backgroundTint="?attr/colorOnPrimary"-->
-<!--        android:src="@drawable/ic_baseline_local_hospital_36"-->
-<!--        app:layout_anchor="@id/bottomAppBar"-->
-<!--        app:maxImageSize="45dp"-->
-<!--        app:tint="?attr/colorPrimary"-->
-<!--        android:hapticFeedbackEnabled="true"/>-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
