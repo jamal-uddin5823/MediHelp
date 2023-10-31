@@ -41,7 +41,6 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-
                 Intent intent = new Intent(this,Login.class);
                 startActivity(intent);
                 finish();
