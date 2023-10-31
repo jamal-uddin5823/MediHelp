@@ -85,7 +85,7 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
-            android:tint="@color/accent2"
+
             app:layout_constraintBottom_toBottomOf="@+id/lytRoundedBackSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

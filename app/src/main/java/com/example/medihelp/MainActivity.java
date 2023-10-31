@@ -37,15 +37,15 @@ public class MainActivity extends AppCompatActivity{
             case "home":
                 replaceFragment(new HomeFragment());
                 break;
-            case "search":
-                replaceFragment(new SearchFragment());
-                break;
-            case "diagnose":
-                replaceFragment(new DiagnoseFragment());
-                break;
-//            case "bookmark":
-//                replaceFragment(new BookmarksFragment());
+//            case "search":
+//                replaceFragment(new SearchFragment());
 //                break;
+//            case "diagnose":
+//                replaceFragment(new DiagnoseFragment());
+//                break;
+            case "bookmark":
+                replaceFragment(new BookmarksFragment());
+                break;
             case "profile":
                 replaceFragment(new ProfileFragment());
                 break;

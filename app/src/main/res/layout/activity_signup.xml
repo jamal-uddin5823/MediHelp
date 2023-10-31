@@ -56,20 +56,53 @@
                     android:fontFamily="@font/mon"
                     android:textStyle="bold"
                     />
+
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/baseline_person_add_24" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="560dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:cardElevation="21dp"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+
 
 
                 <LinearLayout
@@ -83,8 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="50dp"
-                        android:text="Sign Up"
                         android:maxLines="1"
+                        android:text="Sign Up"
                         android:textColor="@color/black"
                         android:textSize="40dp"
                         android:textStyle="bold" />
@@ -98,9 +131,9 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_person_24"
-                        android:maxLines="1"
                         android:drawablePadding="10dp"
                         android:hint="Username"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
 
                     <EditText
@@ -108,26 +141,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="10dp"
                         android:hint="Email"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
+
                     <EditText
                         android:id="@+id/editAge"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_calendar_month_24"
                         android:drawablePadding="10dp"
                         android:hint="Age"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
 
                     <EditText
@@ -135,13 +169,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_scale_24"
                         android:drawablePadding="10dp"
                         android:hint="Weight"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
 
                     <Spinner
@@ -149,14 +183,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
-                        android:hint="Blood Group"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_arrow_drop_down_24"
                         android:drawablePadding="10dp"
+                        android:hint="Blood Group"
                         android:layout="@layout/custom_spinner"
+                        android:maxLines="1"
                         android:padding="8dp" />
 
 
@@ -165,14 +199,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
-                        android:hint="Gender"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_arrow_drop_down_24"
                         android:drawablePadding="10dp"
+                        android:hint="Gender"
                         android:layout="@layout/custom_spinner"
+                        android:maxLines="1"
                         android:padding="8dp"
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -183,19 +217,19 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
-                        android:maxLines="1"
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/key"
                         android:drawablePadding="10dp"
                         android:hint="Password"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
+
                     <EditText
                         android:id="@+id/confirmpassword"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:maxLines="1"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
@@ -203,8 +237,8 @@
                         android:drawablePadding="5dp"
                         android:hint="Confirm Password"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:paddingStart="10dp" />
-
 
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -232,17 +266,17 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="50dp"
                 android:background="@drawable/white_button"
                 android:text="Log in"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginVertical="70dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.427">
+                app:layout_constraintVertical_bias="0.242">
 
             </androidx.appcompat.widget.AppCompatButton>
 

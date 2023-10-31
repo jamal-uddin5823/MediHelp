@@ -81,6 +81,20 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/tvTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Team Scooby DU"
+                android:layout_marginVertical="25dp"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="?attr/colorPrimary"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lytRoundedBackSearch" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAboutUs"
                 android:layout_width="match_parent"
@@ -88,7 +102,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lytRoundedBackSearch" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTeamName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

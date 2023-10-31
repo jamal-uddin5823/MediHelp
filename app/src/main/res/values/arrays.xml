@@ -2,14 +2,14 @@
 <resources>
 <string-array name="blood_group_options">
     <item>Blood Group</item>
-    <item>A+</item>
-    <item>A-</item>
-    <item>B+</item>
-    <item>B-</item>
-    <item>AB+</item>
-    <item>AB-</item>
-    <item>O+</item>
-    <item>O-</item>
+    <item>A+ve</item>
+    <item>A-ve</item>
+    <item>B+ve</item>
+    <item>B-ve</item>
+    <item>AB+ve</item>
+    <item>AB-ve</item>
+    <item>O+ve</item>
+    <item>O-ve</item>
     <!-- Add more options as needed -->
 </string-array>
 

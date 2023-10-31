@@ -1,0 +1,30 @@
+<!-- res/navigation/nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.medihelp.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookmark"
+        android:name="com.example.medihelp.BookmarksFragment"
+        android:label="Bookmark"
+        tools:layout="@layout/fragment_bookmarks" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.medihelp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <!-- Define more destinations as needed -->
+
+</navigation>

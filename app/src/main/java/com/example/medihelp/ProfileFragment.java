@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Configuration;
@@ -23,6 +24,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -40,6 +42,7 @@ public class ProfileFragment extends Fragment {
     Button btnLogout;
 
     TextView tvUserName;
+    ImageView imgProfileFrag;
 
     private static final String TAG = "ProfileFragment";
 
@@ -75,6 +78,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        imgProfileFrag = view.findViewById(R.id.imgProfileFrag);
 
         btnUserDetails = view.findViewById(R.id.btnUserDetails);
         btnAboutUs = view.findViewById(R.id.btn_aboutUs);
@@ -195,6 +200,8 @@ public class ProfileFragment extends Fragment {
                         // String userEmail = user.getEmail();
                         textView.setText(userName);
                         Log.d(TAG, "onUserReceived: " +userName);
+                        String imageUrl = user.getPicture();
+                        Picasso.get().load(imageUrl).into(imgProfileFrag);
                         // ... and so on
                     } else {
                         // Handle the case where the user is not found or not authenticated
@@ -205,6 +212,7 @@ public class ProfileFragment extends Fragment {
 
         }  else {
             textView.setText(MainActivity.currentUserData.getName());
+            Picasso.get().load(MainActivity.currentUserData.getPicture()).into(imgProfileFrag);
         }
 
 

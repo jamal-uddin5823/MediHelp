@@ -11,12 +11,12 @@ val apiKey = properties.getProperty("API_KEY") ?: ""
 
 android {
     namespace = "com.example.medihelp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.medihelp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -51,6 +51,7 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
+<<<<<<< HEAD
     implementation("com.google.android.material:material:1.9.0")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -75,11 +76,26 @@ dependencies {
     //okhttp
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
+=======
+    implementation("com.google.android.material:material:1.10.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.4.1"))
+    implementation("com.google.firebase:firebase-storage")
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("androidx.navigation:navigation-fragment:2.4.1")
+    implementation("androidx.navigation:navigation-ui:2.4.1")
+>>>>>>> c0788d1dcb1ae6ee3acd81fa2b4e52fe6a1a7d89
 
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<<<<<<< HEAD
     annotationProcessor("androidx.room:room-compiler:2.5.2")
 
     //animation
@@ -93,4 +109,8 @@ dependencies {
 
     //for api key
     implementation("io.github.cdimascio:java-dotenv:5.2.0")
+=======
+    annotationProcessor("androidx.room:room-compiler:2.6.0")
+
+>>>>>>> c0788d1dcb1ae6ee3acd81fa2b4e52fe6a1a7d89
 }
