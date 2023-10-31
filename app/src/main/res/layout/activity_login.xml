@@ -53,7 +53,7 @@
                     android:layout_marginRight="100dp"
                     android:text="MEDIHELP"
                     android:textColor="@color/white"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:fontFamily="@font/mon"
                     android:textStyle="bold"
                     />
@@ -86,7 +86,7 @@
                         android:layout_marginTop="50dp"
                         android:text="Login"
                         android:textColor="@color/black"
-                        android:textSize="40dp"
+                        android:textSize="40sp"
                         android:textStyle="bold" />
 
                     <EditText

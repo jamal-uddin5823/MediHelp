@@ -29,8 +29,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgDev"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_gravity="center_vertical"
                 app:shapeAppearanceOverlay="@style/RoundedFrameShape"
                 app:srcCompat="@drawable/ic_baseline_profile_36" />
@@ -39,6 +39,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center_vertical">
 
                 <LinearLayout
@@ -51,12 +52,14 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvDdevName"
-                            android:layout_width="190dp"
+                            android:layout_width="wrap_content"
+                            android:maxWidth="170dp"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:paddingHorizontal="10dp"
@@ -66,7 +69,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="190dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top"
                             android:text="University of Dhaka"
@@ -74,28 +77,32 @@
                             android:paddingHorizontal="10dp"/>
 
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:gravity="center_vertical">
-                        <ImageView
-                            android:id="@+id/imgDevMail"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:tint="@color/primary"
-                            android:padding="3dp"
-                            android:layout_gravity="center_vertical"
-                            android:clickable="true"
-                            android:src="@drawable/baseline_email_24"
-                            android:focusable="true" />
-                    </LinearLayout>
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="end"-->
+<!--                        android:gravity="center_vertical">-->
+
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
+
             </LinearLayout>
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/imgDevMail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end|center"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="3dp"
+                android:src="@drawable/baseline_email_24"
+                android:tint="@color/primary" />
 
         </LinearLayout>
     </LinearLayout>

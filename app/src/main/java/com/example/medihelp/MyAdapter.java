@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -86,7 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
                 String phno = doctors.get(position).getContact();
                 dialPhoneNumber(phno);
-//                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"Contacting "+phno, Toast.LENGTH_SHORT).show();
             }
         });
     }
