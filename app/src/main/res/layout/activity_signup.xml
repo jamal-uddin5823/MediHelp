@@ -128,6 +128,7 @@
                     <EditText
                         android:id="@+id/editName"
                         android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
@@ -141,6 +142,7 @@
 
                     <EditText
                         android:id="@+id/editEmail"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
@@ -155,6 +157,7 @@
 
                     <EditText
                         android:id="@+id/editAge"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
@@ -169,6 +172,7 @@
 
                     <EditText
                         android:id="@+id/editWeight"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
@@ -215,6 +219,7 @@
 
                     <EditText
                         android:id="@+id/editPassword"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
@@ -230,6 +235,7 @@
 
                     <EditText
                         android:id="@+id/confirmpassword"
+                        android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"

@@ -237,27 +237,41 @@ public class Signup extends AppCompatActivity {
 
     }
 
-    private void createUserAccount(String age, String weight, String gender, String bloodGroup){
-//        progress_signup.setMessage("Creating Account...");
-//        progress_signup.show();
-
-        mAuth.createUserWithEmailAndPassword(email,password).
-                addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+    private void createUserAccount(String age, String weight, String gender, String bloodGroup) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-//                        progress_signup.dismiss();
-                        updateUserInfo(age,weight,gender,bloodGroup);
+                        // Verification email sent
+                        mAuth.getCurrentUser().sendEmailVerification()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        // Verification email sent successfully
+                                        Toast.makeText(Signup.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Handle the error
+                                        Toast.makeText(Signup.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
+                                    }
+                                });
+
+                        updateUserInfo(age, weight, gender, bloodGroup);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-//                        progress_signup.dismiss();
-                        Toast.makeText(Signup.this, "Hello: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
+                        Toast.makeText(Signup.this, "Hello: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
+
 
     private void updateUserInfo(String age, String weight, String gender, String bloodGroup) {
 //        progress_signup.setMessage("Saving User Info...");
