@@ -35,36 +35,36 @@ public class StartActivity extends AppCompatActivity {
 
         UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
 
-        userDataRetrieval.retrieveUserData(user -> {
-            if(MainActivity.currentUserData!=null) {
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(this,Login.class);
-                startActivity(intent);
-                finish();
-            }
-
-        });
-
-
-        startProgressBar = findViewById(R.id.startProgressBar);
-//        btnGetStarted = findViewById(R.id.btnGetStarted);
-        lottieanim=findViewById(R.id.animation);
-        lottieanim.playAnimation();
-
-//        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Show the ProgressBar when the button is clicked
-////                startProgressBar.setVisibility(View.VISIBLE);
-//
-//                Intent intent = new Intent(getApplicationContext(), Login.class);
+//        userDataRetrieval.retrieveUserData(user -> {
+//            if(MainActivity.currentUserData!=null) {
+//                Intent intent = new Intent(this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            } else {
+//                Intent intent = new Intent(this,Login.class);
 //                startActivity(intent);
 //                finish();
 //            }
+//
 //        });
+
+
+        startProgressBar = findViewById(R.id.startProgressBar);
+        btnGetStarted = findViewById(R.id.btnGetStarted);
+        lottieanim=findViewById(R.id.animation);
+        lottieanim.playAnimation();
+
+        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Show the ProgressBar when the button is clicked
+//                startProgressBar.setVisibility(View.VISIBLE);
+
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
 
