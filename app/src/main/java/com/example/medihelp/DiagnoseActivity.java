@@ -45,6 +45,7 @@ public class DiagnoseActivity extends AppCompatActivity {
     Button btnDiagtoSearch;
 
     ConstraintLayout clDiagnosis;
+    ConstraintLayout clBuffer;
     String apiKey = BuildConfig.API_KEY;
     private static final String TAG = "DiagnoseActivity";
 
@@ -58,6 +59,7 @@ public class DiagnoseActivity extends AppCompatActivity {
         btnVoiceInput = findViewById(R.id.btnVoiceInput);
         btnAnalyseSymptoms = findViewById(R.id.btnAnalyseSymptoms);
         clDiagnosis = findViewById(R.id.clDiagnosis);
+        clBuffer = findViewById(R.id.clBuffer);
         btnDiagtoSearch = findViewById(R.id.btnDiagtoSearch);
         suggested=findViewById(R.id.textView7);
 
@@ -81,6 +83,15 @@ public class DiagnoseActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
+                if (clBuffer == null) {
+                    Log.e(TAG, "clBuffer is null!");
+                }
+                if (clDiagnosis == null) {
+                    Log.e(TAG, "clDiagnosis is null!");
+                }
+                clDiagnosis.setVisibility(View.GONE);
+                clBuffer.setVisibility(View.VISIBLE);
                 Toast.makeText(view.getContext(),"Please wait. Analysis may take 8-10 seconds.",Toast.LENGTH_LONG).show();
                 EditText etSymptoms = findViewById(R.id.etSymptoms);
                 String symptoms=etSymptoms.getText().toString();
@@ -134,7 +145,16 @@ public class DiagnoseActivity extends AppCompatActivity {
                                     // Set the extracted content to the TextView
                                     suggested.setText(content);
 
+                                    if (clBuffer == null) {
+                                        Log.e(TAG, "clBuffer is null inside onResponse!");
+                                    }
+
+                                    if (clDiagnosis == null) {
+                                        Log.e(TAG, "clDiagnosis is null!");
+                                    }
+
 //                                    suggested.setText(responseBody);
+                                    clBuffer.setVisibility(View.GONE);
                                     clDiagnosis.setVisibility(View.VISIBLE);
                                 });
                             } else {
@@ -148,42 +168,8 @@ public class DiagnoseActivity extends AppCompatActivity {
                         }
                     }
 
-//                    @Override
-//                    public void onResponse(okhttp3.Call call, okhttp3.Response response) {
-//                        String responseBody;
-//                        try {
-//                            responseBody = response.body().string();
-//                            if (response.isSuccessful()) {
-//                                DiagnoseActivity.this.runOnUiThread(() -> suggested.setText(responseBody));
-//                                clDiagnosis.setVisibility(view.VISIBLE);
-//                            } else {
-//                                Log.d(TAG, responseBody);
-//                                DiagnoseActivity.this.runOnUiThread(() -> {
-//                                    suggested.setText("API Response unsuccessful: " + responseBody);
-//                                });
-//                            }
-//                        } catch (IOException e) {
-//                            Log.e(TAG, "Error reading response body: " + e.getMessage());
-//                        }
-//                    }
                 });
                 Log.d(TAG, "Request handled");
-//                delay(3000);
-
-//                clDiagnosis.setVisibility(view.VISIBLE);
-//                try {
-//                    HttpRequest postRequest = HttpRequest.newBuilder()
-//                            .uri(new URI("https://openrouter.ai/api/v1/chat/completions"))
-//                            .header("Authorization", "Bearer")
-//                            .header("HTTP-Referer", "http://localhost:3000")
-//                            .POST(BodyPublishers.ofString(jsonRequest))
-//                            .build();
-//                    //                Toast.makeText(view.getContext(),"Analysing the symptoms",Toast.LENGTH_SHORT).show();
-//                    clDiagnosis.setVisibility(View.VISIBLE);
-//                }
-//                catch(URISyntaxException e){
-//                    System.out.println("API Call failed");
-//                }
 
             }
         });
