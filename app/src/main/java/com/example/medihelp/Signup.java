@@ -49,6 +49,11 @@ public class Signup extends AppCompatActivity {
     private Spinner bloodGroupSpinner, genderSpinner;
     ImageView ivSignUp;
 
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
+
+
     public static User myuser;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;

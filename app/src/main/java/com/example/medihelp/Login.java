@@ -1,13 +1,21 @@
 package com.example.medihelp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.ActivityNotFoundException;
+
 import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,10 +38,16 @@ public class Login extends AppCompatActivity {
 
     private static final String TAG = "Login";
     EditText editTextEmail, editTextPassword;
-    Button buttonLogin;
+    Button buttonLogin,buttonforgor;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    TextView textView, textViewforgotPass;
+
+
+    static final int Req_Call=1;
+
+    TextView textView,textViewforgotPass;
+
+
 
     @Override
     public void onStart() {
@@ -52,6 +66,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Log.d("Hel","Start at login");
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);

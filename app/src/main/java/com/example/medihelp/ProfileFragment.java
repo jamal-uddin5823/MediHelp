@@ -26,6 +26,8 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class ProfileFragment extends Fragment {
     View view;
@@ -161,9 +163,13 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Logging out",Toast.LENGTH_SHORT).show();
                 Context context = getActivity();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(context, Login.class);
+
+                Log.d("Hllo","Redreictb=ing to lgin");
+
+                context.startActivity(intent);
+
                 MainActivity.currFragment="Home";
                 MainActivity.currentUserData=null;
                 startActivity(intent);

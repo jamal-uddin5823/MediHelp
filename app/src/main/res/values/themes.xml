@@ -4,22 +4,22 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-<!--        <item name="colorPrimary">@color/olive</item>-->
-<!--        <item name="colorPrimaryVariant">@color/beige</item>-->
-<!--        <item name="colorOnPrimary">@color/darkest_green</item>-->
+<!--                <item name="colorPrimary">@color/olive</item>-->
+<!--                <item name="colorPrimaryVariant">@color/beige</item>-->
+<!--                <item name="colorOnPrimary">@color/darkest_green</item>-->
 
-<!--        <item name="colorSecondary">@color/olive</item>-->
-<!--        <item name="colorSecondaryVariant">@color/lime</item>-->
-<!--        <item name="colorOnSecondary">@color/darkest_green</item>-->
+<!--                <item name="colorSecondary">@color/olive</item>-->
+<!--                <item name="colorSecondaryVariant">@color/lime</item>-->
+<!--                <item name="colorOnSecondary">@color/darkest_green</item>-->
 
 
-<!--        <item name="colorPrimary">@color/light_green</item>-->
-<!--        <item name="colorPrimaryVariant">@color/green</item>-->
-<!--        <item name="colorOnPrimary">@color/lighter_green</item>-->
+<!--                <item name="colorPrimary">@color/light_green</item>-->
+<!--                <item name="colorPrimaryVariant">@color/green</item>-->
+<!--                <item name="colorOnPrimary">@color/lighter_green</item>-->
 
-<!--        <item name="colorSecondary">@color/olive</item>-->
-<!--        <item name="colorSecondaryVariant">@color/lime</item>-->
-<!--        <item name="colorOnSecondary">@color/darkest_green</item>-->
+<!--                <item name="colorSecondary">@color/olive</item>-->
+<!--                <item name="colorSecondaryVariant">@color/lime</item>-->
+<!--                <item name="colorOnSecondary">@color/darkest_green</item>-->
         `
 
 <!--        <item name="colorPrimary">@color/lavender</item>-->

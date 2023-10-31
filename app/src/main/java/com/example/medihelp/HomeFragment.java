@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment {
 
                     if (doctor != null) {
                         doctor.setID(snapshot.child("ID").getValue(Long.class));
-                        doctor.setName(snapshot.child("name").getValue(String.class));
+                        doctor.setName("Dr. "+snapshot.child("name").getValue(String.class));
                         doctor.setSpeciality(snapshot.child("speciality").getValue(String.class));
                         doctor.setLocation(snapshot.child("location").getValue(String.class));
                         doctor.setContact(snapshot.child("contact").getValue(String.class));

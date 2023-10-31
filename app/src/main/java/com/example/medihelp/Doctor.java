@@ -7,8 +7,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "bookmarkeddoc")
 public class Doctor {
-
-
     @PrimaryKey()
     private Long ID;
     @ColumnInfo(name = "name")

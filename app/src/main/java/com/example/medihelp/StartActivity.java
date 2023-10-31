@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.airbnb.lottie.*;
+
 public class StartActivity extends AppCompatActivity {
     TextView btnGetStarted;
+    LottieAnimationView lottieanim;
     private ProgressBar startProgressBar;
 
     @SuppressLint("MissingInflatedId")
@@ -22,14 +25,15 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         startProgressBar = findViewById(R.id.startProgressBar);
-
         btnGetStarted = findViewById(R.id.btnGetStarted);
+        lottieanim=findViewById(R.id.animation);
+        lottieanim.playAnimation();
 
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Show the ProgressBar when the button is clicked
-                startProgressBar.setVisibility(View.VISIBLE);
+//                startProgressBar.setVisibility(View.VISIBLE);
 
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);

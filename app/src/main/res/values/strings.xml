@@ -18,4 +18,6 @@
     <string name="register_C">REGISTER</string>
     <string name="login_now">Login Now</string>
     <string name="sign_up">Sign Up</string>
+    <string name="say_hi">SAY HI!</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>
