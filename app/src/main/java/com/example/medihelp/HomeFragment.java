@@ -124,9 +124,12 @@ public class HomeFragment extends Fragment {
 
                     if (doctor != null) {
                         doctor.setID(snapshot.child("ID").getValue(Long.class));
-                        doctor.setName("Dr. "+snapshot.child("name").getValue(String.class));
-                        doctor.setSpeciality(snapshot.child("speciality").getValue(String.class));
-                        doctor.setLocation(snapshot.child("location").getValue(String.class));
+                        String name = capitalizeEachWord(snapshot.child("name").getValue(String.class));
+                        doctor.setName("Dr. " + name);
+                        String speciality = capitalizeEachWord(snapshot.child("speciality").getValue(String.class));
+                        doctor.setSpeciality(speciality);
+                        String location= capitalizeEachWord(snapshot.child("location").getValue(String.class));
+                        doctor.setLocation(location);
                         doctor.setContact(snapshot.child("contact").getValue(String.class));
                         Log.d(TAG, "Doctor ID: " + doctor.getID());
                         Log.d(TAG, "Doctor Name: " + doctor.getName());
@@ -202,5 +205,18 @@ public class HomeFragment extends Fragment {
 
 
 
+    }
+
+    public static String capitalizeEachWord(String str) {
+        String[] words = str.split(" ");
+        StringBuilder capitalizedString = new StringBuilder();
+
+        for (String word : words) {
+            String firstLetter = word.substring(0, 1).toUpperCase();
+            String remainingLetters = word.substring(1).toLowerCase();
+            capitalizedString.append(firstLetter).append(remainingLetters).append(" ");
+        }
+
+        return capitalizedString.toString().trim();
     }
 }

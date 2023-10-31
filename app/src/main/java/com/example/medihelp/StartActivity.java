@@ -31,19 +31,39 @@ public class StartActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-
-
         UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
 
         userDataRetrieval.retrieveUserData(user -> {
             if(MainActivity.currentUserData!=null) {
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(onBoardingIntent);
+                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
             } else {
-                Intent intent = new Intent(this,Login.class);
-                startActivity(intent);
-                finish();
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(onBoardingIntent);
+                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,Login.class);
+//                startActivity(intent);
+//                finish();
             }
 
         });

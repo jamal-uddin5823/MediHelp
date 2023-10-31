@@ -44,7 +44,7 @@ public class UpdateProfile extends AppCompatActivity {
     private DatabaseReference userDatabase;
 
     // UI components
-    private EditText editName, editEmail, editPassword, Age, Weight, Blood, Gender;
+    private EditText editName, editPassword, Age, Weight, Blood, Gender;
     private Button saveButton, backButton;
     ImageView ivSelectImage;
     private Spinner bloodGroupSpinner, genderSpinner;
@@ -66,7 +66,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         // Initialize UI components
         editName = findViewById(R.id.editName);
-        editEmail = findViewById(R.id.editEmail);
+//        editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         Age = findViewById(R.id.Age);
         Weight = findViewById(R.id.Weight);
@@ -88,7 +88,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         if(MainActivity.currentUserData!=null) {
             editName.setText(MainActivity.currentUserData.getName());
-            editEmail.setText(MainActivity.currentUserData.getEmail());
+//            editEmail.setText(MainActivity.currentUserData.getEmail());
             editPassword.setText(MainActivity.currentUserData.getPassword());
             Age.setText(MainActivity.currentUserData.getAge());
             Weight.setText(MainActivity.currentUserData.getWeight());
@@ -257,7 +257,7 @@ public class UpdateProfile extends AppCompatActivity {
     private void saveProfileData() {
         // Retrieve user input
         String name = editName.getText().toString().trim();
-        String email = editEmail.getText().toString().trim();
+//        String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String age = Age.getText().toString().trim();
         // String gender = Gender.getText().toString().trim();
@@ -267,12 +267,12 @@ public class UpdateProfile extends AppCompatActivity {
         String selectedGender = genderSpinner.getSelectedItem().toString();
         String selectedBloodGroup = bloodGroupSpinner.getSelectedItem().toString();
 
-        Log.d(TAG,name+" "+email+ " "+password);
+//        Log.d(TAG,name+" "+email+ " "+password);
         Log.d(TAG,age+" "+weight+" "+selectedGender+" "+selectedBloodGroup);
 
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
+        if (!name.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -296,15 +296,15 @@ public class UpdateProfile extends AppCompatActivity {
                                 editName.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                                 MainActivity.currentUserData.setName(name);
                             }
-                            if (!email.isEmpty()) {
-                                prevEmail = existingUser.getEmail();
-                                prevPass = existingUser.getPassword();
-                                UpdateEmail(prevPass,  email);
-                                existingUser.setEmail(email);
-                                MainActivity.currentUserData.setEmail(email);
-                                editEmail.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-
-                            }
+//                            if (!email.isEmpty()) {
+//                                prevEmail = existingUser.getEmail();
+//                                prevPass = existingUser.getPassword();
+//                                UpdateEmail(prevPass,  email);
+//                                existingUser.setEmail(email);
+//                                MainActivity.currentUserData.setEmail(email);
+//                                editEmail.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+//
+//                            }
                             if (!password.isEmpty()) {
                                 prevPass = existingUser.getPassword();
                                 existingUser.setPassword(password);

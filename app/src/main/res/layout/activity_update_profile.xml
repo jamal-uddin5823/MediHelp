@@ -140,6 +140,7 @@
                         android:gravity="center_vertical"
                         android:textColor="?attr/textFillColor" />
 
+
                     <EditText
                         android:id="@+id/editPassword"
                         android:layout_width="match_parent"

@@ -6,11 +6,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText etNameSearch;
     EditText etSpecialitySearch;
     EditText etLocationSearch;
+    TextView home;
     private DatabaseReference databaseRef;
 
     public List<Doctor> doctorsList = new ArrayList<>();
@@ -54,10 +57,20 @@ public class SearchActivity extends AppCompatActivity {
         recview.setLayoutManager(new LinearLayoutManager(this));
         Log.d(TAG, "RecyclerView initialized");
 
+        home=findViewById(R.id.textView5);
+
         etNameSearch = findViewById(R.id.etDocNameSearch);
         etSpecialitySearch = findViewById(R.id.etDocSpecialitySearch);
         etLocationSearch = findViewById(R.id.etDocLocationSearch);
         searchReference = FirebaseDatabase.getInstance().getReference("Doctors");
+
+        home.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(SearchActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
 
@@ -65,8 +78,17 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Searching",Toast.LENGTH_SHORT).show();
                 String name=etNameSearch.getText().toString().trim();
+                name = name.replaceFirst("\\Dr. ", "").trim();
+                name = name.replaceFirst("\\Dr.", "").trim();
+                name = name.replaceFirst("\\Dr ", "").trim();
+                name = name.replaceFirst("\\Dr", "").trim();
+                name=name.toLowerCase();
                 String speciality=etSpecialitySearch.getText().toString().trim();
+                speciality=speciality.toLowerCase();
                 String location=etLocationSearch.getText().toString().trim();
+                location=location.toLowerCase();
+                Log.d(TAG,name+" "+speciality+" "+location);
+
 //                Log.d(TAG,name);
 //                if(name.isEmpty())Log.d(TAG,"AAAAAAAAAAA");
 
@@ -141,9 +163,12 @@ public class SearchActivity extends AppCompatActivity {
                                         Doctor doctor = snapshot.getValue(Doctor.class);
                                         if (doctor != null) {
                                             doctor.setID(snapshot.child("ID").getValue(Long.class));
-                                            doctor.setName("Dr. " + snapshot.child("name").getValue(String.class));
-                                            doctor.setSpeciality(snapshot.child("speciality").getValue(String.class));
-                                            doctor.setLocation(snapshot.child("location").getValue(String.class));
+                                            String name = capitalizeEachWord(snapshot.child("name").getValue(String.class));
+                                            doctor.setName("Dr. " + name);
+                                            String speciality = capitalizeEachWord(snapshot.child("speciality").getValue(String.class));
+                                            doctor.setSpeciality(speciality);
+                                            String location= capitalizeEachWord(snapshot.child("location").getValue(String.class));
+                                            doctor.setLocation(location);
                                             doctor.setContact(snapshot.child("contact").getValue(String.class));
                                             Log.d(TAG, "Doctor ID: " + doctor.getID());
                                             Log.d(TAG, "Doctor Name: " + doctor.getName());
@@ -196,9 +221,12 @@ public class SearchActivity extends AppCompatActivity {
 
                     if (doctor != null) {
                         doctor.setID(snapshot.child("ID").getValue(Long.class));
-                        doctor.setName("Dr. "+snapshot.child("name").getValue(String.class));
-                        doctor.setSpeciality(snapshot.child("speciality").getValue(String.class));
-                        doctor.setLocation(snapshot.child("location").getValue(String.class));
+                        String name = capitalizeEachWord(snapshot.child("name").getValue(String.class));
+                        doctor.setName("Dr. " + name);
+                        String speciality = capitalizeEachWord(snapshot.child("speciality").getValue(String.class));
+                        doctor.setSpeciality(speciality);
+                        String location= capitalizeEachWord(snapshot.child("location").getValue(String.class));
+                        doctor.setLocation(location);
                         doctor.setContact(snapshot.child("contact").getValue(String.class));
                         Log.d(TAG, "Doctor ID: " + doctor.getID());
                         Log.d(TAG, "Doctor Name: " + doctor.getName());
@@ -226,51 +254,18 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-//    public void searchDoctorByName(String name) {
-//        databaseRef = FirebaseDatabase.getInstance().getReference("Doctors");
-//        Query query;
-//
-//        if (name != null) {
-//            query = databaseRef.orderByChild("name").startAt(name).endAt(name + "\uf8ff");
-//        } else {
-//            query = databaseRef;
-//        }
-//
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                doctorsList.clear();
-//
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Doctor doctor = snapshot.getValue(Doctor.class);
-//
-//                    if (doctor != null) {
-//                        doctor.setID(snapshot.child("ID").getValue(Long.class));
-//                        doctor.setName(snapshot.child("name").getValue(String.class));
-//                        doctor.setSpeciality(snapshot.child("speciality").getValue(String.class));
-//                        doctor.setLocation(snapshot.child("location").getValue(String.class));
-//                        doctor.setContact(snapshot.child("contact").getValue(String.class));
-//                        Log.d(TAG, "Doctor ID: " + doctor.getID());
-//                        Log.d(TAG, "Doctor Name: " + doctor.getName());
-//                        Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
-//                        Log.d(TAG, "Doctor Location: " + doctor.getLocation());
-//                        Log.d(TAG, "Doctor Contact: " + doctor.getContact());
-//
-//                        doctorsList.add(doctor);
-//                    } else {
-//                        Log.w(TAG, "Doctor is null for Search by Name: " + snapshot.getKey());
-//                    }
-//                }
-//                Log.d("DoctorsListSize", "Size of doctorsList: " + doctorsList.size());
-//                adapter.updateData(doctorsList);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(getBaseContext(), "Error fetchinf data: Name Search", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    public static String capitalizeEachWord(String str) {
+        String[] words = str.split(" ");
+        StringBuilder capitalizedString = new StringBuilder();
+
+        for (String word : words) {
+            String firstLetter = word.substring(0, 1).toUpperCase();
+            String remainingLetters = word.substring(1).toLowerCase();
+            capitalizedString.append(firstLetter).append(remainingLetters).append(" ");
+        }
+
+        return capitalizedString.toString().trim();
+    }
 
 
 }
