@@ -45,7 +45,7 @@ public class Signup extends AppCompatActivity {
     private Button buttonSign_in;
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
-    private ProgressDialog progress_signup;
+//    private ProgressDialog progress_signup;
     private Spinner bloodGroupSpinner, genderSpinner;
     ImageView ivSignUp;
 
@@ -56,7 +56,7 @@ public class Signup extends AppCompatActivity {
 
     public static User myuser;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri selectedImageUri;
+    private Uri selectedImageUri = null;
 
 
     @Override
@@ -67,9 +67,9 @@ public class Signup extends AppCompatActivity {
         userDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         setContentView(R.layout.activity_signup);
-        progress_signup = new ProgressDialog(this);
-        progress_signup.setTitle("Please wait");
-        progress_signup.setCanceledOnTouchOutside(false);
+//        progress_signup = new ProgressDialog(this);
+//        progress_signup.setTitle("Please wait");
+//        progress_signup.setCanceledOnTouchOutside(false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -102,7 +102,7 @@ public class Signup extends AppCompatActivity {
         buttonSign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -225,6 +225,9 @@ public class Signup extends AppCompatActivity {
         else if(!password.equals(ConfirmPassword)){
             Toast.makeText(this,"Passwords Doesn't Match",Toast.LENGTH_SHORT).show();
         }
+        else if(selectedImageUri==null) {
+            Toast.makeText(this, "Profile pic not added", Toast.LENGTH_SHORT).show();
+        }
 
         else{
             createUserAccount(age,weight,gender,bloodGroup);
@@ -235,21 +238,21 @@ public class Signup extends AppCompatActivity {
     }
 
     private void createUserAccount(String age, String weight, String gender, String bloodGroup){
-        progress_signup.setMessage("Creating Account...");
-        progress_signup.show();
+//        progress_signup.setMessage("Creating Account...");
+//        progress_signup.show();
 
         mAuth.createUserWithEmailAndPassword(email,password).
                 addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        progress_signup.dismiss();
+//                        progress_signup.dismiss();
                         updateUserInfo(age,weight,gender,bloodGroup);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        progress_signup.dismiss();
+//                        progress_signup.dismiss();
                         Toast.makeText(Signup.this, "Hello: "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -257,11 +260,14 @@ public class Signup extends AppCompatActivity {
     }
 
     private void updateUserInfo(String age, String weight, String gender, String bloodGroup) {
-        progress_signup.setMessage("Saving User Info...");
+//        progress_signup.setMessage("Saving User Info...");
         long timestamp = System.currentTimeMillis();
 
         String uid = mAuth.getUid();
 
+        if(selectedImageUri!=null) {
+
+        }
         uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
             myuser=new User(username,email,password);
 
@@ -284,13 +290,13 @@ public class Signup extends AppCompatActivity {
 
             // Setup data to db
 
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-            ref.child(uid)
+            userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+            userDatabase.child(uid)
                     .setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            progress_signup.dismiss();
+//                            progress_signup.dismiss();
                             Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
@@ -300,7 +306,7 @@ public class Signup extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            progress_signup.dismiss();
+//                            progress_signup.dismiss();
                             Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
                         }

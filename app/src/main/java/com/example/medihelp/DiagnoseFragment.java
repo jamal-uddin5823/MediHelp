@@ -30,6 +30,7 @@ public class DiagnoseFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_diagnose, container, false);
 
+
         ImageButton btnVoiceInput = view.findViewById(R.id.btnVoiceInput);
         Button btnAnalyseSymptoms = view.findViewById(R.id.btnAnalyseSymptoms);
 

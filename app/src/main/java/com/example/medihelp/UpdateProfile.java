@@ -57,6 +57,8 @@ public class UpdateProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
 
         // Initialize Firebase components
         mAuth = FirebaseAuth.getInstance();
@@ -84,18 +86,21 @@ public class UpdateProfile extends AppCompatActivity {
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
 
-        editName.setText(MainActivity.currentUserData.getName());
-        editEmail.setText(MainActivity.currentUserData.getEmail());
-        editPassword.setText(MainActivity.currentUserData.getPassword());
-        Age.setText(MainActivity.currentUserData.getAge());
-        Weight.setText(MainActivity.currentUserData.getWeight());
+        if(MainActivity.currentUserData!=null) {
+            editName.setText(MainActivity.currentUserData.getName());
+            editEmail.setText(MainActivity.currentUserData.getEmail());
+            editPassword.setText(MainActivity.currentUserData.getPassword());
+            Age.setText(MainActivity.currentUserData.getAge());
+            Weight.setText(MainActivity.currentUserData.getWeight());
+        }
+
 
 
         String[] bloodGroups = getResources().getStringArray(R.array.blood_group_options);
         int position = -1;
 
         for (int i = 0; i < bloodGroups.length; i++) {
-            if (MainActivity.currentUserData.getBloodGroup().equals(bloodGroups[i])) {
+            if (MainActivity.currentUserData!=null && MainActivity.currentUserData.getBloodGroup().equals(bloodGroups[i])) {
                 position = i;
                 break;
             }
@@ -109,7 +114,7 @@ public class UpdateProfile extends AppCompatActivity {
         int position2 = -1;
 
         for (int i = 0; i < genders.length; i++) {
-            if (MainActivity.currentUserData.getGender().equals(genders[i])) {
+            if (MainActivity.currentUserData!=null && MainActivity.currentUserData.getGender().equals(genders[i])) {
                 position2 = i;
                 break;
             }
@@ -118,8 +123,9 @@ public class UpdateProfile extends AppCompatActivity {
         if (position2 != -1) {
             genderSpinner.setSelection(position2);
         }
-
-        String imageUrl = MainActivity.currentUserData.getPicture(); // Replace with the actual method or key to access the image URL
+        String imageUrl=null;
+        if(MainActivity.currentUserData!=null)
+            imageUrl = MainActivity.currentUserData.getPicture(); // Replace with the actual method or key to access the image URL
         if(imageUrl!=null) {
             Picasso.get().load(imageUrl).into(ivSelectImage);
         }
@@ -261,6 +267,9 @@ public class UpdateProfile extends AppCompatActivity {
         String selectedGender = genderSpinner.getSelectedItem().toString();
         String selectedBloodGroup = bloodGroupSpinner.getSelectedItem().toString();
 
+        Log.d(TAG,name+" "+email+ " "+password);
+        Log.d(TAG,age+" "+weight+" "+selectedGender+" "+selectedBloodGroup);
+
 
         // Check if any of the fields have non-empty values
         if (!name.isEmpty() || !email.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
@@ -282,38 +291,45 @@ public class UpdateProfile extends AppCompatActivity {
                             User existingUser = dataSnapshot.getValue(User.class);
 
                             // Update the fields with non-empty values and change text color to black
-                            if (!name.isEmpty() && !name.equals(MainActivity.currentUserData.getName())) {
+                            if (!name.isEmpty()) {
                                 existingUser.setName(name);
                                 editName.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                                MainActivity.currentUserData.setName(name);
                             }
-                            if (!email.isEmpty() && !email.equals(MainActivity.currentUserData.getEmail())) {
+                            if (!email.isEmpty()) {
                                 prevEmail = existingUser.getEmail();
                                 prevPass = existingUser.getPassword();
                                 UpdateEmail(prevPass,  email);
                                 existingUser.setEmail(email);
+                                MainActivity.currentUserData.setEmail(email);
                                 editEmail.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
 
                             }
-                            if (!password.isEmpty() && !password.equals(MainActivity.currentUserData.getPassword())) {
+                            if (!password.isEmpty()) {
                                 prevPass = existingUser.getPassword();
                                 existingUser.setPassword(password);
+                                MainActivity.currentUserData.setPassword(password);
                                 editPassword.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                                 UpdatePassword(prevPass, password);
                             }
-                            if (!age.isEmpty() && !age.equals(MainActivity.currentUserData.getAge())) {
+                            if (!age.isEmpty()) {
                                 existingUser.setAge(age);
+                                MainActivity.currentUserData.setAge(age);
                                 Age.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
                             if (genderSpinner.getSelectedItemPosition() != 0) {
+                                MainActivity.currentUserData.setGender(selectedGender);
                                 existingUser.setGender(selectedGender); // Update gender value with the selected option
 
                             }
                             if (bloodGroupSpinner.getSelectedItemPosition() != 0) {
+                                MainActivity.currentUserData.setBloodGroup(selectedBloodGroup);
                                 existingUser.setBloodGroup(selectedBloodGroup); // Update blood group value with the selected option
 
                             }
-                            if (!weight.isEmpty() && !weight.equals(MainActivity.currentUserData.getWeight())) {
+                            if (!weight.isEmpty() ) {
                                 existingUser.setWeight(weight);
+                                MainActivity.currentUserData.setWeight(weight);
                                 Weight.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
 //                            if (!bloodGroup.isEmpty()) {

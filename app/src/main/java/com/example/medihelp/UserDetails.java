@@ -47,6 +47,9 @@ public class UserDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
+
         profileName = findViewById(R.id.editName);
         profileEmail = findViewById(R.id.editEmail);
         profilePassword = findViewById(R.id.editPassword);
@@ -108,7 +111,7 @@ public class UserDetails extends AppCompatActivity {
         Drawable visibleIcon = ContextCompat.getDrawable(this, R.drawable.ic_eye);
         Drawable hiddenIcon = ContextCompat.getDrawable(this, R.drawable.ic_not_eye);
 
-        PasswordToggleHelper passwordToggleHelper = new PasswordToggleHelper(profilePassword, toggleEyeIcon, visibleIcon, hiddenIcon);
+        PasswordToggleHelper passwordToggleHelper = new PasswordToggleHelper(profilePassword, toggleEyeIcon, hiddenIcon, visibleIcon);
 
 //        toggleEyeIcon.setOnClickListener(new View.OnClickListener() {
 //            @Override

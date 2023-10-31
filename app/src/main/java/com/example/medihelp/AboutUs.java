@@ -22,6 +22,8 @@ public class AboutUs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
+
 
         rvAboutUs = findViewById(R.id.rvAboutUs);
         rvAboutUs.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

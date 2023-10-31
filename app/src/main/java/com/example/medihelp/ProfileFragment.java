@@ -164,6 +164,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(view.getContext(),"Logging out",Toast.LENGTH_SHORT).show();
                 Context context = getActivity();
                 FirebaseAuth.getInstance().signOut();
+                MainActivity.currentUserData = null;
                 Intent intent = new Intent(context, Login.class);
 
                 Log.d("Hllo","Redreictb=ing to lgin");

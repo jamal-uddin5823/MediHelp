@@ -2,11 +2,14 @@ package com.example.medihelp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -86,7 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
                 String phno = doctors.get(position).getContact();
                 dialPhoneNumber(phno);
-//                Toast.makeText(view.getContext(),"Contacting",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(),"Contacting "+phno, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,8 +103,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+
+        // Check if there is an app that can handle the Intent
+        PackageManager packageManager = context.getPackageManager();
+        List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+
+        if (activities.size() > 0) {
+            Log.d(TAG, "Calling");
             context.startActivity(intent);
+        } else {
+            // Handle the case where there is no app to handle the Intent
+            Log.d(TAG, "No app can handle this action."+phoneNumber);
+            // You can display a message to the user or take alternative actions.
         }
     }
+
 }
