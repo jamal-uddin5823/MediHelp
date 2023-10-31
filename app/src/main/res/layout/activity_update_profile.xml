@@ -125,20 +125,21 @@
                         android:hint="Name"
                         android:padding="8dp"
                         android:gravity="center_vertical"
-                        android:textColor="@color/black" />
+                        android:textColor="?attr/textFillColor" />
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/editEmail"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:layout_marginTop="5dp"-->
-<!--                        android:background="@drawable/custom_edittext"-->
-<!--                        android:drawableLeft="@drawable/baseline_email_24"-->
-<!--                        android:drawablePadding="8dp"-->
-<!--                        android:hint="Email"-->
-<!--                        android:padding="8dp"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:textColor="@color/black" />-->
+                    <EditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawableLeft="@drawable/baseline_email_24"
+                        android:drawablePadding="8dp"
+                        android:hint="Email"
+                        android:padding="8dp"
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/textFillColor" />
+
 
                     <EditText
                         android:id="@+id/editPassword"
@@ -152,7 +153,7 @@
                         android:inputType="textPassword"
                         android:padding="8dp"
                         android:gravity="center_vertical"
-                        android:textColor="@color/black" />
+                        android:textColor="?attr/textFillColor" />
 
 
                     <EditText
@@ -166,7 +167,7 @@
                         android:drawablePadding="8dp"
                         android:hint="Age"
                         android:padding="8dp"
-                        android:textColor="@color/black" />
+                        android:textColor="?attr/textFillColor" />
 
 
                     <EditText
@@ -180,7 +181,7 @@
                         android:drawablePadding="8dp"
                         android:hint="Weight"
                         android:padding="8dp"
-                        android:textColor="@color/black" />
+                        android:textColor="?attr/textFillColor" />
 
                     <Spinner
                         android:id="@+id/Blood"
@@ -190,6 +191,7 @@
                         android:background="@drawable/custom_edittext"
                         android:gravity="center_vertical"
                         android:hint="Blood Group"
+                        android:textColor="?attr/textFillColor"
                         android:layout="@layout/custom_spinner"
                         android:padding="8dp" />
 
@@ -203,6 +205,7 @@
                         android:gravity="center_vertical"
                         android:hint="Gender"
                         android:layout="@layout/custom_spinner"
+                        android:textColor="?attr/textFillColor"
                         android:padding="8dp"
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
