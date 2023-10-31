@@ -41,6 +41,7 @@ public class DiagnoseActivity extends AppCompatActivity {
     ImageButton btnVoiceInput;
     Button btnAnalyseSymptoms;
     TextView suggested;
+    TextView home;
 
     Button btnDiagtoSearch;
 
@@ -62,6 +63,15 @@ public class DiagnoseActivity extends AppCompatActivity {
         clBuffer = findViewById(R.id.clBuffer);
         btnDiagtoSearch = findViewById(R.id.btnDiagtoSearch);
         suggested=findViewById(R.id.textView7);
+        home=findViewById(R.id.textView5);
+
+        home.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(DiagnoseActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnDiagtoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,17 +135,22 @@ public class DiagnoseActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(okhttp3.Call call, IOException e){
                         Log.d(TAG, "API Call failed: " + e.getMessage());
-                        suggested.setText("Network Error!");
-                        if (clBuffer == null) {
-                            Log.e(TAG, "clBuffer is null inside onResponse!");
-                        }
+//                        Toast.makeText(view.getContext(),"Network Error. Check your connectivity and try again",Toast.LENGTH_SHORT).show();
+                        runOnUiThread(() -> {
+                            suggested.setText("Network Error!");
+                            if (clBuffer == null) {
+                                Log.e(TAG, "clBuffer is null inside onResponse!");
+                            }
 
-                        if (clDiagnosis == null) {
-                            Log.e(TAG, "clDiagnosis is null!");
-                        }
+                            if (clDiagnosis == null) {
+                                Log.e(TAG, "clDiagnosis is null!");
+                            }
 
-                        clBuffer.setVisibility(View.GONE);
-                        clDiagnosis.setVisibility(View.VISIBLE);
+//                                    suggested.setText(responseBody);
+                            clBuffer.setVisibility(View.GONE);
+                            clDiagnosis.setVisibility(View.VISIBLE);
+                        });
+
                     }
 
                     @Override
