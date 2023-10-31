@@ -1,7 +1,51 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Dark.Theme.MediHelp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Night.Theme.MediHelp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!--                <item name="colorPrimary">@color/olive</item>-->
+        <!--                <item name="colorPrimaryVariant">@color/beige</item>-->
+        <!--                <item name="colorOnPrimary">@color/darkest_green</item>-->
+
+        <!--                <item name="colorSecondary">@color/olive</item>-->
+        <!--                <item name="colorSecondaryVariant">@color/lime</item>-->
+        <!--                <item name="colorOnSecondary">@color/darkest_green</item>-->
+
+
+        <!--                <item name="colorPrimary">@color/light_green</item>-->
+        <!--                <item name="colorPrimaryVariant">@color/green</item>-->
+        <!--                <item name="colorOnPrimary">@color/lighter_green</item>-->
+
+        <!--                <item name="colorSecondary">@color/olive</item>-->
+        <!--                <item name="colorSecondaryVariant">@color/lime</item>-->
+        <!--                <item name="colorOnSecondary">@color/darkest_green</item>-->
+        `
+
+        <!--        <item name="colorPrimary">@color/lavender</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/dark_lavender</item>-->
+        <!--        <item name="colorOnPrimary">@color/beige</item>-->
+
+        <!--        <item name="colorSecondary">@color/teal_200</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <!--        <item name="colorOnSecondary">@color/black</item>-->
+
+
+        <!--        <item name="colorAccent">@color/pink</item>-->
+        <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+
+        <item name="colorPrimary">@color/gray</item>
+        <item name="colorSecondary">@color/light_gray</item>
+        <item name="colorTertiary">@color/black</item>
+        <item name="colorAccent">@color/light_gray</item>
+        <item name="colorOnPrimary">#D0CAC4</item>
+        <item name="textFillColor">@color/white</item>
+        <item name="background">@color/bg_color</item>
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+        <item name="textAppearanceTitleLarge">@color/light_gray</item>
+
+
     </style>
+
+    <style name="Theme.MediHelp" parent="Night.Theme.MediHelp" />
 </resources>

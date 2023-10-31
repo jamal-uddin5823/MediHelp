@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
 
@@ -143,7 +144,7 @@
             android:layout_marginTop="24dp"
             android:text="What would you like to do?"
             android:textAlignment="center"
-            android:textColor="@color/secondary"
+            android:textColor="?attr/textAppearanceTitleLarge"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -280,7 +281,7 @@
             android:layout_marginHorizontal="10dp"
             android:text="Doctors Available"
             android:textAlignment="center"
-            android:textColor="@color/secondary"
+            android:textColor="?attr/textAppearanceTitleLarge"
             android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

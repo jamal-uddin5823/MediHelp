@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/background"
+    app:cardBackgroundColor="@color/primary"
     app:cardCornerRadius="25dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:background="@color/background"
+        android:background="?attr/cardBackgroundColor"
         android:orientation="vertical">
 
         <LinearLayout

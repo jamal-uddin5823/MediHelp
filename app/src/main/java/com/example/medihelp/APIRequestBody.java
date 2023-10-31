@@ -2,7 +2,8 @@ package com.example.medihelp;
 
 import java.util.List;
 
-public class APIRequestBody {
+public class
+APIRequestBody {
     private String model="mistralai/mistral-7b-instruct";
     private List<Message> messages;
 
