@@ -56,7 +56,10 @@ public class BookmarkRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> 
         holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
 
         holder.icon_bookmark.setOnClickListener(view -> {
-            roomDatabaseHelper.DoctorDao().delete(doctor);
+            assert doctor != null;
+            if(roomDatabaseHelper.DoctorDao().loadByIds(new Long[]{doctor.getID()}).size()>0) {
+                roomDatabaseHelper.DoctorDao().delete(doctor);
+            }
             booked_doclist.remove(position);
             notifyItemChanged(position);
         });
