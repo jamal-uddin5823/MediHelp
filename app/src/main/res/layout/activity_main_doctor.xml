@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityDoctor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rounded_backHome"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/rounded_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvTitle"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="15dp"-->
+        <!--                android:gravity="start"-->
+        <!--                android:paddingHorizontal="30dp"-->
+        <!--                android:text="@string/app_name"-->
+        <!--                android:textColor="@color/background"-->
+        <!--                android:textSize="35sp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/top_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:text="MediHelp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/mon"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfileHome"
+            android:scaleType="centerCrop"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="124dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedFrameShape"
+            app:srcCompat="@drawable/ic_baseline_profile_36" />
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="104dp"
+            android:paddingHorizontal="30dp"
+            android:text="Welcome\n"
+            android:textColor="@color/white"
+
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rounded_backHome">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDoctorDetails"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/white_button"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/white"
+            android:padding="15dp"
+            android:text="Doctor Details"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/layout_buttonTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.49" />
+
+        <LinearLayout
+            android:id="@+id/layout_buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/white_button"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_aboutUs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="THEME"
+                android:textColor="@color/white"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:theme="@style/Theme.AppCompat"
+                android:thumb="@drawable/thumb"
+                app:layout_constraintBottom_toBottomOf="@id/layout_buttonTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/layout_buttonTheme"
+                app:track="@drawable/track" />
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_aboutUs"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/white_button"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/white"
+            android:padding="15dp"
+            android:text="About us"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btn_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginVertical="25dp"
+            android:background="@drawable/white_button"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/white"
+            android:padding="15dp"
+            android:text="Log out"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/marginButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/marginButton"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginVertical="25dp"
+            android:background="@android:color/transparent"
+            android:drawablePadding="15dp"
+            android:drawableTint="?attr/colorPrimary"
+            android:padding="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

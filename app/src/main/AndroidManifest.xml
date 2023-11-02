@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <queries>
+
         <!-- Specific intents you query for -->
         <intent>
             <action android:name="android.intent.action.DIAL" />
@@ -22,10 +23,8 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
 
     <application
         android:allowBackup="true"
@@ -37,6 +36,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediHelp"
         tools:targetApi="31">
+        <activity
+            android:name=".UpdateDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectUserTypeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AboutUs"
             android:exported="false" />
@@ -60,23 +80,25 @@
             android:exported="false" />
         <activity
             android:name=".StartActivity"
-            android:exported="true">
+            android:exported="false">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Login"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"
@@ -90,6 +112,10 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+        <activity
+            android:name=".MainActivityDoctor"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
     </application>
 
 </manifest>

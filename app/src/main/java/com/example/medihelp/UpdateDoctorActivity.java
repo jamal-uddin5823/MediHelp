@@ -37,92 +37,57 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-public class UpdateProfile extends AppCompatActivity {
+public class UpdateDoctorActivity extends AppCompatActivity {
 
     // Firebase components
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
 
     // UI components
-    private EditText editName, editPassword, Age, Weight, Blood, Gender;
+    private EditText editName, editPassword, Speciality, Location;
     private Button saveButton, backButton;
     ImageView ivSelectImage;
-    private Spinner bloodGroupSpinner, genderSpinner;
     private ProgressBar progressBar;
-    private static final String TAG = "UpdateProfile";
+    private static final String TAG = "UpdateDoctor";
 
     private String prevPass, prevEmail;
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_profile);
+        setContentView(R.layout.activity_update_doctor);
         getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
 
 
         // Initialize Firebase components
         mAuth = FirebaseAuth.getInstance();
-        userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        userDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
 
         // Initialize UI components
         editName = findViewById(R.id.editName);
 //        editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
-        Age = findViewById(R.id.Age);
-        Weight = findViewById(R.id.Weight);
+        Speciality = findViewById(R.id.Speciality);
+        Location = findViewById(R.id.Location);
         saveButton = findViewById(R.id.SaveButton);
         backButton = findViewById(R.id.backButton);
         ivSelectImage = findViewById(R.id.ivSelectImage);
 //        progressBar = findViewById(R.id.progressBar);
 
 
-        bloodGroupSpinner = findViewById(R.id.Blood);
-        ArrayAdapter<CharSequence> bloodGroupAdapter = ArrayAdapter.createFromResource(this, R.array.blood_group_options, android.R.layout.simple_spinner_item);
-        bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bloodGroupSpinner.setAdapter(bloodGroupAdapter);
 
-        genderSpinner = findViewById(R.id.Gender);
-        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_options, android.R.layout.simple_spinner_item);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(genderAdapter);
 
-        if(MainActivity.currentUserData!=null) {
-            editName.setText(MainActivity.currentUserData.getName());
+        if(MainActivityDoctor.currentDoctorData!=null) {
+            editName.setText(MainActivityDoctor.currentDoctorData.getName());
 //            editEmail.setText(MainActivity.currentUserData.getEmail());
-            editPassword.setText(MainActivity.currentUserData.getPassword());
-            Age.setText(MainActivity.currentUserData.getAge());
-            Weight.setText(MainActivity.currentUserData.getWeight());
+            editPassword.setText(MainActivityDoctor.currentDoctorData.getPassword());
+            Speciality.setText(MainActivityDoctor.currentDoctorData.getSpeciality());
+            Location.setText(MainActivityDoctor.currentDoctorData.getLocation());
         }
 
 
 
-        String[] bloodGroups = getResources().getStringArray(R.array.blood_group_options);
-        int position = -1;
 
-        for (int i = 0; i < bloodGroups.length; i++) {
-            if (MainActivity.currentUserData!=null && MainActivity.currentUserData.getBloodGroup().equals(bloodGroups[i])) {
-                position = i;
-                break;
-            }
-        }
-
-        if (position != -1) {
-            bloodGroupSpinner.setSelection(position);
-        }
-
-        String[] genders = getResources().getStringArray(R.array.gender_options);
-        int position2 = -1;
-
-        for (int i = 0; i < genders.length; i++) {
-            if (MainActivity.currentUserData!=null && MainActivity.currentUserData.getGender().equals(genders[i])) {
-                position2 = i;
-                break;
-            }
-        }
-
-        if (position2 != -1) {
-            genderSpinner.setSelection(position2);
-        }
         String imageUrl=null;
         if(MainActivity.currentUserData!=null)
             imageUrl = MainActivity.currentUserData.getPicture(); // Replace with the actual method or key to access the image URL
@@ -140,7 +105,7 @@ public class UpdateProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveProfileData();
-                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
+                Intent intent = new Intent(getApplicationContext(), DoctorDetailsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -150,7 +115,7 @@ public class UpdateProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle back button click or navigation to previous screen
-                Intent intent = new Intent(getApplicationContext(), UserDetails.class);
+                Intent intent = new Intent(getApplicationContext(), DoctorDetailsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -177,7 +142,7 @@ public class UpdateProfile extends AppCompatActivity {
     private void uploadImageToFirebase(Uri imageUri) {
         // Create a reference to the Firebase Storage location where you want to store the image.
         // Replace "your-app-name" with your actual Firebase Storage bucket name.
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference("profile_images");
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("doctors/profile_images");
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -211,7 +176,7 @@ public class UpdateProfile extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        User existingUser = dataSnapshot.getValue(User.class);
+                                        DoctorData existingUser = dataSnapshot.getValue(DoctorData.class);
 
                                         if (!imageUrl.isEmpty()) {
                                             existingUser.setPicture(imageUrl);
@@ -223,10 +188,10 @@ public class UpdateProfile extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
-                                                            Toast.makeText(UpdateProfile.this, "Saved Changes", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(UpdateDoctorActivity.this, "Saved Changes", Toast.LENGTH_SHORT).show();
 
                                                         } else {
-                                                            Toast.makeText(UpdateProfile.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(UpdateDoctorActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
 
                                                         }
                                                     }
@@ -259,20 +224,19 @@ public class UpdateProfile extends AppCompatActivity {
         String name = editName.getText().toString().trim();
 //        String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
-        String age = Age.getText().toString().trim();
+        String speciality = Speciality.getText().toString().trim();
         // String gender = Gender.getText().toString().trim();
-        String weight = Weight.getText().toString().trim();
+        String location = Location.getText().toString().trim();
         //  String bloodGroup = Blood.getText().toString().trim();
 
-        String selectedGender = genderSpinner.getSelectedItem().toString();
-        String selectedBloodGroup = bloodGroupSpinner.getSelectedItem().toString();
+
 
 //        Log.d(TAG,name+" "+email+ " "+password);
-        Log.d(TAG,age+" "+weight+" "+selectedGender+" "+selectedBloodGroup);
+//        Log.d(TAG,age+" "+weight+" "+selectedGender+" "+selectedBloodGroup);
 
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
+        if (!name.isEmpty() || !password.isEmpty() || !speciality.isEmpty() || !location.isEmpty()) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -288,13 +252,13 @@ public class UpdateProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            User existingUser = dataSnapshot.getValue(User.class);
+                            DoctorData existingUser = dataSnapshot.getValue(DoctorData.class);
 
                             // Update the fields with non-empty values and change text color to black
                             if (!name.isEmpty()) {
                                 existingUser.setName(name);
                                 editName.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-                                MainActivity.currentUserData.setName(name);
+                                MainActivityDoctor.currentDoctorData.setName(name);
                             }
 //                            if (!email.isEmpty()) {
 //                                prevEmail = existingUser.getEmail();
@@ -308,34 +272,20 @@ public class UpdateProfile extends AppCompatActivity {
                             if (!password.isEmpty()) {
                                 prevPass = existingUser.getPassword();
                                 existingUser.setPassword(password);
-                                MainActivity.currentUserData.setPassword(password);
+                                MainActivityDoctor.currentDoctorData.setPassword(password);
                                 editPassword.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                                 UpdatePassword(prevPass, password);
                             }
-                            if (!age.isEmpty()) {
-                                existingUser.setAge(age);
-                                MainActivity.currentUserData.setAge(age);
-                                Age.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                            if (!speciality.isEmpty()) {
+                                existingUser.setSpeciality(speciality);
+                                MainActivityDoctor.currentDoctorData.setSpeciality(speciality);
+                                Speciality.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
-                            if (genderSpinner.getSelectedItemPosition() != 0) {
-                                MainActivity.currentUserData.setGender(selectedGender);
-                                existingUser.setGender(selectedGender); // Update gender value with the selected option
-
+                            if (!location.isEmpty() ) {
+                                existingUser.setLocation(location);
+                                MainActivityDoctor.currentDoctorData.setLocation(location);
+                                Location.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
-                            if (bloodGroupSpinner.getSelectedItemPosition() != 0) {
-                                MainActivity.currentUserData.setBloodGroup(selectedBloodGroup);
-                                existingUser.setBloodGroup(selectedBloodGroup); // Update blood group value with the selected option
-
-                            }
-                            if (!weight.isEmpty() ) {
-                                existingUser.setWeight(weight);
-                                MainActivity.currentUserData.setWeight(weight);
-                                Weight.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-                            }
-//                            if (!bloodGroup.isEmpty()) {
-//                                existingUser.setBloodGroup(bloodGroup);
-//                                Blood.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-//                            }
 
                             // Save the updated user data to Firebase
                             userDatabase.child(uid).setValue(existingUser)
@@ -343,10 +293,10 @@ public class UpdateProfile extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(UpdateProfile.this, "Saved Changes", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(UpdateDoctorActivity.this, "Saved Changes", Toast.LENGTH_SHORT).show();
 
                                             } else {
-                                                Toast.makeText(UpdateProfile.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(UpdateDoctorActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
 
                                             }
                                         }
@@ -378,7 +328,7 @@ public class UpdateProfile extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         //password updated
-                                        Toast.makeText(UpdateProfile.this, "Password Updated", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateDoctorActivity.this, "Password Updated", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -386,7 +336,7 @@ public class UpdateProfile extends AppCompatActivity {
                                     public void onFailure(@NonNull Exception e) {
                                         //password failed
 
-                                        Toast.makeText(UpdateProfile.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateDoctorActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                                     }
                                 });
@@ -395,7 +345,7 @@ public class UpdateProfile extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UpdateProfile.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateDoctorActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -420,16 +370,16 @@ public class UpdateProfile extends AppCompatActivity {
                                             if (emailUpdateTask.isSuccessful()) {
                                                 // Email updated successfully and verification email sent
                                                 Log.d(TAG, "Email updated successfully. Verification email sent.");
-                                                Toast.makeText(UpdateProfile.this, "Email updated successfully. Please check your inbox for a verification email.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(UpdateDoctorActivity.this, "Email updated successfully. Please check your inbox for a verification email.", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 Log.e(TAG, "Failed to update email: " + emailUpdateTask.getException().getMessage());
-                                                Toast.makeText(UpdateProfile.this, "Failed to update email: " + emailUpdateTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(UpdateDoctorActivity.this, "Failed to update email: " + emailUpdateTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                         } else {
                             Log.e(TAG, "Re-authentication failed: " + reauthTask.getException().getMessage());
-                            Toast.makeText(UpdateProfile.this, "Re-authentication failed: " + reauthTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateDoctorActivity.this, "Re-authentication failed: " + reauthTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -446,11 +396,11 @@ public class UpdateProfile extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Verification email sent successfully
                             Log.d(TAG, "Email verification sent.");
-                            Toast.makeText(UpdateProfile.this, "Verification email sent. Please check your inbox.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateDoctorActivity.this, "Verification email sent. Please check your inbox.", Toast.LENGTH_SHORT).show();
                         } else {
                             // Log the error message
                             Log.e(TAG, "Failed to send email verification: " + task.getException().getMessage());
-                            Toast.makeText(UpdateProfile.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateDoctorActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

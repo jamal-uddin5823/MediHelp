@@ -1,20 +1,15 @@
 package com.example.medihelp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import android.content.ActivityNotFoundException;
 
 import android.annotation.SuppressLint;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 
 import android.view.View;
 import android.widget.Button;
@@ -28,17 +23,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class Login extends AppCompatActivity {
+public class LoginDoctorActivity extends AppCompatActivity {
 
-    private static final String TAG = "Login";
+    private static final String TAG = "LoginDoctor";
     EditText editTextEmail, editTextPassword;
-    Button buttonLogin,buttonLoginDoc;
+    Button buttonLogin, changeRoleButton;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
 
@@ -55,7 +45,7 @@ public class Login extends AppCompatActivity {
 //        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivityDoctor.class);
             startActivity(intent);
             finish();
         }
@@ -65,18 +55,18 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_doctor);
         Log.d("Hel","Start at login");
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
 //        progressBar = findViewById(R.id.progressBar);
-        buttonLoginDoc = findViewById(R.id.login_doc);
+        changeRoleButton = findViewById(R.id.btnChangeRole);
         textView = findViewById(R.id.signup);
         textViewforgotPass = findViewById(R.id.forgotpass);
 
-        buttonLoginDoc.setOnClickListener(view -> {
+        changeRoleButton.setOnClickListener(view -> {
             Intent intent = new Intent(this,SelectUserTypeActivity.class);
             startActivity(intent);
             finish();
@@ -84,7 +74,7 @@ public class Login extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Signup.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpDoctorActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -111,12 +101,12 @@ public class Login extends AppCompatActivity {
                 password = editTextPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginDoctorActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 else if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginDoctorActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 //                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
@@ -130,16 +120,16 @@ public class Login extends AppCompatActivity {
 //                                progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(Login.this, "Login Successful.",
+                                    Toast.makeText(LoginDoctorActivity.this, "Login Successful.",
                                             Toast.LENGTH_SHORT).show();
 
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent= new Intent(getApplicationContext(), MainActivityDoctor.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     //FIX THIS
-                                    Toast.makeText(Login.this, "Authentication failed",
+                                    Toast.makeText(LoginDoctorActivity.this, "Authentication failed",
                                             Toast.LENGTH_SHORT).show();
 //                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
 //                                    startActivity(intent);

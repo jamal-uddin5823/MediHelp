@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".LoginDoctorActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="50dp"
-                        android:text="Login as Patient"
+                        android:text="Login as Doctor"
                         android:textColor="?attr/textFillColor"
                         android:textSize="35sp"
                         android:textStyle="bold" />
@@ -179,7 +179,7 @@
                 </androidx.appcompat.widget.AppCompatButton>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/login_doc"
+                    android:id="@+id/btnChangeRole"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
