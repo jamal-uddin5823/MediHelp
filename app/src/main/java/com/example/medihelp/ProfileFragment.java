@@ -165,6 +165,7 @@ public class ProfileFragment extends Fragment {
                 Context context = getActivity();
                 FirebaseAuth.getInstance().signOut();
                 MainActivity.currentUserData = null;
+                MainActivityDoctor.currentDoctorData = null;
                 Intent intent = new Intent(context, Login.class);
 
                 Log.d("Hllo","Redreictb=ing to lgin");

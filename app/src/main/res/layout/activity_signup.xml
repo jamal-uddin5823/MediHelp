@@ -120,7 +120,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
                         android:maxLines="1"
-                        android:text="Sign Up"
+                        android:text="Sign Up as Patient"
                         android:textColor="?attr/textFillColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />
@@ -152,6 +152,7 @@
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="10dp"
                         android:hint="Email"
+                        android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:paddingStart="10dp" />
 
@@ -167,6 +168,7 @@
                         android:drawableStart="@drawable/baseline_calendar_month_24"
                         android:drawablePadding="10dp"
                         android:hint="Age"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:paddingStart="10dp" />
 
@@ -182,6 +184,7 @@
                         android:drawableStart="@drawable/baseline_scale_24"
                         android:drawablePadding="10dp"
                         android:hint="Weight"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:paddingStart="10dp" />
 
@@ -270,34 +273,60 @@
             </androidx.cardview.widget.CardView>
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/signin"
-                android:layout_width="160dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="20dp"
-                android:background="@drawable/white_button"
-                android:text="Log in"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.216">
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-            </androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/signin"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_button"
+                    android:text="Log in"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toEndOf="@id/login_doc"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
-                android:id="@+id/progress_signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/signin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/login_doc"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/white_button"
+                    android:text="Back"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <ProgressBar
+                    android:id="@+id/progress_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/signin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

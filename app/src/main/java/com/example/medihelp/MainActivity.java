@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity{
 
     public static String currFragment="Home";
     public static User currentUserData;
+//    public static DoctorData currentDoctorData;
+
     //this is tasnia
 
     @Override
@@ -37,12 +39,6 @@ public class MainActivity extends AppCompatActivity{
             case "home":
                 replaceFragment(new HomeFragment());
                 break;
-//            case "search":
-//                replaceFragment(new SearchFragment());
-//                break;
-//            case "diagnose":
-//                replaceFragment(new DiagnoseFragment());
-//                break;
             case "bookmark":
                 replaceFragment(new BookmarksFragment());
                 break;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateProfile">
+    tools:context=".UpdateDoctorActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -75,19 +75,19 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/cardView2"-->
-<!--                        android:layout_width="100dp"-->
-<!--                        android:layout_height="100dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        app:cardCornerRadius="100dp"-->
-<!--                        app:cardElevation="21dp"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintHorizontal_bias="0.426"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/cardView"-->
-<!--                        app:layout_constraintVertical_bias="0.059">-->
+                    <!--                    <androidx.cardview.widget.CardView-->
+                    <!--                        android:id="@+id/cardView2"-->
+                    <!--                        android:layout_width="100dp"-->
+                    <!--                        android:layout_height="100dp"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        app:cardCornerRadius="100dp"-->
+                    <!--                        app:cardElevation="21dp"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                        app:layout_constraintHorizontal_bias="0.426"-->
+                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/cardView"-->
+                    <!--                        app:layout_constraintVertical_bias="0.059">-->
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -147,61 +147,33 @@
 
 
                     <EditText
-                        android:id="@+id/Age"
+                        android:id="@+id/Speciality"
                         android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/baseline_calendar_month_24"
+                        android:drawableLeft="@drawable/baseline_local_hospital_24"
                         android:gravity="center_vertical"
                         android:drawablePadding="8dp"
-                        android:hint="Age"
+                        android:hint="Speciality"
                         android:padding="8dp"
                         android:textColor="?attr/textFillColor" />
 
 
                     <EditText
-                        android:id="@+id/Weight"
+                        android:id="@+id/Location"
                         android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/baseline_scale_24"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
                         android:drawablePadding="8dp"
-                        android:hint="Weight"
+                        android:hint="Location"
                         android:padding="8dp"
                         android:textColor="?attr/textFillColor" />
-
-                    <Spinner
-                        android:id="@+id/Blood"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/custom_edittext"
-                        android:gravity="center_vertical"
-                        android:hint="Blood Group"
-                        android:textColor="?attr/textFillColor"
-                        android:layout="@layout/custom_spinner"
-                        android:padding="8dp" />
-
-
-                    <Spinner
-                        android:id="@+id/Gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/custom_edittext"
-                        android:gravity="center_vertical"
-                        android:hint="Gender"
-                        android:layout="@layout/custom_spinner"
-                        android:textColor="?attr/textFillColor"
-                        android:padding="8dp"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-
 
 
                     <LinearLayout
@@ -251,21 +223,21 @@
 
 
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        android:layout_marginBottom="32dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBar"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginStart="32dp"-->
+    <!--        android:layout_marginTop="32dp"-->
+    <!--        android:layout_marginEnd="32dp"-->
+    <!--        android:layout_marginBottom="32dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 

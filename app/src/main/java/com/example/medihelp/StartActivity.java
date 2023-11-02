@@ -2,13 +2,11 @@ package com.example.medihelp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,51 +26,62 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         getWindow().setStatusBarColor(getResources().getColor(R.color.primary));
-
         handler = new Handler();
 
-        UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+        Intent intent = getIntent();
+        String role = intent.getStringExtra("role");
 
-        userDataRetrieval.retrieveUserData(user -> {
-            if(MainActivity.currentUserData!=null) {
+        assert role != null;
+        Log.d("HEEEYYY",role);
 
-                new Handler().postDelayed(new Runnable() {
-                    Intent homeIntent;
-                    @Override
-                    public void run() {
-                        Intent onBoardingIntent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(onBoardingIntent);
-                        finish();
-                    }
-                },3000);
+        if(role.equals("patient")) {
+            initPatient();
+        } else if(role.equals("doctor")) {
+            initDoctor();
+        }
 
-//                Intent intent = new Intent(this,MainActivity.class);
-//                startActivity(intent);
-//                finish();
-            } else {
-
-                new Handler().postDelayed(new Runnable() {
-                    Intent homeIntent;
-                    @Override
-                    public void run() {
-                        Intent onBoardingIntent = new Intent(getApplicationContext(), Login.class);
-                        startActivity(onBoardingIntent);
-                        finish();
-                    }
-                },3000);
-
-//                Intent intent = new Intent(this,Login.class);
-//                startActivity(intent);
-//                finish();
-            }
-
-        });
-
-
-        startProgressBar = findViewById(R.id.startProgressBar);
-//        btnGetStarted = findViewById(R.id.btnGetStarted);
-        lottieanim=findViewById(R.id.animation);
-        lottieanim.playAnimation();
+//        UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+//
+//        userDataRetrieval.retrieveUserData(user -> {
+//            if(MainActivity.currentUserData!=null) {
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    Intent homeIntent;
+//                    @Override
+//                    public void run() {
+//                        Intent onBoardingIntent = new Intent(getApplicationContext(), MainActivity.class);
+//                        startActivity(onBoardingIntent);
+//                        finish();
+//                    }
+//                },3000);
+//
+////                Intent intent = new Intent(this,MainActivity.class);
+////                startActivity(intent);
+////                finish();
+//            } else {
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    Intent homeIntent;
+//                    @Override
+//                    public void run() {
+//                        Intent onBoardingIntent = new Intent(getApplicationContext(), Login.class);
+//                        startActivity(onBoardingIntent);
+//                        finish();
+//                    }
+//                },3000);
+//
+////                Intent intent = new Intent(this,Login.class);
+////                startActivity(intent);
+////                finish();
+//            }
+//
+//        });
+//
+//
+//        startProgressBar = findViewById(R.id.startProgressBar);
+////        btnGetStarted = findViewById(R.id.btnGetStarted);
+//        lottieanim=findViewById(R.id.animation);
+//        lottieanim.playAnimation();
 
 //        btnGetStarted.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -88,5 +97,101 @@ public class StartActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void initPatient() {
+        UserDataRetrieval userDataRetrieval = new UserDataRetrieval();
+
+        userDataRetrieval.retrieveUserData(user -> {
+            MainActivityDoctor.currentDoctorData=null;
+            if(MainActivity.currentUserData !=null) {
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        onBoardingIntent.putExtra("role","patient");
+                        startActivity(onBoardingIntent);
+//                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
+            } else {
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), Login.class);
+                        onBoardingIntent.putExtra("role","patient");
+                        startActivity(onBoardingIntent);
+//                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,Login.class);
+//                startActivity(intent);
+//                finish();
+            }
+
+        });
+
+
+        startProgressBar = findViewById(R.id.startProgressBar);
+//        btnGetStarted = findViewById(R.id.btnGetStarted);
+        lottieanim=findViewById(R.id.animation);
+        lottieanim.playAnimation();
+    }
+
+    private void initDoctor() {
+        DoctorDataRetrieval doctorDataRetrieval = new DoctorDataRetrieval();
+
+        doctorDataRetrieval.retrieveDoctorData(user -> {
+            MainActivity.currentUserData=null;
+            if(MainActivityDoctor.currentDoctorData!=null) {
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), MainActivityDoctor.class);
+                        onBoardingIntent.putExtra("role","doctor");
+                        startActivity(onBoardingIntent);
+//                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
+            } else {
+
+                new Handler().postDelayed(new Runnable() {
+                    Intent homeIntent;
+                    @Override
+                    public void run() {
+                        Intent onBoardingIntent = new Intent(getApplicationContext(), LoginDoctorActivity.class);
+                        onBoardingIntent.putExtra("role","doctor");
+                        startActivity(onBoardingIntent);
+//                        finish();
+                    }
+                },3000);
+
+//                Intent intent = new Intent(this,Login.class);
+//                startActivity(intent);
+//                finish();
+            }
+
+        });
+
+
+        startProgressBar = findViewById(R.id.startProgressBar);
+//        btnGetStarted = findViewById(R.id.btnGetStarted);
+        lottieanim=findViewById(R.id.animation);
+        lottieanim.playAnimation();
     }
 }
