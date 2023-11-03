@@ -221,37 +221,30 @@ public class SignUpDoctorActivity extends AppCompatActivity {
     }
 
     private void createUserAccount(String speciality, String location) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        // Verification email sent
-                        mAuth.getCurrentUser().sendEmailVerification()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        // Verification email sent successfully
-                                        Toast.makeText(SignUpDoctorActivity.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // Handle the error
-                                        Toast.makeText(SignUpDoctorActivity.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
-                                    }
-                                });
 
-                        updateUserInfo(speciality, location);
-                    }
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    // User account created successfully
+                    sendVerificationEmail( speciality,location);
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
-                        Toast.makeText(SignUpDoctorActivity.this, "Hello: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
+                    Toast.makeText(SignUpDoctorActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void sendVerificationEmail(String speciality, String location) {
+        mAuth.getCurrentUser().sendEmailVerification()
+                .addOnSuccessListener(unused -> {
+                    // Verification email sent successfully
+                    Toast.makeText(SignUpDoctorActivity.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+
+                    updateUserInfo(speciality, location);
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error
+                    Toast.makeText(SignUpDoctorActivity.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
                 });
     }
 
@@ -293,9 +286,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
                         public void onSuccess(Void unused) {
 //                            progress_signup.dismiss();
                             Toast.makeText(SignUpDoctorActivity.this, "Account Created...", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivityDoctor.class);
-                            startActivity(intent);
-                            finish();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

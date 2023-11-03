@@ -46,7 +46,7 @@ public class Signup extends AppCompatActivity {
     private Button buttonLoginDoc;
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
-//    private ProgressDialog progress_signup;
+    //    private ProgressDialog progress_signup;
     private Spinner bloodGroupSpinner, genderSpinner;
     ImageView ivSignUp;
 
@@ -81,7 +81,7 @@ public class Signup extends AppCompatActivity {
         editAge = findViewById(R.id.editAge);
         editWeight = findViewById(R.id.editWeight);
         buttonSignup = findViewById(R.id.signup);
-        buttonSign_in = findViewById(R.id.signin);
+        buttonSign_in = findViewById(R.id.sign_in);
         buttonLoginDoc = findViewById(R.id.login_doc);
 
 
@@ -122,6 +122,7 @@ public class Signup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validateData();
+
             }
         });
 
@@ -186,7 +187,7 @@ public class Signup extends AppCompatActivity {
             databaseReference.child("users").child(userId).child("profileImageUrl").setValue(imageUrl)
                     .addOnSuccessListener(aVoid -> {
                         // Image URL saved successfully
-                        Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
                         // Handle the error
@@ -249,93 +250,83 @@ public class Signup extends AppCompatActivity {
 
     private void createUserAccount(String age, String weight, String gender, String bloodGroup) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        // Verification email sent
-                        mAuth.getCurrentUser().sendEmailVerification()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        // Verification email sent successfully
-                                        Toast.makeText(Signup.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // Handle the error
-                                        Toast.makeText(Signup.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
-                                    }
-                                });
-
-                        updateUserInfo(age, weight, gender, bloodGroup);
-                    }
+                .addOnSuccessListener(authResult -> {
+                    // User account created successfully
+                    sendVerificationEmail();
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
-                        Toast.makeText(Signup.this, "Hello: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
+                    Toast.makeText(Signup.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void sendVerificationEmail() {
+        mAuth.getCurrentUser().sendEmailVerification()
+                .addOnSuccessListener(unused -> {
+                    // Verification email sent successfully
+                    Toast.makeText(Signup.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+
+                    updateUserInfo(age, weight, gender, bloodGroup);
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error
+                    Toast.makeText(Signup.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
                 });
     }
 
 
+
     private void updateUserInfo(String age, String weight, String gender, String bloodGroup) {
 //        progress_signup.setMessage("Saving User Info...");
-        long timestamp = System.currentTimeMillis();
 
         String uid = mAuth.getUid();
 
         if(selectedImageUri!=null) {
 
+
+            uploadImageToFirebaseStorage(selectedImageUri, imageUrl -> {
+                myuser = new User(username, email, password);
+
+
+                // Setup data to add in db
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("uid", uid);
+                hashMap.put("email", email);
+                hashMap.put("name", username);
+                hashMap.put("password", password);
+                hashMap.put("age", age);
+                hashMap.put("gender", gender);
+                hashMap.put("bloodGroup", bloodGroup);
+                hashMap.put("weight", weight);
+                hashMap.put("picture", imageUrl);
+                hashMap.put("userType", "user");
+
+                // Setup data to db
+
+                userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+                userDatabase.child(uid)
+                        .setValue(hashMap)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+//                            progress_signup.dismiss();
+                                Log.d("Lubaina", "Very sad");
+                                //Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+//                            progress_signup.dismiss();
+                                Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
+                            }
+                        });
+            });
         }
-        uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
-            myuser=new User(username,email,password);
-
-
-            // Setup data to add in db
-
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("uid", uid);
-            hashMap.put("email", email);
-            hashMap.put("name", username);
-            hashMap.put("password",password);
-            hashMap.put("profileImage", "");
-            hashMap.put("age",age);
-            hashMap.put("gender",gender);
-            hashMap.put("bloodGroup",bloodGroup);
-            hashMap.put("weight",weight);
-            hashMap.put("picture",imageUrl);
-            hashMap.put("userType", "user");
-            hashMap.put("timestamp", timestamp);
-
-            // Setup data to db
-
-            userDatabase = FirebaseDatabase.getInstance().getReference("Users");
-            userDatabase.child(uid)
-                    .setValue(hashMap)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-//                            progress_signup.dismiss();
-                            Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-//                            progress_signup.dismiss();
-                            Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
-                        }
-                    });
-        });
 
 
     }
