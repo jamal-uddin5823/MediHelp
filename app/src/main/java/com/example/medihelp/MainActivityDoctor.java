@@ -49,6 +49,7 @@ public class MainActivityDoctor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_doctor);
+//        finish();
 
         Log.d(TAG,"CREATEDDDDDDDD");
 
@@ -150,6 +151,12 @@ public class MainActivityDoctor extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 
     void showName(TextView textView) {

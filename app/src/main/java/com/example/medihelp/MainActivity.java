@@ -26,9 +26,12 @@ public class MainActivity extends AppCompatActivity{
 
     //this is tasnia
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        finish();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -108,6 +111,12 @@ public class MainActivity extends AppCompatActivity{
 
         // Handle configuration change if needed
         // You can update your UI accordingly for landscape or portrait mode
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 
     public boolean isProfileFragmentVisible() {

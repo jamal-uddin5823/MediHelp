@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
+
 //        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         imgProfileHome = view.findViewById(R.id.imgProfileHome);
 

@@ -172,32 +172,40 @@ public class SearchActivity extends AppCompatActivity {
                                 for (DataSnapshot snap1 : nameResults) {
                                     for (DataSnapshot snap2 : specialityResults) {
                                         for (DataSnapshot snap3 : locationResults) {
-                                            long a = snap1.child("ID").getValue(Long.class);
-                                            long b = snap2.child("ID").getValue(Long.class);
-                                            long c = snap3.child("ID").getValue(Long.class);
-                                            if ((a == b) && (b == c)) {
-                                                Log.d(TAG, a + " " + b + " " + c);
-                                                Doctor doctor = snap1.getValue(Doctor.class);
-                                                if (doctor != null) {
-                                                    doctor.setID(snap1.child("ID").getValue(Long.class));
-                                                    String name = capitalizeEachWord(snap1.child("name").getValue(String.class));
-                                                    doctor.setName("Dr. " + name);
-                                                    String speciality = capitalizeEachWord(snap1.child("speciality").getValue(String.class));
-                                                    doctor.setSpeciality(speciality);
-                                                    String location = capitalizeEachWord(snap1.child("location").getValue(String.class));
-                                                    doctor.setLocation(location);
-                                                    doctor.setContact(snap1.child("contact").getValue(String.class));
-                                                    Log.d(TAG, "Doctor ID: " + doctor.getID());
-                                                    Log.d(TAG, "Doctor Name: " + doctor.getName());
-                                                    Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
-                                                    Log.d(TAG, "Doctor Location: " + doctor.getLocation());
-                                                    Log.d(TAG, "Doctor Contact: " + doctor.getContact());
+                                            Long aLong = snap1.child("ID").getValue(Long.class);
+                                            Long bLong = snap2.child("ID").getValue(Long.class);
+                                            Long cLong = snap3.child("ID").getValue(Long.class);
 
-                                                    doctorsList.add(doctor);
-                                                } else {
-                                                    Log.w(TAG, "Doctor is null for snapshot: " + snap1.getKey());
+                                            if(aLong!=null && bLong!=null && cLong!=null) {
+                                                long a = aLong;
+                                                long b = bLong;
+                                                long c = cLong;
+
+                                                if ((a == b) && (b == c)) {
+                                                    Log.d(TAG, a + " " + b + " " + c);
+                                                    Doctor doctor = snap1.getValue(Doctor.class);
+                                                    if (doctor != null) {
+                                                        doctor.setID(snap1.child("ID").getValue(Long.class));
+                                                        String name = capitalizeEachWord(snap1.child("name").getValue(String.class));
+                                                        doctor.setName("Dr. " + name);
+                                                        String speciality = capitalizeEachWord(snap1.child("speciality").getValue(String.class));
+                                                        doctor.setSpeciality(speciality);
+                                                        String location = capitalizeEachWord(snap1.child("location").getValue(String.class));
+                                                        doctor.setLocation(location);
+                                                        doctor.setContact(snap1.child("contact").getValue(String.class));
+                                                        Log.d(TAG, "Doctor ID: " + doctor.getID());
+                                                        Log.d(TAG, "Doctor Name: " + doctor.getName());
+                                                        Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
+                                                        Log.d(TAG, "Doctor Location: " + doctor.getLocation());
+                                                        Log.d(TAG, "Doctor Contact: " + doctor.getContact());
+
+                                                        doctorsList.add(doctor);
+                                                    } else {
+                                                        Log.w(TAG, "Doctor is null for snapshot: " + snap1.getKey());
+                                                    }
                                                 }
                                             }
+
                                         }
                                     }
                                 }
