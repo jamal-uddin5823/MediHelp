@@ -100,6 +100,7 @@
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="10dp"
+                        android:inputType="textEmailAddress"
                         android:hint="Email"
                         android:paddingStart="10dp" />
 
@@ -172,9 +173,10 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintHorizontal_bias="0.235"
                     app:layout_constraintStart_toEndOf="@id/login_doc"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
                 </androidx.appcompat.widget.AppCompatButton>
 

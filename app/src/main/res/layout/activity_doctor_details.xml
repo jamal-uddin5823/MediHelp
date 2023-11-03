@@ -182,7 +182,16 @@
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
+                        <TextView
+                            android:id="@+id/editContact"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:drawablePadding="8dp"
+                            android:textAlignment="textEnd"
+                            android:padding="8dp"
+                            android:textColor="?attr/textFillColor"
+                            app:drawableLeftCompat="@drawable/baseline_call_24" />
 
                         <TextView
                             android:id="@+id/editSpeciality"

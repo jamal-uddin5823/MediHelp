@@ -43,7 +43,7 @@ public class MainActivityDoctor extends AppCompatActivity {
     ImageView imgProfileFrag;
 
 
-    public static DoctorData currentDoctorData;
+    public static Doctor currentDoctorData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class MainActivityDoctor extends AppCompatActivity {
 
             doctorDataRetrieval.retrieveDoctorData(new DoctorDataRetrieval.OnDoctorDataReceivedListener() {
                 @Override
-                public void onDoctorReceived(DoctorData user) {
+                public void onDoctorReceived(Doctor user) {
                     if (user != null) {
                         // The user object contains the current user's data
                         String userName = user.getName();

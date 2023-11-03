@@ -1,5 +1,6 @@
 package com.example.medihelp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +53,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Log.d(TAG, "onBindViewHolder called for position: " + position);
         Doctor doctor = doctors.get(position);
         if (doctor != null) {
             holder.Doc_name.setText(doctor.getName());
             holder.Speciality.setText(doctor.getSpeciality());
             holder.Location.setText(doctor.getLocation());
+            Picasso.get()
+                    .load(doctor.getPicture())
+                    .placeholder(R.drawable.ic_baseline_profile_36) // Replace with your placeholder image
+                    .error(R.drawable.ic_baseline_profile_36) // Replace with an error image
+                    .into(holder.imgDoc);
+
+            Log.d(TAG,"PICTUREEEEE= "+doctor.getPicture());
 
         } else {
             Log.e(TAG, "Doctor is null at position: " + position);

@@ -32,7 +32,7 @@ public class DoctorDataRetrieval {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        MainActivityDoctor.currentDoctorData = dataSnapshot.getValue(DoctorData.class);
+                        MainActivityDoctor.currentDoctorData = dataSnapshot.getValue(Doctor.class);
                         listener.onDoctorReceived(MainActivityDoctor.currentDoctorData);
                     } else {
                         listener.onDoctorReceived(null); // User not found
@@ -52,6 +52,6 @@ public class DoctorDataRetrieval {
     }
 
     public interface OnDoctorDataReceivedListener {
-        void onDoctorReceived(DoctorData doctorData);
+        void onDoctorReceived(Doctor doctorData);
     }
 }

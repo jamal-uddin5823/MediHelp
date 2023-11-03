@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = Doctor.class, exportSchema = false,version = 1)
+@Database(entities = Doctor.class, exportSchema = false,version = 2)
 public abstract class RoomDatabaseHelper extends RoomDatabase {
     private static final String DB_NAME = "bookmarkeddoc";
 

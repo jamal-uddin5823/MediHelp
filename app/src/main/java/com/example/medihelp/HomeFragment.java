@@ -132,11 +132,14 @@ public class HomeFragment extends Fragment {
                         String location= capitalizeEachWord(snapshot.child("location").getValue(String.class));
                         doctor.setLocation(location);
                         doctor.setContact(snapshot.child("contact").getValue(String.class));
+                        String picture = snapshot.child("picture").getValue(String.class);
+                        doctor.setPicture(picture);
                         Log.d(TAG, "Doctor ID: " + doctor.getID());
                         Log.d(TAG, "Doctor Name: " + doctor.getName());
                         Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
                         Log.d(TAG, "Doctor Location: " + doctor.getLocation());
                         Log.d(TAG, "Doctor Contact: " + doctor.getContact());
+                        Log.d(TAG,"Doc pic: "+doctor.getPicture());
 
                         doctorsList.add(doctor);
                     } else {
@@ -189,7 +192,11 @@ public class HomeFragment extends Fragment {
                         String imageUrl = user.getPicture();
                         String userEmail = user.getEmail();
                         textView.setText("Welcome \n" +userName );
-                        Picasso.get().load(imageUrl).into(imgProfileHome);
+                        Picasso.get()
+                                .load(user.getPicture())
+                                .placeholder(R.drawable.ic_baseline_profile_36) // Replace with your placeholder image
+                                .error(R.drawable.ic_baseline_profile_36) // Replace with an error image
+                                .into(imgProfileHome);
 //                        Log.d(TAG, "onUserReceived: " +userName);
                         // ... and so on
                     } else {

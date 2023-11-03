@@ -29,7 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 
 public class SignUpDoctorActivity extends AppCompatActivity {
-    private EditText name, editTextEmail, editTextPassword, confirmPassword, editSpeciality, editLocation;
+    private EditText name, editTextEmail, editTextPassword, confirmPassword, editSpeciality, editLocation, editContact;
     private Button buttonSignup;
     private Button buttonSign_in;
     private Button btnChangeRole;
@@ -43,7 +43,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("message");
 
 
-    public static DoctorData myuser;
+    public static Doctor myuser;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri = null;
 
@@ -68,6 +68,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         confirmPassword = findViewById(R.id.confirmpassword);
         editSpeciality = findViewById(R.id.editSpeciality);
         editLocation = findViewById(R.id.editLocation);
+        editContact = findViewById(R.id.editContact);
         buttonSignup = findViewById(R.id.signup);
         buttonSign_in = findViewById(R.id.signin);
         btnChangeRole = findViewById(R.id.btnChangeRole);
@@ -160,7 +161,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
             // Save the image URL under the current user's node
-            databaseReference.child("doctors").child(userId).child("profileImageUrl").setValue(imageUrl)
+            databaseReference.child("Doctors").child(userId).child("picture").setValue(imageUrl)
                     .addOnSuccessListener(aVoid -> {
                         // Image URL saved successfully
                         Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
@@ -178,12 +179,13 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
 
 
-    private String username="", email="",password="", ConfirmPassword="",speciality="",location="";
+    private String username="", email="",password="", ConfirmPassword="",speciality="",location="",contact="";
     private void validateData(){
         email=editTextEmail.getText().toString().trim();
         password=editTextPassword.getText().toString().trim();
         speciality = editSpeciality.getText().toString().trim();
         location = editLocation.getText().toString().trim();
+        contact = editContact.getText().toString().trim();
         username=name.getText().toString().trim();
         ConfirmPassword=confirmPassword.getText().toString().trim();
         //validate data
@@ -199,6 +201,9 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         }
         else if(TextUtils.isEmpty(location)){
             Toast.makeText(this,"Enter Location",Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(contact)){
+            Toast.makeText(this,"Enter Contact no",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Enter Password",Toast.LENGTH_SHORT).show();
@@ -266,7 +271,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
         }
         uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
-            myuser=new DoctorData(username,email,password);
+            myuser=new Doctor(username,email,password);
 
 
             // Setup data to add in db
@@ -276,9 +281,10 @@ public class SignUpDoctorActivity extends AppCompatActivity {
             hashMap.put("email", email);
             hashMap.put("name", username);
             hashMap.put("password",password);
-            hashMap.put("profileImage", "");
+//            hashMap.put("profileImage", "");
             hashMap.put("speciality",speciality);
             hashMap.put("location",location);
+            hashMap.put("contact",contact);
             hashMap.put("picture",imageUrl);
             hashMap.put("userType", "doctor");
             hashMap.put("timestamp", timestamp);
@@ -309,5 +315,12 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LoginDoctorActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

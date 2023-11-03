@@ -53,6 +53,7 @@ public class UpdateProfile extends AppCompatActivity {
 
     private String prevPass, prevEmail;
     private static final int PICK_IMAGE_REQUEST = 1;
+    private Uri selectedImageUri = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,9 +169,10 @@ public class UpdateProfile extends AppCompatActivity {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             // The user selected an image
-            Uri selectedImageUri = data.getData();
+            selectedImageUri = data.getData();
             // Now, you can proceed with the image upload process to Firebase Storage.
-            uploadImageToFirebase(selectedImageUri);
+            ivSelectImage.setImageURI(selectedImageUri);
+//            uploadImageToFirebase(selectedImageUri);
         }
     }
 
@@ -272,7 +274,7 @@ public class UpdateProfile extends AppCompatActivity {
 
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0) {
+        if (!name.isEmpty() || !password.isEmpty() || !age.isEmpty() || !weight.isEmpty() || genderSpinner.getSelectedItemPosition() != 0 ||  bloodGroupSpinner.getSelectedItemPosition() != 0 || selectedImageUri!=null) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -281,6 +283,7 @@ public class UpdateProfile extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 String uid = currentUser.getUid();
+                uploadImageToFirebase(selectedImageUri);
 
 
                 // Fetch the existing user data from Firebase

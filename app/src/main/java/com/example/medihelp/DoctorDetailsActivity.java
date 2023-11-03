@@ -156,7 +156,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        DoctorData doctorData = dataSnapshot.getValue(DoctorData.class);
+                        Doctor doctorData = dataSnapshot.getValue(Doctor.class);
 
                         if (doctorData != null) {
                             String nameUser = doctorData.getName();

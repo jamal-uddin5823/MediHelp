@@ -82,9 +82,8 @@
                         android:id="@+id/ivSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:tint="@color/white"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/baseline_person_add_24" />
+                        android:src="@drawable/baseline_person_add_white_24" />
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

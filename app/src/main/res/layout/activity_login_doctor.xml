@@ -100,6 +100,7 @@
                         android:background="@drawable/edit_textbg"
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="10dp"
+                        android:inputType="textEmailAddress"
                         android:hint="Email"
                         android:paddingStart="10dp" />
 
@@ -166,6 +167,7 @@
                     android:id="@+id/signup"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
                     android:background="@drawable/white_button"
                     android:text="Sign up"
                     android:textColor="@color/white"
@@ -174,7 +176,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toEndOf="@id/login_doc"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
                 </androidx.appcompat.widget.AppCompatButton>
 
@@ -182,7 +185,7 @@
                     android:id="@+id/btnChangeRole"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="32dp"
                     android:background="@drawable/white_button"
                     android:text="Back"
                     android:textColor="@color/white"

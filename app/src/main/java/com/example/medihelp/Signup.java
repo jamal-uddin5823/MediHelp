@@ -162,6 +162,7 @@ public class Signup extends AppCompatActivity {
                     imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         // Save the image URL in the Realtime Database
                         String imageUrl = uri.toString();
+//                        Picasso.get().load(imageUrl).into(ivSignUp);
                         saveImageUrlToDatabase(imageUrl);
 
                         // Pass the image URL back to the caller
@@ -303,7 +304,7 @@ public class Signup extends AppCompatActivity {
             hashMap.put("email", email);
             hashMap.put("name", username);
             hashMap.put("password",password);
-            hashMap.put("profileImage", "");
+//            hashMap.put("profileImage", "");
             hashMap.put("age",age);
             hashMap.put("gender",gender);
             hashMap.put("bloodGroup",bloodGroup);
@@ -338,5 +339,12 @@ public class Signup extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,Login.class);
+        startActivity(intent);
+        finish();
     }
 }

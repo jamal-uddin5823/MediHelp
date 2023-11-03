@@ -141,4 +141,11 @@ public class LoginDoctorActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,SelectUserTypeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

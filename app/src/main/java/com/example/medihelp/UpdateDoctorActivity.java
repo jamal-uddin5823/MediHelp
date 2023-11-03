@@ -44,7 +44,7 @@ public class UpdateDoctorActivity extends AppCompatActivity {
     private DatabaseReference userDatabase;
 
     // UI components
-    private EditText editName, editPassword, Speciality, Location;
+    private EditText editName, editPassword, Speciality, Location,editContact;
     private Button saveButton, backButton;
     ImageView ivSelectImage;
     private ProgressBar progressBar;
@@ -69,6 +69,7 @@ public class UpdateDoctorActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
         Speciality = findViewById(R.id.Speciality);
         Location = findViewById(R.id.Location);
+        editContact = findViewById(R.id.Contact);
         saveButton = findViewById(R.id.SaveButton);
         backButton = findViewById(R.id.backButton);
         ivSelectImage = findViewById(R.id.ivSelectImage);
@@ -83,14 +84,15 @@ public class UpdateDoctorActivity extends AppCompatActivity {
             editPassword.setText(MainActivityDoctor.currentDoctorData.getPassword());
             Speciality.setText(MainActivityDoctor.currentDoctorData.getSpeciality());
             Location.setText(MainActivityDoctor.currentDoctorData.getLocation());
+            editContact.setText(MainActivityDoctor.currentDoctorData.getContact());
         }
 
 
 
 
         String imageUrl=null;
-        if(MainActivity.currentUserData!=null)
-            imageUrl = MainActivity.currentUserData.getPicture(); // Replace with the actual method or key to access the image URL
+        if(MainActivityDoctor.currentDoctorData!=null)
+            imageUrl = MainActivityDoctor.currentDoctorData.getPicture(); // Replace with the actual method or key to access the image URL
         if(imageUrl!=null) {
             Picasso.get().load(imageUrl).into(ivSelectImage);
         }
@@ -176,7 +178,7 @@ public class UpdateDoctorActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        DoctorData existingUser = dataSnapshot.getValue(DoctorData.class);
+                                        Doctor existingUser = dataSnapshot.getValue(Doctor.class);
 
                                         if (!imageUrl.isEmpty()) {
                                             existingUser.setPicture(imageUrl);
@@ -222,12 +224,10 @@ public class UpdateDoctorActivity extends AppCompatActivity {
     private void saveProfileData() {
         // Retrieve user input
         String name = editName.getText().toString().trim();
-//        String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String speciality = Speciality.getText().toString().trim();
-        // String gender = Gender.getText().toString().trim();
         String location = Location.getText().toString().trim();
-        //  String bloodGroup = Blood.getText().toString().trim();
+        String contact = editContact.getText().toString().trim();
 
 
 
@@ -236,7 +236,7 @@ public class UpdateDoctorActivity extends AppCompatActivity {
 
 
         // Check if any of the fields have non-empty values
-        if (!name.isEmpty() || !password.isEmpty() || !speciality.isEmpty() || !location.isEmpty()) {
+        if (!name.isEmpty() || !password.isEmpty() || !speciality.isEmpty() || !location.isEmpty() || !contact.isEmpty()) {
             // At least one field has a non-empty value, so we can proceed to update the profile
 
             // Validate user input (add your own validation logic)
@@ -252,7 +252,7 @@ public class UpdateDoctorActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            DoctorData existingUser = dataSnapshot.getValue(DoctorData.class);
+                            Doctor existingUser = dataSnapshot.getValue(Doctor.class);
 
                             // Update the fields with non-empty values and change text color to black
                             if (!name.isEmpty()) {
@@ -260,15 +260,6 @@ public class UpdateDoctorActivity extends AppCompatActivity {
                                 editName.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                                 MainActivityDoctor.currentDoctorData.setName(name);
                             }
-//                            if (!email.isEmpty()) {
-//                                prevEmail = existingUser.getEmail();
-//                                prevPass = existingUser.getPassword();
-//                                UpdateEmail(prevPass,  email);
-//                                existingUser.setEmail(email);
-//                                MainActivity.currentUserData.setEmail(email);
-//                                editEmail.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-//
-//                            }
                             if (!password.isEmpty()) {
                                 prevPass = existingUser.getPassword();
                                 existingUser.setPassword(password);
@@ -285,6 +276,11 @@ public class UpdateDoctorActivity extends AppCompatActivity {
                                 existingUser.setLocation(location);
                                 MainActivityDoctor.currentDoctorData.setLocation(location);
                                 Location.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                            }
+                            if (!contact.isEmpty() ) {
+                                existingUser.setContact(contact);
+                                MainActivityDoctor.currentDoctorData.setContact(contact);
+                                editContact.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
                             }
 
                             // Save the updated user data to Firebase

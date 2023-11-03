@@ -18,6 +18,11 @@ public class Doctor {
     @ColumnInfo(name = "contact")
     private String contact;
 
+    private String picture;
+
+    private String email;
+    private String password;
+
     public Doctor(Long ID, String name, String speciality, String location, String contact) {
         this.ID = ID;
         this.name = name;
@@ -27,11 +32,19 @@ public class Doctor {
     }
 
     @Ignore
-    public Doctor(String name, String speciality, String location, String contact) {
+    public Doctor(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    @Ignore
+    public Doctor(String name, String speciality, String location, String contact, String picture) {
         this.name = name;
         this.speciality = speciality;
         this.location = location;
         this.contact = contact;
+        this.picture = picture;
     }
     public Doctor() {
     }
@@ -74,5 +87,29 @@ public class Doctor {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

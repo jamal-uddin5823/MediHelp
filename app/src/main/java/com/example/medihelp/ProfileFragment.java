@@ -203,7 +203,11 @@ public class ProfileFragment extends Fragment {
                         textView.setText(userName);
                         Log.d(TAG, "onUserReceived: " +userName);
                         String imageUrl = user.getPicture();
-                        Picasso.get().load(imageUrl).into(imgProfileFrag);
+                        Picasso.get()
+                                .load(imageUrl)
+                                .placeholder(R.drawable.ic_baseline_profile_36) // Replace with your placeholder image
+                                .error(R.drawable.ic_baseline_profile_36) // Replace with an error image
+                                .into(imgProfileFrag);
                         // ... and so on
                     } else {
                         // Handle the case where the user is not found or not authenticated

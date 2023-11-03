@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static String currFragment="Home";
     public static User currentUserData;
-//    public static DoctorData currentDoctorData;
+//    public static Doctor currentDoctorData;
 
     //this is tasnia
 
