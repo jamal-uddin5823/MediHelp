@@ -318,7 +318,7 @@ public class Signup extends AppCompatActivity {
 //                                finish();
 //                            progress_signup.dismiss();
 //                                Log.d("Lubaina", "Very sad");
-                                //Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
 
                             }
                         })
