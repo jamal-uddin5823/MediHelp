@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class DoctorDetailsActivity extends AppCompatActivity {
-    TextView profileName, profileEmail, profilePassword;
+    TextView profileName, profileEmail, profilePassword,editContact;
 
     TextView profileSpeciality, profileLocation;
     Button back,update;
@@ -45,6 +45,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         profileName = findViewById(R.id.editName);
         profileEmail = findViewById(R.id.editEmail);
         profilePassword = findViewById(R.id.editPassword);
+        editContact = findViewById(R.id.editContact);
 
 //        progressBar = findViewById(R.id.progressBar);
 
@@ -134,12 +135,12 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         });
 
         TextView profile = findViewById(R.id.textView4);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Log.d("EIIIIIIIIIIIIIIIII", "onClick: ALUEEEEEEEEEEEEEEE");
-            }
-        });
+//        profile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Log.d("EIIIIIIIIIIIIIIIII", "onClick: ALUEEEEEEEEEEEEEEE");
+//            }
+//        });
     }
 
 
@@ -149,28 +150,50 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
 //        progressBar.setVisibility(View.VISIBLE); // Show the ProgressBar
 
-        if(MainActivityDoctor.currentDoctorData==null) {
             String uid = firebaseUser.getUid();
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Doctors").child(uid);
+
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        Doctor doctorData = dataSnapshot.getValue(Doctor.class);
+                        User userData = dataSnapshot.getValue(User.class);
 
-                        if (doctorData != null) {
-                            String nameUser = doctorData.getName();
-                            String emailUser = doctorData.getEmail();
-                            String passwordUser = doctorData.getPassword();
-                            String speciality= doctorData.getSpeciality();
-                            String location = doctorData.getLocation();
-                            String imageUrl = doctorData.getPicture();
+                        if (userData != null) {
+                            String nameUser = userData.getName();
+                            String emailUser = userData.getEmail();
+                            String passwordUser = userData.getPassword();
+                            String imageUrl = userData.getPicture();
+
+                            DatabaseReference doctorRef = FirebaseDatabase.getInstance().getReference("Doctors").child(userData.getDoctorId());
+                            doctorRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()) {
+                                        Doctor doctorData = snapshot.getValue(Doctor.class);
+
+                                        if(doctorData!=null) {
+                                            String speciality= doctorData.getSpeciality();
+                                            String location = doctorData.getLocation();
+                                            String contact = doctorData.getContact();
+
+                                            profileLocation.setText(location);
+                                            editContact.setText(contact);
+                                            profileSpeciality.setText(speciality);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                             profileName.setText(nameUser);
                             profileEmail.setText(emailUser);
                             profilePassword.setText(passwordUser);
-                            profileLocation.setText(location);
-
-                            DoctorDetailsActivity.this.profileSpeciality.setText(speciality);
                             Picasso.get().load(imageUrl).into(imgProfile);
                         }
                     }
@@ -188,28 +211,10 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
-            profileName.setText(MainActivityDoctor.currentDoctorData.getName());
-            profileEmail.setText(MainActivityDoctor.currentDoctorData.getEmail());
-            profilePassword.setText(MainActivityDoctor.currentDoctorData.getPassword());
-            profileSpeciality.setText(MainActivityDoctor.currentDoctorData.getSpeciality());
-            profileLocation.setText(MainActivityDoctor.currentDoctorData.getLocation());
-            if(MainActivityDoctor.currentDoctorData!=null) {
-                String imageUrl = MainActivityDoctor.currentDoctorData  .getPicture(); // Replace with the actual method or key to access the image URL
-                if(imageUrl!=null) {
-                    Picasso.get().load(imageUrl).into(imgProfile);
-                }
-            }
-
-        }
-
 
 
 
     }
-
-
-
 
 
 

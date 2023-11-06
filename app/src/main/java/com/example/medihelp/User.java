@@ -2,20 +2,17 @@ package com.example.medihelp;
 
 public class User {
 
-    private String name, email, password, age, weight, BloodGroup,gender, picture;
-
-    private boolean isDoctor;
+    private String name, email, password, age, weight, BloodGroup,gender, picture,userType,doctorId;
 
 
     public User() {
-        this.isDoctor=false;
     }
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.isDoctor=false;
+        this.doctorId = null;
     }
 
     public User(String name, String email, String password, String age, String weight, String bloodGroup, String gender, String picture) {
@@ -27,7 +24,8 @@ public class User {
         BloodGroup = bloodGroup;
         this.gender = gender;
         this.picture = picture;
-        this.isDoctor=false;
+        this.userType = "user";
+        this.doctorId = null;
     }
 
     public User(String name, String email, String age, String gender, String weight, String BloodGroup) {
@@ -37,7 +35,8 @@ public class User {
         this.gender = gender;
         this.weight = weight;
         this.BloodGroup = BloodGroup;
-        this.isDoctor=false;
+        this.userType = "user";
+        this.doctorId = null;
     }
 
     public String getName() {
@@ -104,7 +103,20 @@ public class User {
         this.picture = picture;
     }
 
-    public boolean getDoctorStatus() { return isDoctor;}
 
-    public void setDoctorStatus(boolean doctor) { isDoctor = doctor;}
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
 }

@@ -138,6 +138,9 @@ public class SearchActivity extends AppCompatActivity {
         Query nameQuery = searchReference.orderByChild("name").startAt(startname).endAt(endname);
         Query specialityQuery = searchReference.orderByChild("speciality").startAt(startspeciality).endAt(endspeciality);
         Query locationQuery = searchReference.orderByChild("location").startAt(startlocation).endAt(endlocation);
+        Set<DataSnapshot> nameResults = new HashSet<>();
+        Set<DataSnapshot> specialityResults = new HashSet<>();
+        Set<DataSnapshot> locationResults = new HashSet<>();
 
         nameQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -146,6 +149,7 @@ public class SearchActivity extends AppCompatActivity {
                 Set<DataSnapshot> nameResults = new HashSet<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     nameResults.add(snapshot);
+                    Log.d(TAG, "onDataChange: "+snapshot.toString());
                     Log.d(TAG, "namecount " + nameResults.size());
                 }
 
@@ -166,26 +170,27 @@ public class SearchActivity extends AppCompatActivity {
                                 Set<DataSnapshot> locationResults = new HashSet<>();
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     locationResults.add(snapshot);
-                                    Log.d(TAG, "locacount " + locationResults.size());
+                                    Log.d(TAG, "localcount " + locationResults.size());
                                 }
 
                                 for (DataSnapshot snap1 : nameResults) {
                                     for (DataSnapshot snap2 : specialityResults) {
                                         for (DataSnapshot snap3 : locationResults) {
-                                            Long aLong = snap1.child("ID").getValue(Long.class);
-                                            Long bLong = snap2.child("ID").getValue(Long.class);
-                                            Long cLong = snap3.child("ID").getValue(Long.class);
+                                            String a = snap1.child("ID").getValue(String.class);
+                                            String b = snap2.child("ID").getValue(String.class);
+                                            String c = snap3.child("ID").getValue(String.class);
+                                            Log.d(TAG, "onDataChange: "+a+" "+b+" "+c);
 
-                                            if(aLong!=null && bLong!=null && cLong!=null) {
-                                                long a = aLong;
-                                                long b = bLong;
-                                                long c = cLong;
+                                            if(a!=null && b!=null && c!=null) {
+//                                                long a = aLong;
+//                                                long b = bLong;
+//                                                long c = cLong;
 
-                                                if ((a == b) && (b == c)) {
+                                                if ((a.equals(b)) && (b.equals(c))) {
                                                     Log.d(TAG, a + " " + b + " " + c);
                                                     Doctor doctor = snap1.getValue(Doctor.class);
                                                     if (doctor != null) {
-                                                        doctor.setID(snap1.child("ID").getValue(Long.class));
+                                                        doctor.setID(snap1.child("ID").getValue(String.class));
                                                         String name = capitalizeEachWord(snap1.child("name").getValue(String.class));
                                                         doctor.setName("Dr. " + name);
                                                         String speciality = capitalizeEachWord(snap1.child("speciality").getValue(String.class));

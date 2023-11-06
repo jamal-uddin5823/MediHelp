@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Signup extends AppCompatActivity {
     private EditText name, editTextEmail, editTextPassword, confirmPassword, editAge, editWeight;
@@ -161,7 +162,7 @@ public class Signup extends AppCompatActivity {
                         // Save the image URL in the Realtime Database
                         String imageUrl = uri.toString();
 //                        Picasso.get().load(imageUrl).into(ivSignUp);
-                        saveImageUrlToDatabase(imageUrl);
+//                        saveImageUrlToDatabase(imageUrl);
 
                         // Pass the image URL back to the caller
                         callback.onImageUploadComplete(imageUrl);
@@ -246,6 +247,8 @@ public class Signup extends AppCompatActivity {
 
     }
 
+
+
     private void createUserAccount(String age, String weight, String gender, String bloodGroup) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
@@ -258,20 +261,78 @@ public class Signup extends AppCompatActivity {
                 });
     }
 
-    private void sendVerificationEmail() {
-        mAuth.getCurrentUser().sendEmailVerification()
-                .addOnSuccessListener(unused -> {
-                    // Verification email sent successfully
-                    Toast.makeText(Signup.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+//    private void sendVerificationEmail() {
+//        mAuth.getCurrentUser().sendEmailVerification()
+//                .addOnSuccessListener(unused -> {
+//                    // Verification email sent successfully
+//                    Toast.makeText(Signup.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+//
+//
+//                    updateUserInfo(age, weight, gender, bloodGroup);
+//                })
+//                .addOnFailureListener(e -> {
+//                    // Handle the error
+//                    Toast.makeText(Signup.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
+//                });
+//    }
 
-                    updateUserInfo(age, weight, gender, bloodGroup);
-                })
-                .addOnFailureListener(e -> {
-                    // Handle the error
-                    Toast.makeText(Signup.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
-                });
+    private void sendVerificationEmail() {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Verification email sent successfully
+                                Toast.makeText(Signup.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+
+                                // Check for email verification status in a loop with a delay
+                                checkEmailVerificationStatus(user);
+                            } else {
+                                // Handle the error when sending the verification email
+                                Toast.makeText(Signup.this, "Failed to send verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.e("VerificationEmailError", "Error sending verification email", task.getException());
+                            }
+                        }
+                    });
+        }
     }
+
+    private void checkEmailVerificationStatus(FirebaseUser user) {
+        final Timer emailVerificationTimer = new Timer();
+        emailVerificationTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            if (user.isEmailVerified()) {
+                                // Email is verified; update user info
+                                updateUserInfo(age, weight, gender, bloodGroup);
+
+                                // Display a Toast indicating email verification success
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(Signup.this, "Email verified. User info updated.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                emailVerificationTimer.cancel(); // Stop the timer
+                            }
+                        } else {
+                            Log.e("EmailVerificationStatus", "Error checking email verification status", task.getException());
+                        }
+                    }
+                });
+            }
+        }, 0, 2000); // Check every 5 seconds (adjust the interval as needed)
+    }
+
 
 
 
@@ -310,12 +371,13 @@ public class Signup extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-//                                Intent intent = new Intent(getApplicationContext(),Login.class);
-//                                startActivity(intent);
-//                                finish();
+
 //                            progress_signup.dismiss();
 //                                Log.d("Lubaina", "Very sad");
                                 Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(),Login.class);
+                                startActivity(intent);
+                                finish();
 
                             }
                         })

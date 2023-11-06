@@ -73,7 +73,8 @@
                         android:textAlignment="center"
                         android:textColor="@color/tertiary"
                         android:textSize="30sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="50dp"/>
 
                     <!--                    <androidx.cardview.widget.CardView-->
                     <!--                        android:id="@+id/cardView2"-->
@@ -89,61 +90,8 @@
                     <!--                        app:layout_constraintTop_toBottomOf="@+id/cardView"-->
                     <!--                        app:layout_constraintVertical_bias="0.059">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            app:cardCornerRadius="50dp"
-                            app:cardElevation="21dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintVertical_bias="0.5"
-                            app:layout_constraintHorizontal_bias="0.5">
-                            <ImageView
-                                android:id="@+id/ivSelectImage"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/baseline_person_add_24" />
-                        </androidx.cardview.widget.CardView>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <EditText
-                        android:id="@+id/editName"
-                        android:textCursorDrawable="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/baseline_person_24"
-                        android:drawablePadding="8dp"
-                        android:hint="Name"
-                        android:padding="8dp"
-                        android:gravity="center_vertical"
-                        android:textColor="?attr/textFillColor" />
-
-
-                    <EditText
-                        android:id="@+id/editPassword"
-                        android:textCursorDrawable="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawableLeft="@drawable/key"
-                        android:drawablePadding="5dp"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:padding="8dp"
-                        android:gravity="center_vertical"
-                        android:textColor="?attr/textFillColor" />
 
                     <EditText
                         android:id="@+id/Contact"
@@ -211,7 +159,7 @@
                             android:layout_marginRight="2dp"
                             />
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/SaveButton"
+                            android:id="@+id/btnSave"
                             android:layout_width="25dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"

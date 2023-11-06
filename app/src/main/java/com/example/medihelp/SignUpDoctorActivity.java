@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -62,7 +65,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         buttonSignup = findViewById(R.id.signup);
         btnBack = findViewById(R.id.btnChangeRole);
 
-        ivSignUp = findViewById(R.id.ivSignUp);
+//        ivSignUp = findViewById(R.id.ivSignUp);
 
 
         btnBack.setOnClickListener(view -> {
@@ -71,9 +74,9 @@ public class SignUpDoctorActivity extends AppCompatActivity {
             finish();
         });
 
-        ivSignUp.setOnClickListener(view -> {
-            openImagePicker();
-        });
+//        ivSignUp.setOnClickListener(view -> {
+//            openImagePicker();
+//        });
 
 
         buttonSignup.setOnClickListener(new View.OnClickListener() {
@@ -85,11 +88,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
     }
 
-    private void openImagePicker() {
-        // Use an Intent to open the image picker
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -101,62 +100,6 @@ public class SignUpDoctorActivity extends AppCompatActivity {
             ivSignUp.setImageURI(selectedImageUri); // Set the selected image in your ImageView
         }
     }
-
-
-    private void uploadImageToFirebaseStorage(Uri imageUri, OnImageUploadComplete callback) {
-        // Get a reference to the Firebase Storage
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("doctors/profile_images");
-
-        // Generate a unique name for the image file (e.g., using a timestamp)
-        String imageFileName = "image_" + System.currentTimeMillis();
-
-        // Create a reference to the file with the generated name
-        StorageReference imageRef = storageRef.child(imageFileName);
-
-        // Upload the image
-        imageRef.putFile(imageUri)
-                .addOnSuccessListener(taskSnapshot -> {
-                    // Image uploaded successfully, get the download URL
-                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        // Save the image URL in the Realtime Database
-                        String imageUrl = uri.toString();
-                        saveImageUrlToDatabase(imageUrl);
-
-                        // Pass the image URL back to the caller
-                        callback.onImageUploadComplete(imageUrl);
-                    });
-                })
-                .addOnFailureListener(e -> {
-                    // Handle the error
-                    Toast.makeText(this, "Image upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    private void saveImageUrlToDatabase(String imageUrl) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-
-            // Get a reference to the Realtime Database
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
-            // Save the image URL under the current user's node
-            databaseReference.child("Doctors").child(userId).child("picture").setValue(imageUrl)
-                    .addOnSuccessListener(aVoid -> {
-                        // Image URL saved successfully
-                        Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        // Handle the error
-                        Toast.makeText(this, "Failed to save image URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-        } else {
-            // Handle the case where the user is not authenticated
-            Toast.makeText(this, "Doctor not authenticated", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
 
 
     private String name="", email="",password="", ConfirmPassword="",speciality="",location="",contact="";
@@ -186,9 +129,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         else if(!password.equals(MainActivity.currentUserData.getPassword())){
             Toast.makeText(this,"Passwords Doesn't Match",Toast.LENGTH_SHORT).show();
         }
-        else if(selectedImageUri==null) {
-            Toast.makeText(this, "Profile pic not added", Toast.LENGTH_SHORT).show();
-        }
+
 
         else{
             addNewDoctor(name,speciality,location,contact);
@@ -198,146 +139,85 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
     }
 
-//    private void createUserAccount(String speciality, String location) {
-//
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnSuccessListener(authResult -> {
-//                    // User account created successfully
-//                    sendVerificationEmail( speciality,location);
-//                })
-//                .addOnFailureListener(e -> {
-//                    Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
-//                    Toast.makeText(SignUpDoctorActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                });
-//    }
-//
-//    private void sendVerificationEmail(String speciality, String location) {
-//        mAuth.getCurrentUser().sendEmailVerification()
-//                .addOnSuccessListener(unused -> {
-//                    // Verification email sent successfully
-//                    Toast.makeText(SignUpDoctorActivity.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
-//
-//                    updateUserInfo(speciality, location);
-//                })
-//                .addOnFailureListener(e -> {
-//                    // Handle the error
-//                    Toast.makeText(SignUpDoctorActivity.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
-//                });
-//    }
 
 
     private void addNewDoctor(String name, String speciality, String location, String contact) {
-        uploadImageToFirebaseStorage(selectedImageUri, imageUrl -> {
-            long timestamp = System.currentTimeMillis();
-            myuser = new Doctor(name, speciality,location, contact );
 
-            // Use push() to generate a unique ID for the new doctor entry
-            DatabaseReference docRef = FirebaseDatabase.getInstance().getReference("Doctors").push();
-            String doctorId = docRef.getKey(); // This is the new unique ID generated by Firebase
+        String userId = FirebaseAuth.getInstance().getUid();
 
-            // Create a HashMap with the doctor's information
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("ID", doctorId); // Use the generated ID
-            hashMap.put("name", name);
-            hashMap.put("speciality", speciality);
-            hashMap.put("location", location);
-            hashMap.put("contact", contact);
+        addUserAsDoctor(name, speciality, location, contact);
 
-//             Setup data to db
-            docDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
-            docDatabase.child(doctorId)
-                    .setValue(hashMap)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            MainActivity.currentUserData.setDoctorStatus(true);
-                            Toast.makeText(SignUpDoctorActivity.this, "Signed Up!", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-//                            progress_signup.dismiss();
-                            Toast.makeText(SignUpDoctorActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
-                        }
-                    });
-        });
-
+        // Set the userType to "doctor"
+        updateUserToDoctor(userId);
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, LoginDoctorActivity.class);
-        startActivity(intent);
-        finish();
+    private void updateUserToDoctor(String userId) {
+        // Set the userType to "doctor"
+        DatabaseReference userTypeRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("userType");
+        userTypeRef.setValue("doctor");
     }
+
+    private void addUserAsDoctor(String name, String speciality, String location, String contact) {
+        long timestamp = System.currentTimeMillis();
+        myuser = new Doctor(name, speciality, location, contact);
+
+        DatabaseReference docRef = FirebaseDatabase.getInstance().getReference("Doctors").push();
+        String doctorId = docRef.getKey();
+
+        // Construct the doctor's data
+        HashMap<String, Object> doctorData = new HashMap<>();
+        doctorData.put("ID", doctorId);
+        doctorData.put("name", name);
+        doctorData.put("speciality", speciality);
+        doctorData.put("location", location);
+        doctorData.put("contact", contact);
+        doctorData.put("picture", MainActivity.currentUserData.getPicture());
+
+        // Update the "Doctors" database
+        docDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
+        docDatabase.child(doctorId)
+                .setValue(doctorData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        // Now that the doctor data is successfully added, update the user's data
+                        updateUserToDoctor(mAuth.getCurrentUser().getUid(), doctorId); // Pass the current user's UID and doctorId
+                        Toast.makeText(SignUpDoctorActivity.this, "Signed Up!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignUpDoctorActivity.this, "Error updating user info: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
+                    }
+                });
+    }
+
+    private void updateUserToDoctor(String userId, String doctorId) {
+        // Update the user's data to indicate they are now a doctor
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        userRef.child("userType").setValue("doctor");
+
+        // Additionally, store the doctorId in the user's data
+        userRef.child("doctorId").setValue(doctorId);
+
+        // You can also update other user information as needed
+    }
+
+//    private void updateUserToDoctor(String userId) {
+//        // Update the user's data to indicate they are now a doctor
+//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+//
+//        // Assuming "isDoctor" is a field to indicate the user's doctor status
+//        userRef.child("isDoctor").setValue(true);
+//
+//        // You can update other user information as needed
+//    }
+
+
 }
 
 
 
-//
-////        progress_signup.setMessage("Saving User Info...");
-//        long timestamp = System.currentTimeMillis();
-//
-//        String uid = mAuth.getUid();
-//
-//        if(selectedImageUri!=null) {
-//
-//        }
-//        uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
-//            myuser=new Doctor(name,email,password);
-//
-//
-//            // Setup data to add in db
-//
-//            HashMap<String, Object> hashMap = new HashMap<>();
-//            hashMap.put("uid", uid);
-//            hashMap.put("email", email);
-//            hashMap.put("name", name);
-//            hashMap.put("password",password);
-////            hashMap.put("profileImage", "");
-//            hashMap.put("speciality",speciality);
-//            hashMap.put("location",location);
-//            hashMap.put("contact",contact);
-//            hashMap.put("picture",imageUrl);
-//            hashMap.put("userType", "doctor");
-//            hashMap.put("timestamp", timestamp);
-//
-//            // Setup data to db
-//
-//            userDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
-//            userDatabase.child(uid)
-//                    .setValue(hashMap)
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void unused) {
-////                            progress_signup.dismiss();
-//                            Toast.makeText(SignUpDoctorActivity.this, "Account Created...", Toast.LENGTH_SHORT).show();
-////                            Intent intent = new Intent(getApplicationContext(),LoginDoctorActivity.class);
-////                            startActivity(intent);
-////                            finish();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-////                            progress_signup.dismiss();
-//                            Toast.makeText(SignUpDoctorActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
-//                        }
-//                    });
-//        });
-//
-//
-//    }
-//
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent(this, LoginDoctorActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
-//}

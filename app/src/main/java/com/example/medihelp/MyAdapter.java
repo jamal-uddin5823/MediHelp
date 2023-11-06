@@ -73,7 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         }
 
 
-        booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new Long[] {doctors.get(position).getID()});
+        booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new String[] {doctors.get(position).getID()});
 //                if (!bookmarked.get(position)) {
         if(!booked.isEmpty()) {
             holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
@@ -81,15 +81,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         }
 
         holder.icon_bookmark.setOnClickListener(view -> {
-            booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new Long[] {doctors.get(position).getID()});
+            booked = (ArrayList<Doctor>) roomDatabaseHelper.DoctorDao().loadByIds(new String[] {doctors.get(position).getID()});
             if(booked.isEmpty()) {
                 holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.white));
                 holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_solid);
-                roomDatabaseHelper.DoctorDao().insert(doctor);
+                Log.d(TAG, "onBindViewHolder: "+doctor.getName()+" "+doctor.getID()+" "+doctor.getPicture()+" "+doctor.getLocation()+" "+doctor.getContact()+" "+doctor.getSpeciality());
+                if(doctor!=null)
+                    roomDatabaseHelper.DoctorDao().insert(doctor);
             } else {
                 holder.icon_bookmark.setColorFilter(ContextCompat.getColor(context, R.color.primary));
                 holder.icon_bookmark.setBackgroundResource(R.drawable.round_border_trans);
-                roomDatabaseHelper.DoctorDao().delete(doctor);
+                if(doctor!=null)
+                    roomDatabaseHelper.DoctorDao().delete(doctor);
             }
         });
 

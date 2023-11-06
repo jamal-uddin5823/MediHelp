@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.medihelp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
     public List<Doctor> doctorsList = new ArrayList<>();
     private DatabaseReference databaseReference;
     TextView welcomeTextView;
-    Button btnAddDoctor;
+//    Button btnAddDoctor;
     CardView cvDiagnose;
     CardView cvSearch;
 
@@ -61,22 +62,22 @@ public class HomeFragment extends Fragment {
 
         cvDiagnose = view.findViewById(R.id.cvDiagnose);
         cvSearch = view.findViewById(R.id.cvSearch);
-        btnAddDoctor = view.findViewById(R.id.addDoctor);
+//        btnAddDoctor = view.findViewById(R.id.addDoctor);
 
-        btnAddDoctor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isDoctor = MainActivity.currentUserData.getDoctorStatus();
-                if (isDoctor) {
-                    Intent intent = new Intent(getContext(), AlreadyDoctorActivity.class);
-                    startActivity(intent);
-                } else {
-//                    MainActivity.currentUserData.setDoctorStatus(true);
-                    Intent intent = new Intent(getContext(), SignUpDoctorActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+//        btnAddDoctor.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                boolean isDoctor = MainActivity.currentUserData.getDoctorStatus();
+//                if (isDoctor) {
+//                    Intent intent = new Intent(getContext(), AlreadyDoctorActivity.class);
+//                    startActivity(intent);
+//                } else {
+////                    MainActivity.currentUserData.setDoctorStatus(true);
+//                    Intent intent = new Intent(getContext(), SignUpDoctorActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
 
         cvDiagnose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +134,8 @@ public class HomeFragment extends Fragment {
                     Doctor doctor = snapshot.getValue(Doctor.class);
 
                     if (doctor != null) {
-                        doctor.setID(snapshot.child("ID").getValue(Long.class));
+                        doctor.setID(doctor.getID());
+                        Log.d(TAG, "onDataChange: "+doctor.getID());
                         String name = capitalizeEachWord(snapshot.child("name").getValue(String.class));
                         doctor.setName("Dr. " + name);
                         String speciality = capitalizeEachWord(snapshot.child("speciality").getValue(String.class));
@@ -143,12 +145,12 @@ public class HomeFragment extends Fragment {
                         doctor.setContact(snapshot.child("contact").getValue(String.class));
                         String picture = snapshot.child("picture").getValue(String.class);
                         doctor.setPicture(picture);
-                        Log.d(TAG, "Doctor ID: " + doctor.getID());
-                        Log.d(TAG, "Doctor Name: " + doctor.getName());
-                        Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
-                        Log.d(TAG, "Doctor Location: " + doctor.getLocation());
-                        Log.d(TAG, "Doctor Contact: " + doctor.getContact());
-                        Log.d(TAG,"Doc pic: "+doctor.getPicture());
+//                        Log.d(TAG, "Doctor ID: " + doctor.getID());
+//                        Log.d(TAG, "Doctor Name: " + doctor.getName());
+//                        Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
+//                        Log.d(TAG, "Doctor Location: " + doctor.getLocation());
+//                        Log.d(TAG, "Doctor Contact: " + doctor.getContact());
+//                        Log.d(TAG,"Doc pic: "+doctor.getPicture());
 
                         doctorsList.add(doctor);
                     } else {
@@ -216,7 +218,11 @@ public class HomeFragment extends Fragment {
             });
 
         }  else {
-            textView.setText("Welcome \n" +MainActivity.currentUserData.getName() );
+            if(MainActivity.currentUserData!=null && MainActivity.currentUserData.getUserType().equals("doctor"))
+                textView.setText("Welcome \nDr. " +MainActivity.currentUserData.getName() );
+            else if(MainActivity.currentUserData!=null) {
+                textView.setText("Welcome \n" +MainActivity.currentUserData.getName() );
+            }
             Picasso.get().load(MainActivity.currentUserData.getPicture()).into(imgProfileHome);
         }
 
@@ -225,6 +231,7 @@ public class HomeFragment extends Fragment {
     }
 
     public static String capitalizeEachWord(String str) {
+        if(str==null || str.length()==0) return null;
         String[] words = str.split(" ");
         StringBuilder capitalizedString = new StringBuilder();
 

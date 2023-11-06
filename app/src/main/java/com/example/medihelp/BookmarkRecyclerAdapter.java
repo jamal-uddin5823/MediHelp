@@ -57,7 +57,7 @@ public class BookmarkRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> 
 
         holder.icon_bookmark.setOnClickListener(view -> {
             assert doctor != null;
-            if(roomDatabaseHelper.DoctorDao().loadByIds(new Long[]{doctor.getID()}).size()>0) {
+            if(roomDatabaseHelper.DoctorDao().loadByIds(new String[]{doctor.getID()}).size()>0) {
                 roomDatabaseHelper.DoctorDao().delete(doctor);
             }
             booked_doclist.remove(position);

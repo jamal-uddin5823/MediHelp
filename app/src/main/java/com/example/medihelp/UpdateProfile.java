@@ -283,7 +283,8 @@ public class UpdateProfile extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 String uid = currentUser.getUid();
-                uploadImageToFirebase(selectedImageUri);
+                if(selectedImageUri!=null)
+                    uploadImageToFirebase(selectedImageUri);
 
 
                 // Fetch the existing user data from Firebase
@@ -310,10 +311,12 @@ public class UpdateProfile extends AppCompatActivity {
 //                            }
                             if (!password.isEmpty()) {
                                 prevPass = existingUser.getPassword();
-                                existingUser.setPassword(password);
-                                MainActivity.currentUserData.setPassword(password);
-                                editPassword.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
-                                UpdatePassword(prevPass, password);
+                                if(prevPass!=password) {
+                                    existingUser.setPassword(password);
+                                    MainActivity.currentUserData.setPassword(password);
+                                    editPassword.setTextColor(getResources().getColor(R.color.black)); // Change text color to black
+                                    UpdatePassword(prevPass, password);
+                                }
                             }
                             if (!age.isEmpty()) {
                                 existingUser.setAge(age);

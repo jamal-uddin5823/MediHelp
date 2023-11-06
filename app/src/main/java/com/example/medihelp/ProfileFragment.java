@@ -1,5 +1,6 @@
 package com.example.medihelp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,11 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +39,9 @@ public class ProfileFragment extends Fragment {
     View view;
     SwitchCompat switchmode;
     boolean isNightmode;
+
+    Button btnAddDoctor;
+
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -73,6 +82,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,6 +97,7 @@ public class ProfileFragment extends Fragment {
         switchmode = view.findViewById(R.id.switchMode);
 
         tvUserName = view.findViewById(R.id.tvUserName);
+        btnAddDoctor = view.findViewById(R.id.addDoctor);
         btnLogout = view.findViewById(R.id.btn_logout);
 
 
@@ -107,15 +118,47 @@ public class ProfileFragment extends Fragment {
         });
 
 
+        if(MainActivity.currentUserData.getUserType().equals("doctor")) btnAddDoctor.setText("View Doctor Details");
 
+        btnAddDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                boolean isDoctor = MainActivity.currentUserData.getDoctorStatus();
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                String userId = mAuth.getCurrentUser().getUid();
 
-//        btnEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getContext(),UpdateProfile.class);
-//                startActivity(intent);
-//            }
-//        });
+                // Check the user's userType
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("userType");
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(DataSnapshot dataSnapshot) {
+                       if (dataSnapshot.exists()) {
+                           String userType = dataSnapshot.getValue(String.class);
+                           if (userType != null && userType.equals("user")) {
+                               // User has userType "user," so they can join as a doctor
+                               Intent intent = new Intent(getContext(), SignUpDoctorActivity.class);
+                               startActivity(intent);
+                           } else {
+                               // User is already marked as a doctor
+                               Toast.makeText(getContext(), "You are already a doctor.", Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(getContext(), AlreadyDoctorActivity.class);
+                               startActivity(intent);
+                           }
+                       } else {
+                           // Handle the case where userType is not set
+                           Toast.makeText(getContext(), "User data is incomplete. Cannot determine user type.", Toast.LENGTH_SHORT).show();
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+
+            }
+        });
 
         btnUserDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +208,7 @@ public class ProfileFragment extends Fragment {
                 Context context = getActivity();
                 FirebaseAuth.getInstance().signOut();
                 MainActivity.currentUserData = null;
-                MainActivityDoctor.currentDoctorData = null;
+//                MainActivityDoctor.currentDoctorData = null;
                 Intent intent = new Intent(context, Login.class);
 
                 Log.d("Hllo","Redreictb=ing to lgin");

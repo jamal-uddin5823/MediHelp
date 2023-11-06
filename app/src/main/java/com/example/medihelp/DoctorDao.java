@@ -15,7 +15,7 @@ public interface DoctorDao {
     List<Doctor> loadAll();
 
     @Query("SELECT * FROM bookmarkeddoc WHERE id IN (:Ids)")
-    List<Doctor> loadByIds(Long[] Ids);
+    List<Doctor> loadByIds(String[] Ids);
 
     @Insert
     void insert(Doctor doctor);
