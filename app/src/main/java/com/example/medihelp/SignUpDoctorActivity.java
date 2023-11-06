@@ -29,18 +29,14 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 
 public class SignUpDoctorActivity extends AppCompatActivity {
-    private EditText name, editTextEmail, editTextPassword, confirmPassword, editSpeciality, editLocation, editContact;
+    private EditText editTextPassword, editSpeciality, editLocation, editContact;
     private Button buttonSignup;
-    private Button buttonSign_in;
-    private Button btnChangeRole;
+    private Button btnBack;
     private FirebaseAuth mAuth;
-    private DatabaseReference userDatabase;
-    //    private ProgressDialog progress_signup
+    private DatabaseReference docDatabase;
     ImageView ivSignUp;
 
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    static Long count= 30L;
 
 
     public static Doctor myuser;
@@ -53,31 +49,24 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
         //init firebase
         mAuth = FirebaseAuth.getInstance();
-        userDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
+//        docDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
 
         setContentView(R.layout.activity_sign_up_doctor);
-//        progress_signup = new ProgressDialog(this);
-//        progress_signup.setTitle("Please wait");
-//        progress_signup.setCanceledOnTouchOutside(false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_doctor);
-        name = findViewById(R.id.editName);
-        editTextEmail = findViewById(R.id.editEmail);
         editTextPassword = findViewById(R.id.editPassword);
-        confirmPassword = findViewById(R.id.confirmpassword);
         editSpeciality = findViewById(R.id.editSpeciality);
         editLocation = findViewById(R.id.editLocation);
         editContact = findViewById(R.id.editContact);
         buttonSignup = findViewById(R.id.signup);
-        buttonSign_in = findViewById(R.id.signin);
-        btnChangeRole = findViewById(R.id.btnChangeRole);
+        btnBack = findViewById(R.id.btnChangeRole);
 
         ivSignUp = findViewById(R.id.ivSignUp);
 
 
-        btnChangeRole.setOnClickListener(view -> {
-            Intent intent = new Intent(this,SelectUserTypeActivity.class);
+        btnBack.setOnClickListener(view -> {
+            Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();
         });
@@ -86,15 +75,6 @@ public class SignUpDoctorActivity extends AppCompatActivity {
             openImagePicker();
         });
 
-
-        buttonSign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginDoctorActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,22 +159,17 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
 
 
-    private String username="", email="",password="", ConfirmPassword="",speciality="",location="",contact="";
+    private String name="", email="",password="", ConfirmPassword="",speciality="",location="",contact="";
     private void validateData(){
-        email=editTextEmail.getText().toString().trim();
-        password=editTextPassword.getText().toString().trim();
-        speciality = editSpeciality.getText().toString().trim();
-        location = editLocation.getText().toString().trim();
+        name=MainActivity.currentUserData.getName().trim().toLowerCase();
+        speciality = editSpeciality.getText().toString().trim().toLowerCase();
+        location = editLocation.getText().toString().trim().toLowerCase();
         contact = editContact.getText().toString().trim();
-        username=name.getText().toString().trim();
-        ConfirmPassword=confirmPassword.getText().toString().trim();
+        password=editTextPassword.getText().toString().trim();
         //validate data
 
-        if(TextUtils.isEmpty(username)){
+        if(TextUtils.isEmpty(name)){
             Toast.makeText(this,"Enter Username",Toast.LENGTH_SHORT).show();
-        }
-        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(this,"Invalid Email Address",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(speciality)){
             Toast.makeText(this,"Enter Speciality",Toast.LENGTH_SHORT).show();
@@ -208,10 +183,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Enter Password",Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(ConfirmPassword)){
-            Toast.makeText(this,"Confirm Password",Toast.LENGTH_SHORT).show();
-        }
-        else if(!password.equals(ConfirmPassword)){
+        else if(!password.equals(MainActivity.currentUserData.getPassword())){
             Toast.makeText(this,"Passwords Doesn't Match",Toast.LENGTH_SHORT).show();
         }
         else if(selectedImageUri==null) {
@@ -219,82 +191,68 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         }
 
         else{
-            createUserAccount(speciality,location);
+            addNewDoctor(name,speciality,location,contact);
+//            createUserAccount(speciality,location);
         }
 
 
     }
 
-    private void createUserAccount(String speciality, String location) {
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> {
-                    // User account created successfully
-                    sendVerificationEmail( speciality,location);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
-                    Toast.makeText(SignUpDoctorActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    private void sendVerificationEmail(String speciality, String location) {
-        mAuth.getCurrentUser().sendEmailVerification()
-                .addOnSuccessListener(unused -> {
-                    // Verification email sent successfully
-                    Toast.makeText(SignUpDoctorActivity.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
-
-                    updateUserInfo(speciality, location);
-                })
-                .addOnFailureListener(e -> {
-                    // Handle the error
-                    Toast.makeText(SignUpDoctorActivity.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
-                });
-    }
-
-
-    private void updateUserInfo(String speciality, String location) {
-//        progress_signup.setMessage("Saving User Info...");
-        long timestamp = System.currentTimeMillis();
-
-        String uid = mAuth.getUid();
-
-        if(selectedImageUri!=null) {
-
-        }
-        uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
-            myuser=new Doctor(username,email,password);
+//    private void createUserAccount(String speciality, String location) {
+//
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnSuccessListener(authResult -> {
+//                    // User account created successfully
+//                    sendVerificationEmail( speciality,location);
+//                })
+//                .addOnFailureListener(e -> {
+//                    Log.e("Firebase Auth", "Error: " + e.getMessage(), e);
+//                    Toast.makeText(SignUpDoctorActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                });
+//    }
+//
+//    private void sendVerificationEmail(String speciality, String location) {
+//        mAuth.getCurrentUser().sendEmailVerification()
+//                .addOnSuccessListener(unused -> {
+//                    // Verification email sent successfully
+//                    Toast.makeText(SignUpDoctorActivity.this, "Verification email sent. Please verify and login.", Toast.LENGTH_SHORT).show();
+//
+//                    updateUserInfo(speciality, location);
+//                })
+//                .addOnFailureListener(e -> {
+//                    // Handle the error
+//                    Toast.makeText(SignUpDoctorActivity.this, "Failed to send verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Log.e("VerificationEmailError", "Error sending verification email: " + e.getMessage(), e);
+//                });
+//    }
 
 
-            // Setup data to add in db
+    private void addNewDoctor(String name, String speciality, String location, String contact) {
+        uploadImageToFirebaseStorage(selectedImageUri, imageUrl -> {
+            long timestamp = System.currentTimeMillis();
+            myuser = new Doctor(name, speciality,location, contact );
 
+            // Use push() to generate a unique ID for the new doctor entry
+            DatabaseReference docRef = FirebaseDatabase.getInstance().getReference("Doctors").push();
+            String doctorId = docRef.getKey(); // This is the new unique ID generated by Firebase
+
+            // Create a HashMap with the doctor's information
             HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("uid", uid);
-            hashMap.put("email", email);
-            hashMap.put("name", username);
-            hashMap.put("password",password);
-//            hashMap.put("profileImage", "");
-            hashMap.put("speciality",speciality);
-            hashMap.put("location",location);
-            hashMap.put("contact",contact);
-            hashMap.put("picture",imageUrl);
-            hashMap.put("userType", "doctor");
-            hashMap.put("timestamp", timestamp);
+            hashMap.put("ID", doctorId); // Use the generated ID
+            hashMap.put("name", name);
+            hashMap.put("speciality", speciality);
+            hashMap.put("location", location);
+            hashMap.put("contact", contact);
 
-            // Setup data to db
-
-            userDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
-            userDatabase.child(uid)
+//             Setup data to db
+            docDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
+            docDatabase.child(doctorId)
                     .setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-//                            progress_signup.dismiss();
-                            Toast.makeText(SignUpDoctorActivity.this, "Account Created...", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(getApplicationContext(),LoginDoctorActivity.class);
-//                            startActivity(intent);
-//                            finish();
+                            MainActivity.currentUserData.setDoctorStatus(true);
+                            Toast.makeText(SignUpDoctorActivity.this, "Signed Up!", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -317,3 +275,69 @@ public class SignUpDoctorActivity extends AppCompatActivity {
         finish();
     }
 }
+
+
+
+//
+////        progress_signup.setMessage("Saving User Info...");
+//        long timestamp = System.currentTimeMillis();
+//
+//        String uid = mAuth.getUid();
+//
+//        if(selectedImageUri!=null) {
+//
+//        }
+//        uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
+//            myuser=new Doctor(name,email,password);
+//
+//
+//            // Setup data to add in db
+//
+//            HashMap<String, Object> hashMap = new HashMap<>();
+//            hashMap.put("uid", uid);
+//            hashMap.put("email", email);
+//            hashMap.put("name", name);
+//            hashMap.put("password",password);
+////            hashMap.put("profileImage", "");
+//            hashMap.put("speciality",speciality);
+//            hashMap.put("location",location);
+//            hashMap.put("contact",contact);
+//            hashMap.put("picture",imageUrl);
+//            hashMap.put("userType", "doctor");
+//            hashMap.put("timestamp", timestamp);
+//
+//            // Setup data to db
+//
+//            userDatabase = FirebaseDatabase.getInstance().getReference("Doctors");
+//            userDatabase.child(uid)
+//                    .setValue(hashMap)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void unused) {
+////                            progress_signup.dismiss();
+//                            Toast.makeText(SignUpDoctorActivity.this, "Account Created...", Toast.LENGTH_SHORT).show();
+////                            Intent intent = new Intent(getApplicationContext(),LoginDoctorActivity.class);
+////                            startActivity(intent);
+////                            finish();
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+////                            progress_signup.dismiss();
+//                            Toast.makeText(SignUpDoctorActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
+//                        }
+//                    });
+//        });
+//
+//
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(this, LoginDoctorActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
+//}

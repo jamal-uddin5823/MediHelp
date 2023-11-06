@@ -31,6 +31,13 @@ public class Doctor {
         this.contact = contact;
     }
 
+    public Doctor(String name, String speciality, String location, String contact) {
+        this.name = name;
+        this.speciality = speciality;
+        this.location = location;
+        this.contact = contact;
+    }
+
     @Ignore
     public Doctor(String name, String email, String password) {
         this.name = name;

@@ -38,13 +38,8 @@ public class Login extends AppCompatActivity {
 
     private static final String TAG = "Login";
     EditText editTextEmail, editTextPassword;
-    Button buttonLogin,buttonLoginDoc;
+    Button buttonLogin,buttonBack;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
-
-
-    static final int Req_Call=1;
-
     TextView textView,textViewforgotPass;
 
 
@@ -52,7 +47,7 @@ public class Login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -71,16 +66,15 @@ public class Login extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.btn_login);
-//        progressBar = findViewById(R.id.progressBar);
-        buttonLoginDoc = findViewById(R.id.login_doc);
+        buttonBack = findViewById(R.id.login_doc);
         textView = findViewById(R.id.signup);
         textViewforgotPass = findViewById(R.id.forgotpass);
 
-        buttonLoginDoc.setOnClickListener(view -> {
-            Intent intent = new Intent(this,SelectUserTypeActivity.class);
-            startActivity(intent);
-            finish();
-        });
+//        buttonBack.setOnClickListener(view -> {
+//            Intent intent = new Intent(this,SelectUserTypeActivity.class);
+//            startActivity(intent);
+//            finish();
+//        });
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,8 +98,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 String email, password;
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
@@ -119,9 +111,6 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
-//                finish();
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -141,9 +130,6 @@ public class Login extends AppCompatActivity {
                                     //FIX THIS
                                     Toast.makeText(Login.this, "Authentication failed",
                                             Toast.LENGTH_SHORT).show();
-//                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
                                 }
                             }
                         });
@@ -151,11 +137,5 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,SelectUserTypeActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
 }

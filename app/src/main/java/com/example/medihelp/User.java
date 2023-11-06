@@ -4,14 +4,18 @@ public class User {
 
     private String name, email, password, age, weight, BloodGroup,gender, picture;
 
+    private boolean isDoctor;
+
 
     public User() {
+        this.isDoctor=false;
     }
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.isDoctor=false;
     }
 
     public User(String name, String email, String password, String age, String weight, String bloodGroup, String gender, String picture) {
@@ -23,6 +27,7 @@ public class User {
         BloodGroup = bloodGroup;
         this.gender = gender;
         this.picture = picture;
+        this.isDoctor=false;
     }
 
     public User(String name, String email, String age, String gender, String weight, String BloodGroup) {
@@ -32,6 +37,7 @@ public class User {
         this.gender = gender;
         this.weight = weight;
         this.BloodGroup = BloodGroup;
+        this.isDoctor=false;
     }
 
     public String getName() {
@@ -97,4 +103,8 @@ public class User {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public boolean getDoctorStatus() { return isDoctor;}
+
+    public void setDoctorStatus(boolean doctor) { isDoctor = doctor;}
 }

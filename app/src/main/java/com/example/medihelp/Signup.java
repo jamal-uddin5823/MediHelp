@@ -43,7 +43,7 @@ public class Signup extends AppCompatActivity {
     private EditText name, editTextEmail, editTextPassword, confirmPassword, editAge, editWeight;
     private Button buttonSignup;
     private Button buttonSign_in;
-    private Button buttonLoginDoc;
+    private Button buttonBack;
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
     //    private ProgressDialog progress_signup;
@@ -68,9 +68,6 @@ public class Signup extends AppCompatActivity {
         userDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         setContentView(R.layout.activity_signup);
-//        progress_signup = new ProgressDialog(this);
-//        progress_signup.setTitle("Please wait");
-//        progress_signup.setCanceledOnTouchOutside(false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -82,7 +79,7 @@ public class Signup extends AppCompatActivity {
         editWeight = findViewById(R.id.editWeight);
         buttonSignup = findViewById(R.id.signup);
         buttonSign_in = findViewById(R.id.sign_in);
-        buttonLoginDoc = findViewById(R.id.login_doc);
+        buttonBack = findViewById(R.id.login_doc);
 
 
         bloodGroupSpinner = findViewById(R.id.Blood);
@@ -98,8 +95,8 @@ public class Signup extends AppCompatActivity {
         ivSignUp = findViewById(R.id.ivSignUp);
 
 
-        buttonLoginDoc.setOnClickListener(view -> {
-            Intent intent = new Intent(this,SelectUserTypeActivity.class);
+        buttonBack.setOnClickListener(view -> {
+            Intent intent = new Intent(this,Login.class);
             startActivity(intent);
             finish();
         });
@@ -188,7 +185,7 @@ public class Signup extends AppCompatActivity {
             databaseReference.child("users").child(userId).child("profileImageUrl").setValue(imageUrl)
                     .addOnSuccessListener(aVoid -> {
                         // Image URL saved successfully
-                       // Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(this, "Image URL saved to database", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
                         // Handle the error
@@ -332,53 +329,6 @@ public class Signup extends AppCompatActivity {
                         });
             });
         }
-//        uploadImageToFirebaseStorage(selectedImageUri,imageUrl -> {
-//            myuser=new User(username,email,password);
-//
-//
-//            // Setup data to add in db
-//
-//            HashMap<String, Object> hashMap = new HashMap<>();
-//            hashMap.put("uid", uid);
-//            hashMap.put("email", email);
-//            hashMap.put("name", username);
-//            hashMap.put("password",password);
-////            hashMap.put("profileImage", "");
-//            hashMap.put("age",age);
-//            hashMap.put("gender",gender);
-//            hashMap.put("bloodGroup",bloodGroup);
-//            hashMap.put("weight",weight);
-//            hashMap.put("picture",imageUrl);
-//            hashMap.put("userType", "user");
-//            hashMap.put("timestamp", timestamp);
-//
-//            // Setup data to db
-//
-//            userDatabase = FirebaseDatabase.getInstance().getReference("Users");
-//            userDatabase.child(uid)
-//                    .setValue(hashMap)
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void unused) {
-////                            progress_signup.dismiss();
-//                            Toast.makeText(Signup.this, "Account Created...", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-////                            progress_signup.dismiss();
-//                            Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                            Log.e("FirebaseDBError", "Error updating user info: " + e.getMessage(), e);
-//                        }
-//                    });
-//        });
-
-
-
     }
 
     @Override
