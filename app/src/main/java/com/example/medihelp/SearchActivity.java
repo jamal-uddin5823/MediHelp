@@ -93,17 +93,15 @@ public class SearchActivity extends AppCompatActivity {
 //                if(name.isEmpty())Log.d(TAG,"AAAAAAAAAAA");
 
                 searchReference = FirebaseDatabase.getInstance().getReference("Doctors");
-                searchDoctorFinal(name,speciality,location);
 
                 adapter = new MyAdapter(SearchActivity.this, doctorsList);
-
                 recview.setAdapter(adapter);
-                Log.d(TAG, "Adapter set");
-                // Make sure you have a list of doctors
-                Log.d("AdapterSetup", "Number of doctors: " + doctorsList.size());
 
-                recview.setAdapter(adapter);
-                clSearch.setVisibility(View.VISIBLE);
+
+                searchDoctorFinal(name,speciality,location);
+
+
+
             }
 
         });
@@ -124,100 +122,77 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    public void searchDoctorFinal(String name,String speciality, String location) {
+    public void searchDoctorFinal(String name, String speciality, String location) {
+        // Convert the search input to lowercase
+        name = name.toLowerCase();
+        speciality = speciality.toLowerCase();
+        location = location.toLowerCase();
 
-        String startname = name;
-        String endname = name + "\uf8ff";
+        Query nameQuery = searchReference.orderByChild("name").startAt(name).endAt(name + "\uf8ff");
+        Query specialityQuery = searchReference.orderByChild("speciality").startAt(speciality).endAt(speciality + "\uf8ff");
+        Query locationQuery = searchReference.orderByChild("location").startAt(location).endAt(location + "\uf8ff");
 
-        String startspeciality = speciality;
-        String endspeciality = speciality + "\uf8ff";
-
-        String startlocation = location;
-        String endlocation = location + "\uf8ff";
-
-        Query nameQuery = searchReference.orderByChild("name").startAt(startname).endAt(endname);
-        Query specialityQuery = searchReference.orderByChild("speciality").startAt(startspeciality).endAt(endspeciality);
-        Query locationQuery = searchReference.orderByChild("location").startAt(startlocation).endAt(endlocation);
-        Set<DataSnapshot> nameResults = new HashSet<>();
-        Set<DataSnapshot> specialityResults = new HashSet<>();
-        Set<DataSnapshot> locationResults = new HashSet<>();
-
-        nameQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        nameQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                doctorsList.clear();
-                Set<DataSnapshot> nameResults = new HashSet<>();
+                Set<String> nameResults = new HashSet<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    nameResults.add(snapshot);
-                    Log.d(TAG, "onDataChange: "+snapshot.toString());
-                    Log.d(TAG, "namecount " + nameResults.size());
+                    nameResults.add(snapshot.getKey());
                 }
 
-                specialityQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                Log.d(TAG, "Number of Name Matched Items: " + nameResults.size());
+
+                specialityQuery.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        doctorsList.clear();
-                        Set<DataSnapshot> specialityResults = new HashSet<>();
+                        Set<String> specialityResults = new HashSet<>();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            specialityResults.add(snapshot);
-                            Log.d(TAG, "speccount " + specialityResults.size());
+                            specialityResults.add(snapshot.getKey());
                         }
 
-                        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        Log.d(TAG, "Number of Speciality Matched Items: " + specialityResults.size());
+
+                        locationQuery.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                doctorsList.clear();
-                                Set<DataSnapshot> locationResults = new HashSet<>();
+                                Set<String> locationResults = new HashSet<>();
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    locationResults.add(snapshot);
-                                    Log.d(TAG, "localcount " + locationResults.size());
+                                    locationResults.add(snapshot.getKey());
                                 }
 
-                                for (DataSnapshot snap1 : nameResults) {
-                                    for (DataSnapshot snap2 : specialityResults) {
-                                        for (DataSnapshot snap3 : locationResults) {
-                                            String a = snap1.child("ID").getValue(String.class);
-                                            String b = snap2.child("ID").getValue(String.class);
-                                            String c = snap3.child("ID").getValue(String.class);
-                                            Log.d(TAG, "onDataChange: "+a+" "+b+" "+c);
+                                Log.d(TAG, "Number of Location Matched Items: " + locationResults.size());
 
-                                            if(a!=null && b!=null && c!=null) {
-//                                                long a = aLong;
-//                                                long b = bLong;
-//                                                long c = cLong;
+                                // Find the intersection of results from the three queries
+                                Set<String> intersection = new HashSet<>(nameResults);
+                                intersection.retainAll(specialityResults);
+                                intersection.retainAll(locationResults);
 
-                                                if ((a.equals(b)) && (b.equals(c))) {
-                                                    Log.d(TAG, a + " " + b + " " + c);
-                                                    Doctor doctor = snap1.getValue(Doctor.class);
-                                                    if (doctor != null) {
-                                                        doctor.setID(snap1.child("ID").getValue(String.class));
-                                                        String name = capitalizeEachWord(snap1.child("name").getValue(String.class));
-                                                        doctor.setName("Dr. " + name);
-                                                        String speciality = capitalizeEachWord(snap1.child("speciality").getValue(String.class));
-                                                        doctor.setSpeciality(speciality);
-                                                        String location = capitalizeEachWord(snap1.child("location").getValue(String.class));
-                                                        doctor.setLocation(location);
-                                                        doctor.setContact(snap1.child("contact").getValue(String.class));
-                                                        Log.d(TAG, "Doctor ID: " + doctor.getID());
-                                                        Log.d(TAG, "Doctor Name: " + doctor.getName());
-                                                        Log.d(TAG, "Doctor Speciality: " + doctor.getSpeciality());
-                                                        Log.d(TAG, "Doctor Location: " + doctor.getLocation());
-                                                        Log.d(TAG, "Doctor Contact: " + doctor.getContact());
+                                Log.d(TAG, "Number of Intersection Items: " + intersection.size());
 
-                                                        doctorsList.add(doctor);
-                                                    } else {
-                                                        Log.w(TAG, "Doctor is null for snapshot: " + snap1.getKey());
-                                                    }
-                                                }
-                                            }
+                                // Fetch the details of doctors in the intersection
+                                List<Doctor> intersectedDoctors = new ArrayList<>();
+                                for (String doctorKey : intersection) {
+                                    DataSnapshot doctorSnapshot = dataSnapshot.child(doctorKey);
+                                    Doctor doctor = doctorSnapshot.getValue(Doctor.class);
 
-                                        }
+                                    if ( doctor != null) {
+                                        doctor.setID(doctorSnapshot.child("ID").getValue(String.class));
+                                        String docName = capitalizeEachWord(doctorSnapshot.child("name").getValue(String.class));
+                                        doctor.setName("Dr. " + docName);
+                                        String docSpeciality = capitalizeEachWord(doctorSnapshot.child("speciality").getValue(String.class));
+                                        doctor.setSpeciality(docSpeciality);
+                                        String docLocation = capitalizeEachWord(doctorSnapshot.child("location").getValue(String.class));
+                                        doctor.setLocation(docLocation);
+                                        doctor.setContact(doctorSnapshot.child("contact").getValue(String.class));
+                                        intersectedDoctors.add(doctor);
                                     }
                                 }
 
-                                Log.d("DoctorsListSize", "Size of doctorsList: " + doctorsList.size());
-                                System.out.println(doctorsList.size());
-                                adapter.updateData(doctorsList);
+                                // Update the RecyclerView with the intersected results
+                                if (adapter != null) {
+                                    Log.d(TAG, "onDataChange: "+intersectedDoctors.size());
+                                    adapter.updateData(intersectedDoctors);
+                                }
                             }
 
                             @Override
@@ -240,6 +215,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
 
