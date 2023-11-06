@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getContext(), AlreadyDoctorActivity.class);
                     startActivity(intent);
                 } else {
-                    MainActivity.currentUserData.setDoctorStatus(false);
+//                    MainActivity.currentUserData.setDoctorStatus(true);
                     Intent intent = new Intent(getContext(), SignUpDoctorActivity.class);
                     startActivity(intent);
                 }

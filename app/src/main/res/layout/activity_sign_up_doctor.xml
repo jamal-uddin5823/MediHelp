@@ -158,22 +158,6 @@
 
 
                     <EditText
-                        android:id="@+id/editPassword"
-                        android:textCursorDrawable="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_textbg"
-                        android:drawableStart="@drawable/key"
-                        android:drawablePadding="10dp"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:paddingStart="10dp" />
-
-                    <EditText
                         android:id="@+id/editContact"
                         android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
@@ -189,7 +173,21 @@
                         android:maxLines="1"
                         android:paddingStart="10dp" />
 
-
+                    <EditText
+                        android:id="@+id/editPassword"
+                        android:textCursorDrawable="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/edit_textbg"
+                        android:drawableStart="@drawable/key"
+                        android:drawablePadding="10dp"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingStart="10dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/signup"
