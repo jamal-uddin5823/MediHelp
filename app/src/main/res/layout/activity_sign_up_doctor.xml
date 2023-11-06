@@ -113,63 +113,17 @@
 
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
+                        android:gravity="center"
                         android:maxLines="1"
-                        android:text="Sign Up as Doctor"
+                        android:text="Sign Up as a Doctor"
                         android:textColor="?attr/textFillColor"
                         android:textSize="30sp"
                         android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/editName"
-                        android:layout_width="match_parent"
-                        android:textCursorDrawable="@null"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_textbg"
-                        android:drawableStart="@drawable/baseline_person_24"
-                        android:drawablePadding="10dp"
-                        android:hint="Name"
-                        android:maxLines="1"
-                        android:paddingStart="10dp" />
-
-                    <EditText
-                        android:id="@+id/editEmail"
-                        android:textCursorDrawable="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_textbg"
-                        android:drawableStart="@drawable/baseline_email_24"
-                        android:drawablePadding="10dp"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:paddingStart="10dp" />
-
-                    <EditText
-                        android:id="@+id/editContact"
-                        android:textCursorDrawable="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_textbg"
-                        android:drawableStart="@drawable/baseline_call_24"
-                        android:drawablePadding="10dp"
-                        android:hint="Contact no"
-                        android:inputType="number"
-                        android:maxLines="1"
-                        android:paddingStart="10dp" />
 
 
                     <EditText
@@ -220,7 +174,7 @@
                         android:paddingStart="10dp" />
 
                     <EditText
-                        android:id="@+id/confirmpassword"
+                        android:id="@+id/editContact"
                         android:textCursorDrawable="@null"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -228,12 +182,13 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edit_textbg"
-                        android:drawableStart="@drawable/key"
-                        android:drawablePadding="5dp"
-                        android:hint="Confirm Password"
-                        android:inputType="textPassword"
+                        android:drawableStart="@drawable/baseline_call_24"
+                        android:drawablePadding="10dp"
+                        android:hint="Contact no"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:paddingStart="10dp" />
+
 
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -265,21 +220,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/signin"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="36dp"
-                    android:background="@drawable/white_button"
-                    android:text="Log in"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/signin"-->
+<!--                    android:layout_width="160dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="36dp"-->
+<!--                    android:background="@drawable/white_button"-->
+<!--                    android:text="Log in"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="20sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_bias="0.0">-->
 
-                </androidx.appcompat.widget.AppCompatButton>
+<!--                </androidx.appcompat.widget.AppCompatButton>-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnChangeRole"
@@ -292,6 +247,7 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 

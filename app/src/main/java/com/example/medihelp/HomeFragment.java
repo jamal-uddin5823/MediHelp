@@ -40,19 +40,15 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     ActivityMainBinding binding;
-    boolean isBookmarked = false;
-
-    ShapeableImageView imgProfile;
 
     private static final String TAG = "HomeFragment";
     private MyAdapter adapter;
     public List<Doctor> doctorsList = new ArrayList<>();
     private DatabaseReference databaseReference;
     TextView welcomeTextView;
-
+    Button btnAddDoctor;
     CardView cvDiagnose;
     CardView cvSearch;
-    BottomNavigationView bottomNavigationView;
 
     ImageView imgProfileHome;
     @Override
@@ -68,11 +64,27 @@ public class HomeFragment extends Fragment {
 
         cvDiagnose = view.findViewById(R.id.cvDiagnose);
         cvSearch = view.findViewById(R.id.cvSearch);
+        btnAddDoctor = view.findViewById(R.id.addDoctor);
+
+        btnAddDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isDoctor = MainActivity.currentUserData.getDoctorStatus();
+                if (isDoctor) {
+                    Intent intent = new Intent(getContext(), AlreadyDoctorActivity.class);
+                    startActivity(intent);
+                } else {
+                    MainActivity.currentUserData.setDoctorStatus(false);
+                    Intent intent = new Intent(getContext(), SignUpDoctorActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
         cvDiagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),DiagnoseActivity.class);
+                Intent intent = new Intent(getContext(), DiagnoseActivity.class);
                 startActivity(intent);
             }
         });

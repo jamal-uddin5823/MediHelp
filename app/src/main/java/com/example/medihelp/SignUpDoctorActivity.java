@@ -77,7 +77,7 @@ public class SignUpDoctorActivity extends AppCompatActivity {
 
 
         btnChangeRole.setOnClickListener(view -> {
-            Intent intent = new Intent(this,SelectUserTypeActivity.class);
+            Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();
         });
